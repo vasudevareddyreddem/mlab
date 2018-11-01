@@ -21,14 +21,7 @@ class User extends CI_Controller {
 	
 	public function index(){
 		
-				$data['logo_details']=$this->Users_model->get_home_logo_details();
-				$data['slider_details']=$this->Users_model->get_home_slider_details();
-				$data['aboutus_details']=$this->Users_model->get_home_aboutus_details();
-				$data['services_details']=$this->Users_model->get_home_services_details();
-				$data['gallery_details']=$this->Users_model->get_home_gallery_details();
-				$data['testimonials_details']=$this->Users_model->get_home_testimonials_details();
-				$data['contactus_details']=$this->Users_model->get_home_contactus_details();
-				$this->load->view('html/index',$data);
+				$this->load->view('html/index');
 		
 		
 	}

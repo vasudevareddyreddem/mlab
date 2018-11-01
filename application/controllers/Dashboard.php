@@ -13,7 +13,13 @@ class Dashboard extends Back_end {
 	{
 		if($this->session->userdata('mlab_details'))
 		{
-			$this->load->view('admin/dashboard');
+			$login_detail=$this->session->userdata('mlab_details');
+			$data['lab_list']=$this->Admin_model->get_lab_total_list($login_detail['a_id']);	
+			$data['pharmacy_list']=$this->Admin_model->get_pharmacy_total_list($login_detail['a_id']);	
+			$data['total_lab_list']=$this->Admin_model->get_all_lab_total_list($login_detail['a_id']);	
+			$data['total_pharmacy_list']=$this->Admin_model->get_all_pharmacy_total_list($login_detail['a_id']);	
+			//echo '<pre>';print_r($data);exit;
+			$this->load->view('admin/dashboard',$data);
 			$this->load->view('admin/footer');
 
 		}else{

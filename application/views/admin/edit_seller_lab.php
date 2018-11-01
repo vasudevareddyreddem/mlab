@@ -6,7 +6,7 @@
                        <div class="col-md-12">
                             <div class="card card-topline-aqua">
                                 <div class="card-head">
-                                     <header>Add Lab</header>
+                                     <header>Edit Lab</header>
                                     <div class="tools">
                                         <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
 	                                    <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
@@ -15,53 +15,46 @@
                                 </div>
                                 <div class="card-body ">
                                     <div class="container">
-									<form class="" action="<?php echo base_url('seller/addpost/'); ?>" method="post" id="add_seller" name="add_seller" enctype="multipart/form-data">
-
+									<form class="" action="<?php echo base_url('seller/editpost/'); ?>" method="post" id="add_seller" name="add_seller" enctype="multipart/form-data">
+											<input type="hidden" name="a_id" id="a_id" value="<?php echo isset($lab_details['a_id'])?$lab_details['a_id']:''; ?>">
                                         <div class="row">
                                             <div class="form-group col-md-6">
                                                 <label> Name of the Lab</label>
-                                                <input type="text" class="form-control"  name="name" id="name" placeholder="Enter Name" >
+                                                <input type="text" class="form-control"  name="name" id="name" placeholder="Enter Name" value="<?php echo isset($lab_details['name'])?$lab_details['name']:''; ?>">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label> Email Address </label>
-                                                <input type="email" class="form-control"  name="email" id="email" placeholder="Enter Email" >
+                                                <input type="email" class="form-control"  name="email" id="email" placeholder="Enter Email" value="<?php echo isset($lab_details['email'])?$lab_details['email']:''; ?>">
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label> Password </label>
-                                                <input type="password" class="form-control"  name="password" id="password" placeholder="Enter Password" >
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label> Confirm Password </label>
-                                                <input type="password" class="form-control"  name="confirmPassword" id="confirmPassword" placeholder="Enter Confirm Password" >
-                                            </div>
+                                         
                                             <div class="form-group col-md-6">
                                                 <label >Mobile Number</label>
-                                                <input type="text" class="form-control"  name="mobile" id="mobile" placeholder="Enter Mobile" >
+                                                <input type="text" class="form-control"  name="mobile" id="mobile" placeholder="Enter Mobile" value="<?php echo isset($lab_details['mobile'])?$lab_details['mobile']:''; ?>">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label> Landline / Alternate Mobile No </label>
-                                                <input type="text" class="form-control"  name="altmobile" id="altmobile" placeholder="Landline / Alternate Mobile No" >
+                                                <input type="text" class="form-control"  name="altmobile" id="altmobile" placeholder="Landline / Alternate Mobile No" value="<?php echo isset($lab_details['altmobile'])?$lab_details['altmobile']:''; ?>">
                                             </div> 
                                             <div class="form-group col-md-6">
                                                 <label> GSTIN </label>
-                                                <input type="text" class="form-control"  name="gstin" id="gstin" placeholder="GSTIN" >
+                                                <input type="text" class="form-control"  name="gstin" id="gstin" placeholder="GSTIN" value="<?php echo isset($lab_details['gstin'])?$lab_details['gstin']:''; ?>">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label >Address</label>
-                                                <input type="text" class="form-control"  name="address" id="address" placeholder="Enter Address" >
+                                                <input type="text" class="form-control"  name="address" id="address" placeholder="Enter Address" value="<?php echo isset($lab_details['address1'])?$lab_details['address1']:''; ?>">
                                             </div>
 											 <div class="form-group col-md-6">
 												<label>City</label>
-												<input type="text" class="form-control" name="city" id="city" placeholder="Enter City" value="">
+												<input type="text" class="form-control" name="city" id="city" placeholder="Enter City" value="<?php echo isset($lab_details['city'])?$lab_details['city']:''; ?>">
 											</div>
 											     
-											<?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
+								  <?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
                                             <div class="form-group col-md-6">
                                                 <label >State</label>
                                                 <select class="form-control" name="state" id="state">
 												  <option value="">Select State</option>
                                                    <?php foreach($states as $key=>$state):
-														if($hospital_details['hos_bas_state'] == $state):
+														if($lab_details['state'] == $state):
 														$selected ='selected=selected';
 														else : 
 														$selected = '';
@@ -73,15 +66,15 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label >Country</label>
-                                                <input type="text" class="form-control"  name="country" id="country" placeholder="Enter Country" >
+                                                <input type="text" class="form-control"  name="country" id="country" placeholder="Enter Country" value="<?php echo isset($lab_details['country'])?$lab_details['country']:''; ?>">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label> Pincode </label>
-                                                <input type="text" class="form-control"  name="pincode" id="pincode" placeholder="Enter PinCode" >
+                                                <input type="text" class="form-control"  name="pincode" id="pincode" placeholder="Enter PinCode" value="<?php echo isset($lab_details['zipcode'])?$lab_details['zipcode']:''; ?>">
                                             </div> 
                                             <div class="clearfix">&nbsp;</div>
                                             <div class="col-md-12 text-center">
-                                                    <button type="submit" class="btn btn-primary">Add Lab</button>
+                                                    <button type="submit" class="btn btn-primary">Update Lab</button>
                                                 </div>
                                             </div>
 											</form>
@@ -147,32 +140,7 @@
 					message: 'Please enter a valid email address. For example johndoe@domain.com.'
 					}
                 }
-            },
-			password: {
-                validators: {
-					notEmpty: {
-						message: 'Password is required'
-					},
-					stringLength: {
-                        min: 6,
-                        message: 'Password  must be at least 6 characters. '
-                    },
-					regexp: {
-					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~'"\\|=^?$%*)(_+-]*$/,
-					message: 'Password wont allow <>[]'
-					}
-				}
-            },confirmPassword: {
-					 validators: {
-						 notEmpty: {
-						message: 'Confirm Password is required'
-					},
-					identical: {
-						field: 'password',
-						message: 'Password and Confirm Password do not match'
-					}
-					}
-				},gstin: {
+            },gstin: {
                 validators: {
 					notEmpty: {
 						message: 'GSTIN is required'

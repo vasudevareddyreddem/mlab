@@ -43,7 +43,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item ">
-                                        <a href="<?php echo base_url('seller/list'); ?>" class="nav-link "> <span class="title">List</span>
+                                        <a href="<?php echo base_url('seller/lists'); ?>" class="nav-link "> <span class="title">List</span>
                                         </a>
                                     </li> 
 	                            </ul>
@@ -55,11 +55,11 @@
 	                            </a>
                                 <ul class="sub-menu">
                                     <li class="nav-item  ">
-                                        <a href="pharmacy_add.php" class="nav-link "> <span class="title">Add</span>
+                                        <a href="<?php echo base_url('pharmacy'); ?>" class="nav-link "> <span class="title">Add</span>
                                         </a>
                                     </li>
                                     <li class="nav-item ">
-                                        <a href="pharmacy_list.php" class="nav-link "> <span class="title">List</span>
+                                        <a href="<?php echo base_url('pharmacy/lists'); ?>" class="nav-link "> <span class="title">List</span>
                                         </a>
                                     </li> 
 	                            </ul>
@@ -70,7 +70,7 @@
 	                            </a>
 	                        </li>
                             <li class="nav-item ">
-	                            <a href="dashboard.php" class="nav-link "> <i class="material-icons">person</i>
+	                            <a href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Logout</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>

@@ -2,12 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 @include_once( APPPATH . 'controllers/Back_end.php');
 
-class Seller extends Back_end {
+class Pharmacy extends Back_end {
 	
 		public function __construct() 
 		{
 		parent::__construct();	
-		$this->load->model('Seller_model');
+		$this->load->model('Pharmacy_model');
 	
 		}
 	
@@ -18,7 +18,7 @@ class Seller extends Back_end {
 			$login_details=$this->session->userdata('mlab_details');
 				if($login_details['role']==1){
 					
-					$this->load->view('admin/add_seller_lab');
+					$this->load->view('admin/pharmacy_add');
 					$this->load->view('admin/footer');
 				}else{
 					$this->session->set_flashdata('error','You have no permissions');
@@ -37,8 +37,8 @@ class Seller extends Back_end {
 				if($login_details['role']==1){
 					
 					$l_id=base64_decode($this->uri->segment(3));
-					$data['lab_details']=$this->Seller_model->get_lab_details($l_id);
-					$this->load->view('admin/edit_seller_lab',$data);
+					$data['pharmacy_details']=$this->Pharmacy_model->get_Pharmacy_details($l_id);
+					$this->load->view('admin/edit_pharmacy',$data);
 					$this->load->view('admin/footer');
 				}else{
 					$this->session->set_flashdata('error','You have no permissions');
@@ -59,10 +59,10 @@ class Seller extends Back_end {
 					$check_email=$this->Admin_model->check_email_exits($post['email']);
 					if(count($check_email)>0){
 						$this->session->set_flashdata('error',"Email address already exists. Please another email address.");
-						redirect('seller');
+						redirect('pharmacy');
 					}
 					$add=array(
-					'role'=>2,
+					'role'=>3,
 					'name'=>isset($post['name'])?$post['name']:'',
 					'email'=>isset($post['email'])?$post['email']:'',
 					'mobile'=>isset($post['mobile'])?$post['mobile']:'',
@@ -80,14 +80,14 @@ class Seller extends Back_end {
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
 					);
-					$save=$this->Seller_model->save_seller($add);
+					$save=$this->Pharmacy_model->save_pharmacy($add);
 					if(count($save)>0){
-						$this->session->set_flashdata('success','Profile Details successfully Updated');
-						redirect('seller/lists');
+						$this->session->set_flashdata('success','Pharmacy Details successfully Updated');
+						redirect('pharmacy/lists');
 						
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-						redirect('seller');
+						redirect('pharmacy');
 					}
 					//echo '<pre>';print_r($post);exit;
 				}else{
@@ -107,12 +107,12 @@ class Seller extends Back_end {
 				if($login_details['role']==1){
 					$post=$this->input->post();
 					//echo '<pre>';print_r($post);
-					$details=$this->Seller_model->get_lab_details($post['a_id']);
+					$details=$this->Pharmacy_model->get_pharmacy_details($post['a_id']);
 					if($details['email']!=$post['email']){
 						$check_email=$this->Admin_model->check_email_exits($post['email']);
 						if(count($check_email)>0){
 							$this->session->set_flashdata('error',"Email address already exists. Please another email address.");
-							redirect('seller/edit/'.base64_encode($post['a_id']));
+							redirect('pharmacy/edit/'.base64_encode($post['a_id']));
 						}
 					}
 					$add=array(
@@ -130,14 +130,14 @@ class Seller extends Back_end {
 					'created_by'=>$login_details['a_id'],
 					);
 						//echo '<pre>';print_r($add);exit;
-					$update=$this->Seller_model->update_seller_lab_details($post['a_id'],$add);
+					$update=$this->Pharmacy_model->update_seller_pharmacy_details($post['a_id'],$add);
 					if(count($update)>0){
-						$this->session->set_flashdata('success','Lab Details successfully updated');
-						redirect('seller/lists');
+						$this->session->set_flashdata('success','Pharmacy Details successfully Updated');
+						redirect('pharmacy/lists');
 						
 					}else{
-						$this->session->set_flashdata('error',"Technical problem will occurred. Please try again.");
-						redirect('seller/edit/'.base64_encode($post['a_id']));
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('pharmacy/edit/'.base64_encode($post['a_id']));
 					}
 					//echo '<pre>';print_r($post);exit;
 				}else{
@@ -156,8 +156,8 @@ class Seller extends Back_end {
 			$login_details=$this->session->userdata('mlab_details');
 				if($login_details['role']==1){
 					
-					$data['lab_lists']=$this->Seller_model->get_sellers_list($login_details['a_id']);
-					$this->load->view('admin/lab_list',$data);
+					$data['pharmacy_details']=$this->Pharmacy_model->get_all_pharmacy_details($login_details['a_id']);
+					$this->load->view('admin/pharmacy_list',$data);
 					$this->load->view('admin/footer');
 				}else{
 					$this->session->set_flashdata('error','You have no permissions');
@@ -188,21 +188,21 @@ class Seller extends Back_end {
 							'status'=>$statu,
 							'updated_at'=>date('Y-m-d H:i:s')
 							);
-							$statusdata= $this->Seller_model->update_seller_lab_details(base64_decode($a_id),$stusdetails);
+							$statusdata= $this->Pharmacy_model->update_seller_pharmacy_details(base64_decode($a_id),$stusdetails);
 							if(count($statusdata)>0){
 								if($status==1){
-								$this->session->set_flashdata('success',"Lab successfully deactivated.");
+								$this->session->set_flashdata('success',"Pharmacy successfully deactivated.");
 								}else{
-									$this->session->set_flashdata('success',"Lab successfully activated.");
+									$this->session->set_flashdata('success',"Pharmacy successfully activated.");
 								}
-								redirect('seller/lists');
+								redirect('pharmacy/lists');
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-									redirect('seller/lists');
+									redirect('pharmacy/lists');
 							}
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-						redirect('seller/lists');
+						redirect('pharmacy/lists');
 					}
 					
 			}else{
@@ -227,17 +227,17 @@ class Seller extends Back_end {
 							'status'=>2,
 							'updated_at'=>date('Y-m-d H:i:s')
 							);
-							$statusdata= $this->Seller_model->update_seller_lab_details(base64_decode($a_id),$stusdetails);
+							$statusdata= $this->Pharmacy_model->update_seller_pharmacy_details(base64_decode($a_id),$stusdetails);
 							if(count($statusdata)>0){
-								$this->session->set_flashdata('success',"Lab successfully Deleted.");
-								redirect('seller/lists');
+								$this->session->set_flashdata('success',"Pharmacy successfully Deleted.");
+								redirect('pharmacy/lists');
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-									redirect('seller/lists');
+									redirect('pharmacy/lists');
 							}
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-						redirect('seller/lists');
+						redirect('pharmacy/lists');
 					}
 					
 			}else{
