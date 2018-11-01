@@ -32,6 +32,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
                             </li>
+							<?php if($mlab_details['role']==1){ ?>
                             <li class="nav-item ">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
 	                                <span class="title">Seller Lab</span>  <span class="selected"></span>
@@ -69,6 +70,33 @@
 	                                <span class="title">Payments</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
+							<?php }else if($mlab_details['role']==2){ ?>
+							<li class="nav-item  ">
+	                            <a  href="order-pickup.php" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">Order Pickup</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item  ">
+	                            <a  href="upload-reports.php" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">Upload Reports</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item  ">
+	                            <a  href="<?php echo base_url('lab'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">Upload Lab Tests</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item  ">
+	                            <a href="history.php" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">History</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+                            <li class="nav-item  ">
+	                            <a href="payments.php" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">Payments</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+							<?php } ?>
                             <li class="nav-item ">
 	                            <a href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Logout</span> <span class="arrow"></span>

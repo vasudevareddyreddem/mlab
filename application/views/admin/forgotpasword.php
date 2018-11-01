@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
 
-    <title>Seller Lab</title>
+    <title>Forgot Password</title>
     <!-- google font -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css" />
     <!-- icons -->
@@ -26,42 +26,26 @@
 
 <body class="backimg">
     <div class="form-title">
-        <h1>Login Form</h1>
+        <h1>Forgot Password</h1>
     </div>
     <!-- Login Form-->
     <div class="login-form text-center">
         <div class="">
         </div>
         <div class="form formLogin">
-            <h2>Login to your account</h2>
-              <form id="login_form" action="<?php echo base_url('admin/loginpost'); ?>" method="post">
+            <h2>Forgot Password</h2>
+              <form id="login_form" action="<?php echo base_url('admin/forgotpost'); ?>" method="post">
 				<?php $csrf = array(
 						'name' => $this->security->get_csrf_token_name(),
 						'hash' => $this->security->get_csrf_hash()
 									); ?>
 				<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 				<div class="form-group ">
-				<input type="text" class="form-control" id="email" name="email" value="<?php echo $this->input->cookie('username');?>"	placeholder="Email" required>
+				<input type="text" class="form-control" id="email" name="email" value=""	placeholder="Email Address" required>
 				
 			  </div>
-			  <div class="form-group ">
-				<input type="password" class="form-control" id="password" name="password" value="<?php echo $this->input->cookie('password');?>" placeholder="Password" required>
-			  </div>
-			   <div class="remember text-left">
-                    <div class="checkbox checkbox-primary">
-						<?php if($this->input->cookie('remember')!=''){ ?>
-                        <input id="checkbox2" type="checkbox" checked  name="remember_me" value="1">
-						 <?php } else{ ?>
-						   <input id="checkbox2" type="checkbox"   name="remember_me" value="1">
-						 <?php } ?>
-                        <label for="checkbox2">
-                            Remember me
-                        </label>
-                    </div>
-                </div>
-                <button  type="submit"  class="btn btn-primary btn-block text-white">Login</button>
-                <div class="forgetPassword"><a href="<?php echo base_url('admin/forgotpassword'); ?>">Forgot your password?</a>
-                </div>
+                <button  type="submit"  class="btn btn-primary btn-block text-white">Submit</button>
+               
             </form>
         </div>
 
@@ -88,23 +72,7 @@
 					message: 'Please enter a valid email address. For example johndoe@domain.com.'
 					}
 				}
-            },
-             
-            password: {
-                validators: {
-					notEmpty: {
-						message: 'Password is required'
-					},
-					stringLength: {
-                        min: 6,
-                        message: 'Password  must be at least 6 characters'
-                    },
-					regexp: {
-					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~'"\\|=^?$%*)(_+-]*$/,
-					message: 'Password wont allow <>[]'
-					}
-				}
-                }
+            }
             }
         })
      

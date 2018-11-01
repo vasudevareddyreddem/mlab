@@ -74,26 +74,32 @@ class Admin extends CI_Controller {
 	
 	public function forgotpost(){
 		$post=$this->input->post();
-		$check_email=$this->Admin_model->check_email_exits($post['email']);
+		$check_email=$this->Admin_model->active_check_email_exits($post['email']);
+		//echo '<pre>';print_r($check_email);exit;
 			if(count($check_email)>0){
 				
-				$data['details']=$check_email;
 				$this->load->library('email');
 				$this->email->set_newline("\r\n");
 				$this->email->set_mailtype("html");
-				$this->email->from($post['email']);
-				$this->email->to('admin@grfpublishers.org');
-				$this->email->subject('forgot - password');
-				$body = $this->load->view('email/forgot',$data,TRUE);
+				$this->email->to($check_email['email_id']);
+				$this->email->from('customerservice@medspace.com', 'Medcbwtf'); 
+				$this->email->subject('Forgot Password'); 
+				$body = "<b> Your Account login Password is </b> : ".$check_email['org_password'];
 				$this->email->message($body);
-				$this->email->send();
-				$this->session->set_flashdata('success','Check Your Email to reset your password!');
-				redirect('admin');
-
+				if ($this->email->send())
+				{
+					$this->session->set_flashdata('success',"Password sent to your registered email address. Please Check your registered email address");
+					redirect('admin');
+				}else{
+					$this->session->set_flashdata('error'," In Localhost mail  didn't sent");
+					redirect('admin');
+				}
 			}else{
 				$this->session->set_flashdata('error','The email you entered is not a registered email. Please try again. ');
-				redirect('admin');	
+				redirect('admin');
 			}
+
+			
 		
 	}
 	
