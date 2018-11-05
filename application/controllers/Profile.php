@@ -44,7 +44,7 @@ class Profile extends Back_end {
 		{
 			$admindetails=$this->session->userdata('mlab_details');
 			$post=$this->input->post();
-			//echo '<pre>';print_r($post);exit;
+			//echo '<pre>';print_r($post);
 			$userdetails=$this->Admin_model->get_admin_details($admindetails['a_id']);
 			if($userdetails['email']!=$post['email']){
 				
@@ -73,9 +73,11 @@ class Profile extends Back_end {
 					'city'=>isset($post['city'])?$post['city']:'',
 					'state'=>isset($post['state'])?$post['state']:'',
 					'zipcode'=>isset($post['zipcode'])?$post['zipcode']:'',
+					'altmobile'=>isset($post['altmobile'])?$post['altmobile']:$userdetails['altmobile'],
+					'gstin'=>isset($post['gstin'])?$post['gstin']:$userdetails['gstin'],
 					'profile_pic'=>$image,
 					);
-					
+				//echo '<pre>';print_r($updatedetails);exit;	
 				
 				
 			$profile_update=$this->Admin_model->update_profile_details($post['a_id'],$updatedetails);

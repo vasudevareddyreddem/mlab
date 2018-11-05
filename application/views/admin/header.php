@@ -27,6 +27,8 @@
     <link href="<?php echo base_url(); ?>assets/vendor/admin/css/custom.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/vendor/admin/css/responsive.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/vendor/admin/css/theme-color.css" rel="stylesheet" type="text/css" />
+	  <link href="<?php echo base_url(); ?>assets/vendor/admin/css/select2.css" rel="stylesheet" type="text/css" />
+
     <link href="<?php echo base_url(); ?>assets/vendor/admin/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
 	   <script src="<?php echo base_url(); ?>assets/vendor/admin/js/jquery.min.js" ></script>
     <!-- bootstrap -->

@@ -87,6 +87,11 @@
 	                            </a>
 	                        </li>
 							<li class="nav-item  ">
+	                            <a  href="<?php echo base_url('lab/packages'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">Upload Lab Packages</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item  ">
 	                            <a href="history.php" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">History</span> <span class="arrow"></span>
 	                            </a>

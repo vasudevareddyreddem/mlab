@@ -37,6 +37,7 @@ $config['base_url'] = 'http://localhost/mlab/';
 */
 $config['index_page'] = '';
 
+
 /*
 |--------------------------------------------------------------------------
 | URI PROTOCOL

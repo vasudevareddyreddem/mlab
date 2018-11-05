@@ -17,13 +17,22 @@
                                     <label>Name</label>
                                     <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name" value="<?php echo isset($mlab_details['name'])?$mlab_details['name']:''; ?>">
                                 </div>
-                                <div class="form-group col-md-6">
+                              
+								<div class="form-group col-md-6">
                                     <label>Mobile Number</label>
                                     <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Enter Mobile Number" value="<?php echo isset($mlab_details['mobile'])?$mlab_details['mobile']:''; ?>">
+                                </div>
+								  <div class="form-group col-md-6">
+                                    <label> Landline / Alternate Mobile No </label>
+                                    <input type="text" class="form-control" name="altmobile" id="altmobile" placeholder="Enter Landline / Alternate Mobile Number" value="<?php echo isset($mlab_details['altmobile'])?$mlab_details['altmobile']:''; ?>">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Email Id</label>
                                     <input type="text" class="form-control" name="email" id="email" placeholder="Enter Email Id" value="<?php echo isset($mlab_details['email'])?$mlab_details['email']:''; ?>">
+                                </div> 
+								<div class="form-group col-md-6">
+                                    <label>GSTIN</label>
+                                    <input type="text" class="form-control" name="gstin" id="gstin" placeholder="Enter GSTIN " value="<?php echo isset($mlab_details['gstin'])?$mlab_details['gstin']:''; ?>">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Address1</label>
