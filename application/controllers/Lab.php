@@ -73,6 +73,7 @@ class Lab extends Back_end {
 					'test_name'=>isset($post['test_name'])?$post['test_name']:'',
 					'test_duartion'=>isset($post['test_duartion'])?$post['test_duartion']:'',
 					'test_amount'=>isset($post['test_amount'])?$post['test_amount']:'',
+					'delivery_charge'=>isset($post['delivery_charge'])?$post['delivery_charge']:'',
 					'created_at'=>date('Y-m-d H:i:s'),
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
@@ -117,6 +118,7 @@ class Lab extends Back_end {
 					'test_name'=>isset($post['test_name'])?$post['test_name']:'',
 					'test_duartion'=>isset($post['test_duartion'])?$post['test_duartion']:'',
 					'test_amount'=>isset($post['test_amount'])?$post['test_amount']:'',
+					'delivery_charge'=>isset($post['delivery_charge'])?$post['delivery_charge']:'',
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
 					);
@@ -268,6 +270,8 @@ class Lab extends Back_end {
 					'amount'=>isset($post['amount'])?$post['amount']:'',
 					'instruction'=>isset($post['instruction'])?$post['instruction']:'',
 					'percentage'=>isset($percent_friendly)?$percent_friendly:'',
+					'delivery_charge'=>isset($post['delivery_charge'])?$post['delivery_charge']:'',
+
 					'status'=>1,
 					'created_at'=>date('Y-m-d H:i:s'),
 					'updated_at'=>date('Y-m-d H:i:s'),
@@ -462,6 +466,8 @@ class Lab extends Back_end {
 					'amount'=>isset($post['amount'])?$post['amount']:'',
 					'instruction'=>isset($post['instruction'])?$post['instruction']:'',
 					'percentage'=>isset($percent_friendly )?$percent_friendly :'',
+					'delivery_charge'=>isset($post['delivery_charge'])?$post['delivery_charge']:'',
+
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
 					);
@@ -527,6 +533,28 @@ class Lab extends Back_end {
 			redirect('admin');
 		}
 	}
+	
+	/*orders  purpose*/
+	public function orders(){
+		if($this->session->userdata('mlab_details'))
+			{
+			$login_details=$this->session->userdata('mlab_details');
+				if($login_details['role']==1){
+					$data['order_list']=$this->Lab_model->get_all_lab_orders_list($login_details['a_id']);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('admin/lab_order_list',$data);
+					$this->load->view('admin/footer');
+				}else{
+					$this->session->set_flashdata('error','You have no permissions');
+					redirect('dashboard');
+				}
+
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
 	
 	
 }

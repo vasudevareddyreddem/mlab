@@ -121,6 +121,21 @@ class Lab_model extends CI_Model
 		return $this->db->update('packages_test_list',$data);
 	}
 	
+	/*  lab  orders purpose*/
+	public  function get_all_lab_orders_list(){
+		$this->db->select('lab_orders.created_at,lab_orders.payment_type,lab_order_items.delivery_charge,lab_order_items.amount,lab_tests.test_name,lab_tests.test_duartion,test_packages.test_package_name,lab_patient_details.name as p_name,lab_patient_details.mobile,admin.name')->from('lab_order_items');
+		$this->db->join('admin', 'admin.a_id = lab_order_items.l_id', 'left');
+		$this->db->join('lab_orders', 'lab_orders.r_id = lab_order_items.order_id', 'left');
+		$this->db->join('lab_tests', 'lab_tests.l_id = lab_order_items.test_id', 'left');
+		$this->db->join('test_packages', 'test_packages.l_t_p_id = lab_order_items.package_id', 'left');
+		$this->db->join('lab_patient_details', 'lab_patient_details.l_t_a_id = lab_orders.patient_details_id', 'left');
+		//$this->db->where('lab_order_items.l_id',$a_id);		
+        return $this->db->get()->result_array();
+	}
+	/*  lab  orders purpose*/
+	
+	
+	
 	
 	
 	

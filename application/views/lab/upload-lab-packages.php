@@ -51,6 +51,10 @@
                                             <label>Instructions</label>
                                             <input type="text" class="form-control" name="instruction" id="instruction" placeholder="Enter Instructions">
                                         </div>
+										<div class="form-group col-md-6">
+                                            <label>Sample Pickup Charges</label>
+                                            <input type="text" class="form-control" name="delivery_charge" id="delivery_charge" placeholder="Enter Sample Pickup Charges" value="">
+                                        </div>
                                         <div class="clearfix">&nbsp;</div>
                                         <div class="col-md-12 text-center">
                                             <button type="submit" class="btn btn-primary">Upload</button>
@@ -184,6 +188,15 @@ function adminstatus2(id){
                     },regexp: {
 					regexp: /^[0-9. ]+$/,
 					message: 'Discount can only consist of digits, space and dot'
+					}
+                }
+            },delivery_charge: {
+                validators: {
+                    notEmpty: {
+                        message: 'Sample pickup charges is required'
+                    },regexp: {
+					regexp: /^[0-9. ]+$/,
+					message: 'Sample Pickup Charges can only consist of digits, space and dot'
 					}
                 }
             },

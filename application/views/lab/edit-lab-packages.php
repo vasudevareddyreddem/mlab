@@ -55,6 +55,10 @@
                                         <div class="form-group col-md-6">
                                             <label>Instructions</label>
                                             <input type="text" class="form-control" name="instruction" id="instruction" placeholder="Enter Instructions" value="<?php echo isset($packages_name_details['instruction'])?$packages_name_details['instruction']:''; ?>">
+                                        </div> 
+										<div class="form-group col-md-6">
+                                            <label>Sample Pickup Charges</label>
+                                            <input type="text" class="form-control" name="delivery_charge" id="delivery_charge" placeholder="Enter Sample Pickup Charges" value="<?php echo isset($packages_name_details['delivery_charge'])?$packages_name_details['delivery_charge']:''; ?>">
                                         </div>
                                         <div class="clearfix">&nbsp;</div>
                                         <div class="col-md-12 text-center">
@@ -115,6 +119,15 @@
                     },regexp: {
 					regexp: /^[0-9. ]+$/,
 					message: 'Discount can only consist of digits, space and dot'
+					}
+                }
+            },delivery_charge: {
+                validators: {
+                    notEmpty: {
+                        message: 'Sample pickup charges is required'
+                    },regexp: {
+					regexp: /^[0-9. ]+$/,
+					message: 'Sample Pickup Charges can only consist of digits, space and dot'
 					}
                 }
             },

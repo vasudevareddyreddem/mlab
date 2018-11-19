@@ -30,6 +30,10 @@
                                             <label>Amount</label>
                                             <input type="text" class="form-control" name="test_amount" id="test_amount" placeholder="Enter Amount" value="<?php echo isset($test_name_details['test_amount'])?$test_name_details['test_amount']:''; ?>">
                                         </div>
+										<div class="form-group col-md-6">
+                                            <label>Sample Pickup Charges</label>
+                                            <input type="text" class="form-control" name="delivery_charge" id="delivery_charge" placeholder="Enter Sample Pickup Charges" value="<?php echo isset($test_name_details['delivery_charge'])?$test_name_details['delivery_charge']:''; ?>">
+                                        </div>
                                         <div class="clearfix">&nbsp;</div>
                                         <div class="col-md-12 text-center">
                                             <button type="submit" class="btn btn-primary">Update</button>
@@ -106,6 +110,16 @@ function adminstatus2(id){
                     },regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
 					message:'Estimated Duration wont allow <> [] = % '
+					}
+                }
+            },
+			delivery_charge: {
+                validators: {
+                    notEmpty: {
+                        message: 'Sample pickup charges is required'
+                    },regexp: {
+					regexp: /^[0-9. ]+$/,
+					message: 'Sample Pickup Charges can only consist of digits, space and dot'
 					}
                 }
             },

@@ -33,7 +33,7 @@
 	                            </a>
                             </li>
 							<?php if($mlab_details['role']==1){ ?>
-                            <li class="nav-item ">
+                            <li class="nav-item <?php if($this->uri->segment(1)=='lab' || $this->uri->segment(1)=='seller'){ echo "active";} ?>">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
 	                                <span class="title">Seller Lab</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -46,10 +46,14 @@
                                     <li class="nav-item ">
                                         <a href="<?php echo base_url('seller/lists'); ?>" class="nav-link "> <span class="title">List</span>
                                         </a>
+                                    </li>
+									<li class="nav-item ">
+                                        <a href="<?php echo base_url('lab/orders'); ?>" class="nav-link "> <span class="title">Orders</span>
+                                        </a>
                                     </li> 
 	                            </ul>
 	                        </li>
-                            <li class="nav-item ">
+                            <li class="nav-item <?php if($this->uri->segment(1)=='pharmacy'){ echo "active";} ?>">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
 	                                <span class="title">Seller Pharmacy</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -66,13 +70,13 @@
 	                            </ul>
 	                        </li>
 							<li class="nav-item ">
-	                            <a href="payments.php" class="nav-link "> <i class="material-icons">person</i>
+	                            <a href="#" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Payments</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 							<?php }else if($mlab_details['role']==2){ ?>
 							<li class="nav-item  ">
-	                            <a  href="order-pickup.php" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="#" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Order Pickup</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
@@ -92,12 +96,12 @@
 	                            </a>
 	                        </li>
 							<li class="nav-item  ">
-	                            <a href="history.php" class="nav-link "> <i class="material-icons">person</i>
+	                            <a href="<?php echo base_url('history/laborders'); ?>" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">History</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
                             <li class="nav-item  ">
-	                            <a href="payments.php" class="nav-link "> <i class="material-icons">person</i>
+	                            <a href="#" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Payments</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
