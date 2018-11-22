@@ -546,25 +546,6 @@ class Lab extends Back_end {
 	}
 	
 	/*orders  purpose*/
-	public function allorders(){
-		if($this->session->userdata('mlab_details'))
-			{
-			$login_details=$this->session->userdata('mlab_details');
-				if($login_details['role']==2){
-					$data['order_list']=$this->Lab_model->get_all_lab_orders_list($login_details['a_id']);
-					//echo '<pre>';print_r($data);exit;
-					$this->load->view('admin/all_order_list',$data);
-					$this->load->view('admin/footer');
-				}else{
-					$this->session->set_flashdata('error','You have no permissions');
-					redirect('dashboard');
-				}
-
-		}else{
-			$this->session->set_flashdata('error','Please login to continue');
-			redirect('admin');
-		}
-	}
 	public function orders(){
 		if($this->session->userdata('mlab_details'))
 			{
