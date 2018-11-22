@@ -195,11 +195,11 @@ class Lab_model extends CI_Model
 		$this->db->where('order_item_id',$order_item_id);
 		$return=$this->db->get()->row_array();
 		//echo '<pre>';print_r($return);exit;
-		$data[$return['order_item_id']]['order_item_id']=$return['order_item_id'];
+		$data['order_item_id']=$return['order_item_id'];
 		if($return['package_id']==0){
-		$data[$return['order_item_id']]=$this->get_test_order_test_details($return['order_item_id']);
+		$data=$this->get_test_order_test_details($return['order_item_id']);
 		}else{
-			$data[$return['order_item_id']]=$this->get_test_order_package_details($return['order_item_id']);
+			$data=$this->get_test_order_test_details($return['order_item_id']);
 		}
 	
 		if(!empty($data)){

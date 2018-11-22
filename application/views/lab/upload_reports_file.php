@@ -1,4 +1,4 @@
-
+<?php //echo '<pre>';print_r($order_list);exit; ?>
 <div class="page-content-wrapper">
     <div class="page-content">
 
@@ -19,9 +19,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>xxxxx</td>
+								<?php $cnt=1;foreach($order_list as $lis){ ?>
+									<tr>
+                                        <td><?php echo $cnt; ?></td>
+                                        <td><?php echo isset($lis['test_name'])?$lis['test_name']:''; ?></td>
                                         <td class="valigntop">
                                             <div class="btn-group"><a href="#">
                                                 <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" aria-expanded="false">
@@ -30,28 +31,8 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>xxxxx</td>
-                                        <td class="valigntop">
-                                            <div class="btn-group"><a href="#">
-                                                <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" aria-expanded="false">
-                                                    <i class="fa fa-arrow-up"></i>Upload
-                                                </button></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>xxxxx</td>
-                                        <td class="valigntop">
-                                            <div class="btn-group"><a href="#">
-                                                <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" aria-expanded="false">
-                                                    <i class="fa fa-arrow-up"></i>Upload
-                                                </button></a>
-                                            </div>
-                                        </td>
-                                    </tr>
+								<?php $cnt++;} ?>
+                                    
                                 </tbody>
                             </table>
                         </div>

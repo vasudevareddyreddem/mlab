@@ -610,7 +610,7 @@ class Lab extends Back_end {
 				if($login_details['role']==2){
 					$order_item_id=base64_decode($this->uri->segment(3));
 					$data['order_list']=$this->Lab_model->get_order_item_details($order_item_id);
-					echo '<pre>';print_r($data);exit;
+					//echo '<pre>';print_r($data);exit;
 					$this->load->view('lab/upload_reports_file',$data);
 					$this->load->view('admin/footer');
 				}else{
