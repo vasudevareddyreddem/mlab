@@ -22,7 +22,7 @@ class Dashboard extends Back_end {
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/dashboard',$data);
 			}else if($login_detail['role']==2){
-				$this->load->view('lab/dashboard');
+				$this->load->view('lab/labdashboard');
 			}
 			$this->load->view('admin/footer');
 

@@ -24,6 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/mlab/';
+$config['smsusername']	= "pracha";
+$config['smspassword']	= "123456";
+$config['sender']	= "PRACHA";
 
 /*
 |--------------------------------------------------------------------------

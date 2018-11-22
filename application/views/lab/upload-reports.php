@@ -42,7 +42,7 @@
 								</td>
 								<td><?php echo isset($lis['created_at'])?$lis['created_at']:''; ?></td>
 								 <td class="valigntop">
-                                            <div class="btn-group"><a href="upload-samples1.php">
+                                            <div class="btn-group"><a href="<?php echo base_url('lab/uploadreports/'.base64_encode($lis['order_item_id'])); ?>">
                                                 <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" aria-expanded="false">
                                                     <i class="fa fa-arrow-up"></i>Upload
                                                 </button></a>

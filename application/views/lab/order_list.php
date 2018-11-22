@@ -50,7 +50,9 @@
 								<?php if($lis['payment_type']==1){ echo "Online"; } else if($lis['payment_type']==3){ echo "Swipe on Delivery";}else if($lis['payment_type']==2){  echo "Cash On Delivery"; } ?>
 								</td>
 								<td><?php echo isset($lis['created_at'])?$lis['created_at']:''; ?></td>
-								<td><?php if($lis['lab_status']==0){ echo "Pending";}else if($lis['lab_status']==1){ echo "Success"; } ?></td>
+								<td>
+								<?php if($lis['lab_status']==1){ echo "Accepted"; } else if($lis['lab_status']==2){ echo "Rejected";}else if($lis['lab_status']==0){  echo "Pending"; } ?>
+								</td>
                             
                             
                             </tr>

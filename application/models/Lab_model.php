@@ -123,15 +123,16 @@ class Lab_model extends CI_Model
 	}
 	
 	/*  lab  orders purpose*/
-	public  function get_all_lab_orders_list(){
-		$this->db->select('lab_orders.created_at,lab_orders.payment_type,lab_order_items.lab_status,lab_order_items.delivery_charge,lab_order_items.amount,lab_tests.test_name,lab_tests.test_duartion,test_packages.test_package_name,lab_patient_details.name as p_name,lab_patient_details.mobile,admin.name,lab_patient_details.date,lab_patient_details.time,CONCAT(lab_patient_billing.address," ",lab_patient_billing.landmark," ",lab_patient_billing.locality," ",lab_patient_billing.pincode) as address')->from('lab_order_items');
+	public  function get_all_lab_orders_list($a_id){
+		$this->db->select('lab_order_items.order_item_id,lab_orders.created_at,lab_orders.payment_type,lab_order_items.lab_status,lab_order_items.delivery_charge,lab_order_items.amount,lab_tests.test_name,lab_tests.test_duartion,test_packages.test_package_name,lab_patient_details.name as p_name,lab_patient_details.mobile,admin.name,lab_patient_details.date,lab_patient_details.time,CONCAT(lab_patient_billing.address," ",lab_patient_billing.landmark," ",lab_patient_billing.locality," ",lab_patient_billing.pincode) as address')->from('lab_order_items');
 		$this->db->join('admin', 'admin.a_id = lab_order_items.l_id', 'left');
 		$this->db->join('lab_orders', 'lab_orders.r_id = lab_order_items.order_id', 'left');
 		$this->db->join('lab_tests', 'lab_tests.l_id = lab_order_items.test_id', 'left');
 		$this->db->join('test_packages', 'test_packages.l_t_p_id = lab_order_items.package_id', 'left');
 		$this->db->join('lab_patient_details', 'lab_patient_details.l_t_a_id = lab_orders.patient_details_id', 'left');
 		$this->db->join('lab_patient_billing', 'lab_patient_billing.l_t_b_id = lab_orders.billing_id', 'left');
-		//$this->db->where('lab_order_items.l_id',$a_id);		
+		$this->db->where('lab_order_items.l_id',$a_id);		
+		$this->db->where('lab_order_items.lab_status',0);		
         return $this->db->get()->result_array();
 	}
 	/*  lab  orders purpose*/
@@ -148,6 +149,18 @@ class Lab_model extends CI_Model
 		$this->db->where('lab_order_items.l_id',$a_id);		
         return $this->db->get()->result_array();
 	}
+	/* reports orders*/
+	public  function get_reports_lab_orders_list($a_id){
+		$this->db->select('lab_order_items.order_item_id,lab_orders.created_at,lab_orders.payment_type,lab_order_items.lab_status,lab_order_items.delivery_charge,lab_order_items.amount,lab_tests.test_name,lab_tests.test_duartion,test_packages.test_package_name,lab_patient_details.name as p_name,lab_patient_details.mobile,lab_patient_details.date,lab_patient_details.time,CONCAT(lab_patient_billing.address," ",lab_patient_billing.landmark," ",lab_patient_billing.locality," ",lab_patient_billing.pincode) as address')->from('lab_order_items');
+		$this->db->join('lab_orders', 'lab_orders.r_id = lab_order_items.order_id', 'left');
+		$this->db->join('lab_tests', 'lab_tests.l_id = lab_order_items.test_id', 'left');
+		$this->db->join('test_packages', 'test_packages.l_t_p_id = lab_order_items.package_id', 'left');
+		$this->db->join('lab_patient_details', 'lab_patient_details.l_t_a_id = lab_orders.patient_details_id', 'left');
+		$this->db->join('lab_patient_billing', 'lab_patient_billing.l_t_b_id = lab_orders.billing_id', 'left');
+		$this->db->where('lab_order_items.l_id',$a_id);		
+		$this->db->where('lab_order_items.lab_status',1);		
+        return $this->db->get()->result_array();
+	}
 	
 	/* after deactivate test names  showing  in  packages */
 	public  function get_packages_test_list_detsils_status($test_id){
@@ -162,6 +175,43 @@ class Lab_model extends CI_Model
 	}
 	/* after deactivate test names  showing  in  packages */
 	
+	/* order status*/
+	public  function update_order_item_status($order_item_id,$data){
+		$this->db->where('order_item_id',$order_item_id);
+		return $this->db->update('lab_order_items',$data);
+	}
+	public  function order_item_details($order_item_id){
+		$this->db->select('lab_patient_details.date,lab_patient_details.time,lab_patient_details.name,lab_patient_details.mobile')->from('lab_order_items');
+		$this->db->join('lab_orders', 'lab_orders.r_id = lab_order_items.order_id', 'left');
+		$this->db->join('lab_patient_details', 'lab_patient_details.l_t_a_id = lab_orders.patient_details_id', 'left');
+
+		$this->db->where('order_item_id',$order_item_id);
+		return $this->db->get()->row_array();
+	}
+
+/* get order item details */
+	public  function get_order_item_details($order_item_id){
+		$this->db->select('*')->from('lab_order_items');
+		$this->db->where('order_item_id',$order_item_id);
+		$return=$this->db->get()->row_array();
+		//echo '<pre>';print_r($return);exit;
+		$data[$return['order_item_id']]['order_item_id']=$return['order_item_id'];
+		if($return['package_id']==0){
+		$data[$return['order_item_id']]=$this->get_test_order_test_details($return['order_item_id']);
+		}else{
+			$data[$return['order_item_id']]=$this->get_test_order_package_details($return['order_item_id']);
+		}
+	
+		if(!empty($data)){
+			return $data;
+		}
+	}	
+	public  function get_test_order_test_details($order_item_id){
+		$this->db->select('lab_tests.*')->from('order_package_test_list');
+		$this->db->join('lab_tests', 'lab_tests.l_id = order_package_test_list.test_id', 'left');
+		$this->db->where('order_item_id',$order_item_id);
+		return $this->db->get()->result_array();
+	}
 	
 	
 	

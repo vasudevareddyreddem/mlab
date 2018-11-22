@@ -553,7 +553,7 @@ class Lab extends Back_end {
 				if($login_details['role']==2){
 					$data['order_list']=$this->Lab_model->get_all_lab_orders_list($login_details['a_id']);
 					//echo '<pre>';print_r($data);exit;
-					$this->load->view('admin/all_order_list',$data);
+					$this->load->view('lab/all_order_list',$data);
 					$this->load->view('admin/footer');
 				}else{
 					$this->session->set_flashdata('error','You have no permissions');
@@ -589,7 +589,7 @@ class Lab extends Back_end {
 			{
 			$login_details=$this->session->userdata('mlab_details');
 				if($login_details['role']==2){
-					$data['order_list']=$this->Lab_model->get_lab_orders_list($login_details['a_id']);
+					$data['order_list']=$this->Lab_model->get_reports_lab_orders_list($login_details['a_id']);
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('lab/upload-reports',$data);
 					$this->load->view('admin/footer');
@@ -598,6 +598,130 @@ class Lab extends Back_end {
 					redirect('dashboard');
 				}
 
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function uploadreports(){
+		if($this->session->userdata('mlab_details'))
+			{
+			$login_details=$this->session->userdata('mlab_details');
+				if($login_details['role']==2){
+					$order_item_id=base64_decode($this->uri->segment(3));
+					$data['order_list']=$this->Lab_model->get_order_item_details($order_item_id);
+					echo '<pre>';print_r($data);exit;
+					$this->load->view('lab/upload_reports_file',$data);
+					$this->load->view('admin/footer');
+				}else{
+					$this->session->set_flashdata('error','You have no permissions');
+					redirect('dashboard');
+				}
+
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	} 
+	/* order status accept */
+	public  function orderstatus_accept(){
+		if($this->session->userdata('mlab_details'))
+		{
+			$admindetails=$this->session->userdata('mlab_details');
+			//echo '<pre>';print_r($admindetails);exit;
+			if($admindetails['role']==2){
+					$order_item_id_id=base64_decode($this->uri->segment(3));
+					if($order_item_id_id!=''){
+						$stusdetails=array(
+							'lab_status'=>1,
+							'updated_at'=>date('Y-m-d H:i:s')
+							);
+							$statusdata= $this->Lab_model->update_order_item_status($order_item_id_id,$stusdetails);
+							if(count($statusdata)>0){
+								
+								$details=$this->Lab_model->order_item_details($order_item_id_id);
+								$username=$this->config->item('smsusername');
+								$pass=$this->config->item('smspassword');
+								$sender=$this->config->item('sender');
+								$msg="Dear ".$details['name']." , your lab tests order is accepted .sample pickup date & time is ".$details['date']." ".$details['time'].". if any instructions given while ordering please follow it. Any queries call 7997999108";
+								$ch2 = curl_init();
+								curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
+								curl_setopt($ch2, CURLOPT_POST, 1);
+								curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$details['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
+								curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+								//echo '<pre>';print_r($ch);exit;
+								$server_output = curl_exec ($ch2);
+								curl_close ($ch2);
+								//echo '<pre>';print_r($msg);exit;
+								
+								$this->session->set_flashdata('success',"Order successfully accepted.");
+								redirect('lab/allorders');
+							}else{
+									$this->session->set_flashdata('error',"Technical problem will occurred. Please try again.");
+									redirect('lab/allorders');
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('lab/allorders');
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public  function orderstatus_reject(){
+		if($this->session->userdata('mlab_details'))
+		{
+			$admindetails=$this->session->userdata('mlab_details');
+			
+			$post=$this->input->post();
+			//echo '<pre>';print_r($post);exit;
+			if($admindetails['role']==2){
+					$order_item_id_id=base64_decode($post['order_item_id_id']);
+					if($order_item_id_id!=''){
+						$stusdetails=array(
+							'reason'=>isset($post['reason'])?$post['reason']:'',
+							'lab_status'=>2,
+							'updated_at'=>date('Y-m-d H:i:s')
+							);
+							$statusdata= $this->Lab_model->update_order_item_status($order_item_id_id,$stusdetails);
+							if(count($statusdata)>0){
+								
+								$details=$this->Lab_model->order_item_details($order_item_id_id);
+								$username=$this->config->item('smsusername');
+								$pass=$this->config->item('smspassword');
+								$sender=$this->config->item('sender');
+								$msg="Dear ".$details['name']." , your lab test order is rejected because ".$post['reason'];
+								$ch2 = curl_init();
+								curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
+								curl_setopt($ch2, CURLOPT_POST, 1);
+								curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$details['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
+								curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+								//echo '<pre>';print_r($ch);exit;
+								$server_output = curl_exec ($ch2);
+								curl_close ($ch2);
+								//echo '<pre>';print_r($msg);exit;
+								
+								$this->session->set_flashdata('success',"Order successfully rejected.");
+								redirect('lab/allorders');
+							}else{
+									$this->session->set_flashdata('error',"Technical problem will occurred. Please try again.");
+									redirect('lab/allorders');
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('lab/allorders');
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');

@@ -76,7 +76,7 @@
 	                        </li>
 							<?php }else if($mlab_details['role']==2){ ?>
 							<li class="nav-item  ">
-	                            <a  href="#" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('lab/allorders'); ?>" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Order Pickup</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
