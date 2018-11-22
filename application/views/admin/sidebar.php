@@ -81,7 +81,7 @@
 	                            </a>
 	                        </li>
 							<li class="nav-item  ">
-	                            <a  href="upload-reports.php" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('lab/reports'); ?>" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Upload Reports</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>

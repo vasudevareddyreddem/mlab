@@ -16,11 +16,15 @@
                                         <th>Patient Name</th>
                                         <th>Mobile Number</th>
                                         <th>Test Name / Package Name</th>
+										<th>Sample Pickup Date & Time</th>
                                         <th>Amount</th>
                                         <th>Delivery charges</th>
-                                        <th>Time</th>
+										<th>Address</th>
+                                        
                                         <th>Payment Type</th>
+                                        
                                         <th>Created Date & Time</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -33,15 +37,22 @@
                                 <td>
 								<?php echo isset($lis['test_name'])?$lis['test_name']:''; ?>
 								<?php echo isset($lis['test_package_name'])?$lis['test_package_name']:''; ?>
+								<td>
+								<?php echo isset($lis['date'])?$lis['date']:''; ?>
+								<?php echo isset($lis['time'])?$lis['time']:''; ?>
+								</td>
 								
 								</td>
                                 <td><?php echo isset($lis['amount'])?$lis['amount']:''; ?></td>
+                                
                                 <td><?php echo isset($lis['delivery_charge'])?$lis['delivery_charge']:''; ?></td>
-                                <td><?php echo isset($lis['test_duartion'])?$lis['test_duartion']:''; ?></td>
+								<td><?php echo isset($lis['address'])?$lis['address']:''; ?></td>
+                                
                                 <td>
 								<?php if($lis['payment_type']==1){ echo "Online"; } else if($lis['payment_type']==3){ echo "Swipe on Delivery";}else if($lis['payment_type']==2){  echo "Cash On Delivery"; } ?>
 								</td>
 								<td><?php echo isset($lis['created_at'])?$lis['created_at']:''; ?></td>
+								<td><?php if($lis['lab_status']==0){ echo "Pending";}else if($lis['lab_status']==1){ echo "Success"; } ?></td>
                             
                             </tr>
 							

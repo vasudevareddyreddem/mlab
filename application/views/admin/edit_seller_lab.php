@@ -24,7 +24,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label> Email Address </label>
-                                                <input type="email" class="form-control"  name="email" id="email" placeholder="Enter Email" value="<?php echo isset($lab_details['email'])?$lab_details['email']:''; ?>">
+                                                <input type="text" class="form-control"  name="email" id="email" placeholder="Enter Email" value="<?php echo isset($lab_details['email'])?$lab_details['email']:''; ?>">
                                             </div>
                                          
                                             <div class="form-group col-md-6">
@@ -71,6 +71,10 @@
                                             <div class="form-group col-md-6">
                                                 <label> Pincode </label>
                                                 <input type="text" class="form-control"  name="pincode" id="pincode" placeholder="Enter PinCode" value="<?php echo isset($lab_details['zipcode'])?$lab_details['zipcode']:''; ?>">
+                                            </div> 
+											<div class="form-group col-md-6">
+                                                <label> Accrediations </label>
+                                                <input type="text" class="form-control"  name="accrediations" id="accrediations" placeholder="Enter Accrediations" value="<?php echo isset($lab_details['accrediations'])?$lab_details['accrediations']:''; ?>">
                                             </div> 
                                             <div class="clearfix">&nbsp;</div>
                                             <div class="col-md-12 text-center">
@@ -160,7 +164,18 @@
 					message:'Address wont allow <> [] = % '
 					}
                 }
-            },pincode: {
+            },accrediations: {
+                validators: {
+					notEmpty: {
+						message: 'Accrediations is required'
+					},
+                    regexp: {
+					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+					message:'Accrediations wont allow <> [] = % '
+					}
+                }
+            },
+			pincode: {
               validators: {
 					notEmpty: {
 						message: 'Pin code is required'

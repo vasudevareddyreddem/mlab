@@ -55,6 +55,10 @@
                                             <label>Sample Pickup Charges</label>
                                             <input type="text" class="form-control" name="delivery_charge" id="delivery_charge" placeholder="Enter Sample Pickup Charges" value="">
                                         </div>
+										<div class="form-group col-md-6">
+                                            <label>Time taken for uploading of reports</label>
+                                            <input type="text" class="form-control" name="reports_time" id="reports_time" placeholder="Enter Time taken for uploading of reports in hrs" value="">
+                                        </div>
                                         <div class="clearfix">&nbsp;</div>
                                         <div class="col-md-12 text-center">
                                             <button type="submit" class="btn btn-primary">Upload</button>
@@ -197,6 +201,16 @@ function adminstatus2(id){
                     },regexp: {
 					regexp: /^[0-9. ]+$/,
 					message: 'Sample Pickup Charges can only consist of digits, space and dot'
+					}
+                }
+            },
+			reports_time: {
+                validators: {
+                    notEmpty: {
+                        message: 'Time taken for uploading of reports is required'
+                    },regexp: {
+					regexp: /^[0-9.: ]+$/,
+					message: 'Time taken for uploading of reports can only consist of digits, space and dot'
 					}
                 }
             },

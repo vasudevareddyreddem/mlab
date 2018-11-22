@@ -71,7 +71,11 @@
                                             <div class="form-group col-md-6">
                                                 <label> Pincode </label>
                                                 <input type="text" class="form-control"  name="pincode" id="pincode" placeholder="Enter PinCode" value="<?php echo isset($pharmacy_details['zipcode'])?$pharmacy_details['zipcode']:''; ?>">
-                                            </div> 
+                                            </div>
+											<div class="form-group col-md-6">
+                                                <label> Accrediations </label>
+                                                <input type="text" class="form-control"  name="accrediations" id="accrediations" placeholder="Enter Accrediations"  value="<?php echo isset($pharmacy_details['accrediations'])?$pharmacy_details['accrediations']:''; ?>">
+                                            </div> 											
                                             <div class="clearfix">&nbsp;</div>
                                             <div class="col-md-12 text-center">
                                                     <button type="submit" class="btn btn-primary">Update Pharmacy</button>
@@ -148,6 +152,16 @@
                     regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
 					message:'GSTIN wont allow <> [] = % '
+					}
+                }
+            },accrediations: {
+                validators: {
+					notEmpty: {
+						message: 'Accrediations is required'
+					},
+                    regexp: {
+					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+					message:'Accrediations wont allow <> [] = % '
 					}
                 }
             },address: {

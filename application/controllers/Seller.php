@@ -74,6 +74,7 @@ class Seller extends Back_end {
 					'state'=>isset($post['state'])?$post['state']:'',
 					'zipcode'=>isset($post['pincode'])?$post['pincode']:'',
 					'country'=>isset($post['country'])?$post['country']:'',
+					'accrediations'=>isset($post['accrediations'])?$post['accrediations']:'',
 					'password'=>isset($post['confirmPassword'])?md5($post['confirmPassword']):'',
 					'org_password'=>isset($post['confirmPassword'])?$post['confirmPassword']:'',
 					'created_at'=>date('Y-m-d H:i:s'),
@@ -82,7 +83,7 @@ class Seller extends Back_end {
 					);
 					$save=$this->Seller_model->save_seller($add);
 					if(count($save)>0){
-						$this->session->set_flashdata('success','Profile Details successfully Updated');
+						$this->session->set_flashdata('success','Lab details  successsfully added');
 						redirect('seller/lists');
 						
 					}else{
@@ -103,7 +104,7 @@ class Seller extends Back_end {
 	public function editpost(){
 		if($this->session->userdata('mlab_details'))
 			{
-			$login_details=$this->session->userdata('mlab_details');
+			   $login_details=$this->session->userdata('mlab_details');
 				if($login_details['role']==1){
 					$post=$this->input->post();
 					//echo '<pre>';print_r($post);
@@ -126,13 +127,15 @@ class Seller extends Back_end {
 					'state'=>isset($post['state'])?$post['state']:'',
 					'zipcode'=>isset($post['pincode'])?$post['pincode']:'',
 					'country'=>isset($post['country'])?$post['country']:'',
+					'accrediations'=>isset($post['accrediations'])?$post['accrediations']:'',
+
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
 					);
 						//echo '<pre>';print_r($add);exit;
 					$update=$this->Seller_model->update_seller_lab_details($post['a_id'],$add);
 					if(count($update)>0){
-						$this->session->set_flashdata('success','Lab Details successfully updated');
+						$this->session->set_flashdata('success','Lab details successsfully updated');
 						redirect('seller/lists');
 						
 					}else{

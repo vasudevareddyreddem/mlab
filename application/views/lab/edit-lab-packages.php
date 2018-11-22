@@ -60,6 +60,10 @@
                                             <label>Sample Pickup Charges</label>
                                             <input type="text" class="form-control" name="delivery_charge" id="delivery_charge" placeholder="Enter Sample Pickup Charges" value="<?php echo isset($packages_name_details['delivery_charge'])?$packages_name_details['delivery_charge']:''; ?>">
                                         </div>
+										<div class="form-group col-md-6">
+                                            <label>Time taken for uploading of reports</label>
+                                            <input type="text" class="form-control" name="reports_time" id="reports_time" placeholder="Enter Time taken for uploading of reports in hrs" value="<?php echo isset($packages_name_details['reports_time'])?$packages_name_details['reports_time']:''; ?>">
+                                        </div>
                                         <div class="clearfix">&nbsp;</div>
                                         <div class="col-md-12 text-center">
                                             <button type="submit" class="btn btn-primary">Update</button>
@@ -128,6 +132,16 @@
                     },regexp: {
 					regexp: /^[0-9. ]+$/,
 					message: 'Sample Pickup Charges can only consist of digits, space and dot'
+					}
+                }
+            },
+			reports_time: {
+                validators: {
+                    notEmpty: {
+                        message: 'Time taken for uploading of reports is required'
+                    },regexp: {
+					regexp: /^[0-9.: ]+$/,
+					message: 'Time taken for uploading of reports can only consist of digits, space and dot'
 					}
                 }
             },

@@ -24,7 +24,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label> Email Address </label>
-                                                <input type="email" class="form-control"  name="email" id="email" placeholder="Enter Email" >
+                                                <input type="text" class="form-control"  name="email" id="email" placeholder="Enter Email" >
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label> Password </label>
@@ -78,6 +78,10 @@
                                             <div class="form-group col-md-6">
                                                 <label> Pincode </label>
                                                 <input type="text" class="form-control"  name="pincode" id="pincode" placeholder="Enter PinCode" >
+                                            </div>
+											<div class="form-group col-md-6">
+                                                <label> Accrediations </label>
+                                                <input type="text" class="form-control"  name="accrediations" id="accrediations" placeholder="Enter Accrediations" >
                                             </div> 
                                             <div class="clearfix">&nbsp;</div>
                                             <div class="col-md-12 text-center">
@@ -190,6 +194,16 @@
                     regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
 					message:'Address wont allow <> [] = % '
+					}
+                }
+            },accrediations: {
+                validators: {
+					notEmpty: {
+						message: 'Accrediations is required'
+					},
+                    regexp: {
+					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+					message:'Accrediations wont allow <> [] = % '
 					}
                 }
             },pincode: {

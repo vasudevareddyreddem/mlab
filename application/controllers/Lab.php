@@ -160,8 +160,12 @@ class Lab extends Back_end {
 							'status'=>$statu,
 							'updated_at'=>date('Y-m-d H:i:s')
 							);
+							//echo '<pre>';print_r(base64_decode($l_id));exit;
 							$statusdata= $this->Lab_model->update_testname_details(base64_decode($l_id),$stusdetails);
 							if(count($statusdata)>0){
+								$this->Lab_model->update_packages_test_list_details(base64_decode($l_id),$stusdetails);
+								//echo $this->db->last_query();exit;
+
 								if($status==1){
 								$this->session->set_flashdata('success',"Test Name successfully deactivated.");
 								}else{
@@ -201,6 +205,8 @@ class Lab extends Back_end {
 							);
 							$statusdata= $this->Lab_model->update_testname_details(base64_decode($l_id),$stusdetails);
 							if(count($statusdata)>0){
+							$this->Lab_model->update_packages_test_list_details(base64_decode($l_id),$stusdetails);
+
 								$this->session->set_flashdata('success',"Test Name successfully Deleted.");
 								redirect('lab/index/'.base64_encode(1));
 							}else{
@@ -256,7 +262,7 @@ class Lab extends Back_end {
 					$check=$this->Lab_model->check_package_name_exist($post['test_package_name'],$login_details['a_id']);
 					if(count($check)>0){
 						$this->session->set_flashdata('error',"Package already exists. Please another Package.");
-						redirect('packages');
+						redirect('lab/packages/');
 					}
 					$x = $post['discount'];
 					$y = $post['amount'];
@@ -271,7 +277,7 @@ class Lab extends Back_end {
 					'instruction'=>isset($post['instruction'])?$post['instruction']:'',
 					'percentage'=>isset($percent_friendly)?$percent_friendly:'',
 					'delivery_charge'=>isset($post['delivery_charge'])?$post['delivery_charge']:'',
-
+					'reports_time'=>isset($post['reports_time'])?$post['reports_time']:'',
 					'status'=>1,
 					'created_at'=>date('Y-m-d H:i:s'),
 					'updated_at'=>date('Y-m-d H:i:s'),
@@ -280,16 +286,20 @@ class Lab extends Back_end {
 					$save=$this->Lab_model->save_package($add_package);
 					if(count($save)>0){
 						foreach($post['test_name'] as $lis){
-							$add_package_test=array(
-							'l_t_p_id'=>$save,
-							'test_id'=>isset($lis)?$lis:'',
-							'status'=>1,
-							'created_at'=>date('Y-m-d H:i:s'),
-							'updated_at'=>date('Y-m-d H:i:s'),
-							'created_by'=>$login_details['a_id'],
-							);
-							$save=$this->Lab_model->save_package_test_names($add_package_test);
+							if($lis!=''){
+								$add_package_test=array(
+								'l_t_p_id'=>$save,
+								'test_id'=>isset($lis)?$lis:'',
+								'status'=>1,
+								'created_at'=>date('Y-m-d H:i:s'),
+								'updated_at'=>date('Y-m-d H:i:s'),
+								'created_by'=>$login_details['a_id'],
+								);
+								//echo '<pre>';print_r($add_package_test);
+								$this->Lab_model->save_package_test_names($add_package_test);
+								}
 						}
+						//exit;
 						$this->session->set_flashdata('success','Package successfully added');
 						redirect('lab/packages/'.base64_encode(1));
 						
@@ -467,6 +477,7 @@ class Lab extends Back_end {
 					'instruction'=>isset($post['instruction'])?$post['instruction']:'',
 					'percentage'=>isset($percent_friendly )?$percent_friendly :'',
 					'delivery_charge'=>isset($post['delivery_charge'])?$post['delivery_charge']:'',
+					'reports_time'=>isset($post['reports_time'])?$post['reports_time']:'',
 
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
@@ -485,13 +496,13 @@ class Lab extends Back_end {
 									'status'=>1,
 									'updated_at'=>date('Y-m-d H:i:s'),
 									);
-									$save=$this->Lab_model->update_package_test_names($lists['p_t_id'],$lists['test_id'],$add_package_test);
+									$this->Lab_model->update_package_test_names($lists['p_t_id'],$lists['test_id'],$add_package_test);
 								}else{
 									$add_package_test=array(
 									'status'=>2,
 									'updated_at'=>date('Y-m-d H:i:s'),
 									);
-									$save=$this->Lab_model->update_package_test_names($lists['p_t_id'],$lists['test_id'],$add_package_test);
+									$this->Lab_model->update_package_test_names($lists['p_t_id'],$lists['test_id'],$add_package_test);
 								}
 							}
 						/*deleting*/
@@ -543,6 +554,25 @@ class Lab extends Back_end {
 					$data['order_list']=$this->Lab_model->get_all_lab_orders_list($login_details['a_id']);
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('admin/lab_order_list',$data);
+					$this->load->view('admin/footer');
+				}else{
+					$this->session->set_flashdata('error','You have no permissions');
+					redirect('dashboard');
+				}
+
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function reports(){
+		if($this->session->userdata('mlab_details'))
+			{
+			$login_details=$this->session->userdata('mlab_details');
+				if($login_details['role']==2){
+					$data['order_list']=$this->Lab_model->get_lab_orders_list($login_details['a_id']);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('lab/upload-reports',$data);
 					$this->load->view('admin/footer');
 				}else{
 					$this->session->set_flashdata('error','You have no permissions');
