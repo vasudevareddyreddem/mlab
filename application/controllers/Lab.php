@@ -609,6 +609,7 @@ class Lab extends Back_end {
 			$login_details=$this->session->userdata('mlab_details');
 				if($login_details['role']==2){
 					$order_item_id=base64_decode($this->uri->segment(3));
+					$data['order_item_id']=$order_item_id;
 					$data['order_list']=$this->Lab_model->get_order_item_details($order_item_id);
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('lab/upload_reports_file',$data);
@@ -726,6 +727,74 @@ class Lab extends Back_end {
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
+	}
+	
+	/* report file upload  */
+	
+	public  function uploadfile(){
+		if($this->session->userdata('mlab_details'))
+		{
+	 	   $post=$this->input->post();
+		   $pic=$_FILES['image']['name'];
+	   	   $picname = str_replace(" ", "", $pic);
+		   $imagename=microtime().basename($picname);
+		   $imgname = str_replace(" ", "", $imagename);
+		   $details=$this->Lab_model->get_test_report_file_names($post['o_p_t_id']);
+		   if(isset($details['report_file']) && $details['report_file']!=''){
+			   unlink('assets/reportfiles/'.$details['report_file']);
+		   }
+			if(move_uploaded_file($_FILES['image']['tmp_name'], 'assets/reportfiles/'.$imgname)){
+				$addimg=array(
+				'report_file'=>$imgname,
+				'org_report_file'=>$pic,
+				'file_upload_file'=>date('Y-m-d H:i:s')
+				);
+				$save_img=$this->Lab_model->update_test_report_file($post['o_p_t_id'],$addimg);
+				if(count($save_img)>0){
+					$all_details=$this->Lab_model->get_test_report_file_names($post['o_p_t_id']);
+					$file=base_url('assets/reportfiles/'.$all_details['report_file']);
+					$htmlmessage = "Lab tests reports has been uploaded from the Lab";
+					$this->load->library('email');
+					$this->email->set_newline("\r\n");
+					$this->email->set_mailtype("html");
+					$this->email->from('medpharmla.com');
+					$this->email->to($all_details['email']);
+					$this->email->attach($file);
+					$this->email->subject('Lab - Reprits '.$all_details['org_report_file']);
+					//echo $html;exit;
+					$this->email->message($htmlmessage);
+					$this->email->send();
+					
+					/* sms*/
+						$username=$this->config->item('smsusername');
+						$pass=$this->config->item('smspassword');
+						$sender=$this->config->item('sender');
+						$msg="Dear ".$all_details['name']." , your lab tests reports are sent to your registered email address. please, check it. Any queries call 7997999108";
+						$ch2 = curl_init();
+						curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
+						curl_setopt($ch2, CURLOPT_POST, 1);
+						curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$all_details['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
+						curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+						//echo '<pre>';print_r($ch);exit;
+						$server_output = curl_exec ($ch2);
+						curl_close ($ch2);
+					/* sms*/
+					$this->session->set_flashdata('success',"Report file successfully uploaded.");
+					redirect('lab/uploadreports/'.base64_encode($post['order_item_id']));
+				}else{
+					$this->session->set_flashdata('error',"Technical problem will occurred. Please try again.");
+					redirect('lab/uploadreports/'.base64_encode($post['order_item_id']));
+				}
+				//echo '<pre>';print_r($_FILES);exit;
+			}else{
+				$this->session->set_flashdata('error',"Technical problem will occurred. Please try again.");
+				redirect('lab/uploadreports/'.base64_encode($post['order_item_id']));
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+		
 	}
 	
 	

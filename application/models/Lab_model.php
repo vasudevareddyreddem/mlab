@@ -207,12 +207,25 @@ class Lab_model extends CI_Model
 		}
 	}	
 	public  function get_test_order_test_details($order_item_id){
-		$this->db->select('lab_tests.*')->from('order_package_test_list');
+		$this->db->select('lab_tests.*,order_package_test_list.o_p_t_id,order_package_test_list.report_file,order_package_test_list.org_report_file')->from('order_package_test_list');
 		$this->db->join('lab_tests', 'lab_tests.l_id = order_package_test_list.test_id', 'left');
 		$this->db->where('order_item_id',$order_item_id);
 		return $this->db->get()->result_array();
 	}
+	public  function update_test_report_file($o_p_t_id,$data){
+		$this->db->where('o_p_t_id',$o_p_t_id);
+		return $this->db->update('order_package_test_list',$data);
+	}
 	
+	public  function get_test_report_file_names($o_p_t_id){
+		$this->db->select('order_package_test_list.*,lab_patient_details.email,lab_patient_details.mobile,lab_patient_details.name')->from('order_package_test_list');
+		$this->db->join('lab_order_items', 'lab_order_items.order_item_id = order_package_test_list.order_item_id', 'left');
+		$this->db->join('lab_orders', 'lab_orders.r_id = lab_order_items.order_id', 'left');
+		$this->db->join('lab_patient_details', 'lab_patient_details.l_t_a_id = lab_orders.patient_details_id', 'left');
+
+		$this->db->where('order_package_test_list.o_p_t_id',$o_p_t_id);
+		return $this->db->get()->row_array();
+	}
 	
 	
 	
