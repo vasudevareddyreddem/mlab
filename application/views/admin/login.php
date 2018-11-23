@@ -23,17 +23,21 @@
     <!-- favicon -->
 
 </head>
-
-<body class="backimg">
+<style>
+.login-form input {
+    margin:0px;
+}
+</style>
+<body class="backimg" style="background-image: url(<?php echo base_url(); ?>assets/vendor/admin/img/login-background.png);">
     <div class="form-title">
-        <h1>Login Form</h1>
+        <h1>&nbsp;</h1>
     </div>
     <!-- Login Form-->
     <div class="login-form text-center">
         <div class="">
         </div>
-        <div class="form formLogin">
-            <h2>Login to your account</h2>
+        <div class="form formLogin" style="padding-top:20px">
+            <h2 ><strong>Login to your account</strong></h2>
               <form id="login_form" action="<?php echo base_url('admin/loginpost'); ?>" method="post">
 				<?php $csrf = array(
 						'name' => $this->security->get_csrf_token_name(),
