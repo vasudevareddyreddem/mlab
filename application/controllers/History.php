@@ -33,7 +33,7 @@ class History extends Back_end {
 	public function laborders(){
 		if($this->session->userdata('mlab_details'))
 			{
-			$login_details=$this->session->userdata('mlab_details');
+			   $login_details=$this->session->userdata('mlab_details');
 				if($login_details['role']==2){
 					$data['order_list']=$this->History_model->get_lab_orders_list($login_details['a_id']);
 					//echo '<pre>';print_r($data);exit;
