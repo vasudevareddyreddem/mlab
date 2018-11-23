@@ -73,6 +73,27 @@ class Admin_model extends CI_Model
         return $this->db->get()->row_array();
 	}
 	
+	/*  lab dashboard*/
+	
+	public  function get_total_lab_orders($a_id){
+		$this->db->select('COUNT(lab_order_items.l_id) as cnt')->from('lab_order_items');		
+		$this->db->where('lab_order_items.l_id', $a_id);
+		$this->db->where('lab_order_items.status', 1);
+        return $this->db->get()->row_array();
+	}
+	public  function get_total_received_lab_orders($a_id){
+		$this->db->select('COUNT(lab_order_items.l_id) as cnt')->from('lab_order_items');		
+		$this->db->where('lab_order_items.l_id', $a_id);
+		$this->db->where('lab_order_items.lab_status', 1);
+        return $this->db->get()->row_array();
+	}
+	public  function get_total_reject_lab_orders($a_id){
+		$this->db->select('COUNT(lab_order_items.l_id) as cnt')->from('lab_order_items');		
+		$this->db->where('lab_order_items.l_id', $a_id);
+		$this->db->where('lab_order_items.lab_status', 2);
+        return $this->db->get()->row_array();
+	}
+	
 	
 	
 	

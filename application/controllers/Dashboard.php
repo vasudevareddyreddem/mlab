@@ -22,7 +22,11 @@ class Dashboard extends Back_end {
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/dashboard',$data);
 			}else if($login_detail['role']==2){
-				$this->load->view('lab/labdashboard');
+				$data['total_orders']=$this->Admin_model->get_total_lab_orders($login_detail['a_id']);
+				$data['total_received_orders']=$this->Admin_model->get_total_received_lab_orders($login_detail['a_id']);
+				$data['total_reject_orders']=$this->Admin_model->get_total_reject_lab_orders($login_detail['a_id']);
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('lab/dashboard',$data);
 			}
 			$this->load->view('admin/footer');
 
