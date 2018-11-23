@@ -20,7 +20,8 @@
                                         <th>Delivery charges</th>
                                         <th>Payment Type</th>
                                         <th>Created Date & Time</th>
-                                        <th>Status</th>
+                                        <th>Customer Status</th>
+                                        <th>Lab Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -48,9 +49,13 @@
 								</td>
 								<td><?php echo isset($lis['created_at'])?$lis['created_at']:''; ?></td>
 								<td>
+								<?php if($lis['status']==1){ echo "Success"; } else if($lis['status']==2){ echo "Canceled";} ?>
+								</td>
+								<td>
 								<?php if($lis['lab_status']==1){ echo "Accepted"; } else if($lis['lab_status']==2){ echo "Rejected";}else if($lis['lab_status']==0){  echo "Pending"; } ?>
 								</td>
 								 <td class="valigntop">
+								 <?php if($lis['status']==1){ ?>
                                             <div class="btn-group">
                                                 <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                     <i class="fa fa-angle-down"></i>
@@ -66,6 +71,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
+								 <?php } ?>
                                         </td>
                             
                             
