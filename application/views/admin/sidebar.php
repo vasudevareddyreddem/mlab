@@ -100,11 +100,11 @@
 	                                <span class="title">History</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
-                            <li class="nav-item  ">
+                            <!--<li class="nav-item  ">
 	                            <a href="#" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Payments</span> <span class="arrow"></span>
 	                            </a>
-	                        </li>
+	                        </li>-->
 							<?php } ?>
                             <li class="nav-item ">
 	                            <a href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> <i class="material-icons">person</i>

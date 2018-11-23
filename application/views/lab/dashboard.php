@@ -1,4 +1,3 @@
-
 <div class="page-content-wrapper">
     <div class="page-content">
         <div class="page-bar">
@@ -20,37 +19,28 @@
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="card">
                             <div class="panel-body">
+                                <h3>No.of Total Orders </h3>
+                                <span class="text-small margin-top-10 full-width"><?php echo isset($total_orders['cnt'])?$total_orders['cnt']:''; ?></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="card">
+                            <div class="panel-body">
                                 <h3>No.of Received Orders </h3>
-                                <div class="progressbar-xs progress-rounded progress-striped progress ng-isolate-scope active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;"></div>
-                                </div>
-                                <span class="text-small margin-top-10 full-width">14% higher than last month</span>
+                               <span class="text-small margin-top-10 full-width"><?php echo isset($total_received_orders['cnt'])?$total_received_orders['cnt']:''; ?></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="card">
                             <div class="panel-body">
-                                <h3>Orders Dispatched</h3>
-                                <div class="progressbar-xs progress-rounded progress-striped progress ng-isolate-scope active">
-                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%;"></div>
-                                </div>
-                                <span class="text-small margin-top-10 full-width">7% higher than last month</span>
+                                <h3>No.of Rejected Orders</h3>
+                                <span class="text-small margin-top-10 full-width"><?php echo isset($total_reject_orders['cnt'])?$total_reject_orders['cnt']:''; ?></span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="card">
-                            <div class="panel-body">
-                                <h3>Total Amount</h3>
-                                <div class="progressbar-xs progress-rounded progress-striped progress ng-isolate-scope active">
-                                    <div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;"></div>
-                                </div>
-                                <span class="text-small margin-top-10 full-width">14% higher than last month</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-12">
+                    <!--<div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="card">
                             <div class="panel-body">
                                 <h3>Outstanding Amount</h3>
@@ -71,26 +61,10 @@
                                 <span class="text-small margin-top-10 full-width">14% higher than last month</span>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
-            <div class="col-lg-12">
-                <div class="card card-box">
-                    <div class="card-head">
-                        <header>HOSPITAL SURVEY</header>
-                        <div class="tools">
-                            <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
-                            <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
-                            <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
-                        </div>
-                    </div>
-                    <div class="card-body no-padding height-9">
-                        <div class="row">
-                            <canvas id="canvas1"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          
         </div>
 
 
