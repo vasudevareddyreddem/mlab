@@ -19,7 +19,7 @@ class Lab extends Back_end {
 				if($login_details['role']==2){
 					
 					$data['tab']=base64_decode($this->uri->segment(3));
-					$data['test_lists']=$this->Lab_model->get_test_list($login_details['a_id']);
+					$data['test_lists']=$this->Lab_model->get_all_test_list($login_details['a_id']);
 					$this->load->view('lab/upload-lab-tests',$data);
 					$this->load->view('admin/footer');
 				}else{
