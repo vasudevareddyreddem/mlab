@@ -31,11 +31,11 @@
 											<?php }  ?>
 											</td>
 											<td class="valigntop">
-												<div class="btn-group">
-												<form action="<?php echo base_url('lab/uploadfile'); ?>" method="post" enctype="multipart/form-data">
+												<div class="btn-group form-group">
+												<form  id="addreport<?php echo $cnt; ?>" action="<?php echo base_url('lab/uploadfile'); ?>" method="post" enctype="multipart/form-data">
 													<input  type="hidden" name="o_p_t_id" id="o_p_t_id" value="<?php echo isset($lis['o_p_t_id'])?$lis['o_p_t_id']:''; ?>">
 													<input  type="hidden" name="order_item_id" id="order_item_id" value="<?php echo isset($order_item_id)?$order_item_id:''; ?>">
-													<input  type="file" name="image" id="image">
+													<input  type="file" name="image" id="image" class="form-control">
 													<button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="submit" aria-expanded="false">
 														<i class="fa fa-arrow-up"></i>Upload
 													</button>
@@ -43,6 +43,28 @@
 												</div>
 											</td>
 										</tr>
+										<script>
+										$(document).ready(function() {
+    $('#addreport<?php echo $cnt; ?>').bootstrapValidator({
+        
+        fields: {
+            image: {
+                validators: {
+					notEmpty: {
+						message: 'Report is required'
+					},
+					regexp: {
+					regexp: "(.*?)\.(pdf|doc|docx|xls|xlsx)$",
+					message: 'Uploaded file is not a valid. Only pdf,doc,docx,xls,xlsx files are allowed'
+					}
+				}
+            }
+            }
+        })
+     
+});
+										</script>
+										
 									<?php $cnt++;} ?>
 								<?php } ?>
                                     
