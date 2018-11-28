@@ -1,4 +1,4 @@
-
+		
 <div class="page-content-wrapper">
     <div class="page-content">
 
@@ -22,6 +22,30 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div id="tab1" class="container tab-pane <?php if($tab==''){ echo "active"; } ?>"><br>
+							
+                                <form class="pad30 form-horizontal" action="<?php echo base_url('lab/importtest'); ?>" method="post" id="addimporttest" enctype="multipart/form-data">
+								<?php if($this->session->flashdata('addsuccess')){ ?>
+
+					<div class="alert dark alert-warning alert-dismissible" id="infoMessage">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span></button>
+					 <?php foreach($this->session->flashdata('addsuccess') as $error){?>
+					
+					<?php echo $error.'<br/>'; ?>
+					
+					
+					<?php } ?></div><?php } ?>
+								  <p><a href="<?php echo base_url('assets/tests.xlsx'); ?>">Download sample excel sheet</a></p>
+								  <div class="row">
+								  
+                                        <div class="form-group col-md-6">
+                                            <input type="file" class="form-control" name="test_file" id="test_file" >
+                                        </div>
+										 <div class="col-md-6">
+                                            <button type="submit" class="btn btn-primary">Upload</button>
+                                        </div>
+                                    </div>
+								</form>
                                 <form class="pad30 form-horizontal" action="<?php echo base_url('lab/testaddpost'); ?>" method="post" id="add_test_form">
                                     <div class="row">
                                         <div class="form-group col-md-6">
@@ -33,7 +57,7 @@
                                             <input type="text" class="form-control" name="test_name" id="test_name" placeholder="Enter Test Name">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label>Estimated Duration</label>
+                                            <label>Reports In</label>
                                             <input type="text" class="form-control" name="test_duartion" id="test_duartion" placeholder="Enter Duration">
                                         </div>
                                         <div class="form-group col-md-6">
@@ -124,6 +148,24 @@ function adminstatus2(id){
 			$('#content1').html('Are you sure you want to delete?');
 
 }
+$(document).ready(function() {
+    $('#addimporttest').bootstrapValidator({
+        fields: {
+            test_file: {
+                 validators: {
+					notEmpty: {
+						message: 'Excel sheet is required'
+					},
+					regexp: {
+					regexp: "(.*?)\.(xlsx|xls)$",
+					message: 'Uploaded file is not a valid. Only xlsx files are allowed'
+					}
+				}
+            }
+            }
+        })
+     
+});
 	$(document).ready(function() {
     $('#add_test_form').bootstrapValidator({
         
@@ -153,10 +195,10 @@ function adminstatus2(id){
             test_duartion: {
                 validators: {
                     notEmpty: {
-                        message: 'Estimated Duration is required'
+                        message: 'Reports In is required'
                     },regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
-					message:'Estimated Duration wont allow <> [] = % '
+					message:'Reports In wont allow <> [] = % '
 					}
                 }
             },

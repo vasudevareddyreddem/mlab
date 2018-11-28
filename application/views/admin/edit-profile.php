@@ -35,13 +35,13 @@
                                     <input type="text" class="form-control" name="gstin" id="gstin" placeholder="Enter GSTIN " value="<?php echo isset($mlab_details['gstin'])?$mlab_details['gstin']:''; ?>">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Address1</label>
+                                    <label>Address</label>
                                     <input type="text" class="form-control" name="address1" id="address1" placeholder="Address1" value="<?php echo isset($mlab_details['address1'])?$mlab_details['address1']:''; ?>">
                                 </div>
-                                <div class="form-group col-md-6">
+                                <!--<div class="form-group col-md-6">
                                     <label>Address2</label>
                                     <input type="text" class="form-control" name="address2" id="address2" placeholder="Address2" value="<?php echo isset($mlab_details['address2'])?$mlab_details['address2']:''; ?>">
-                                </div>
+                                </div>-->
                                 <div class="form-group col-md-6">
                                     <label>City</label>
                                     <input type="text" class="form-control" name="city" id="city" placeholder="Enter City" value="<?php echo isset($mlab_details['city'])?$mlab_details['city']:''; ?>">
@@ -115,11 +115,11 @@
 			address1: {
                 validators: {
 					notEmpty: {
-						message: 'Address1 is required'
+						message: 'Address is required'
 					},
                     regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
-					message:'Address1 wont allow <> [] = % '
+					message:'Address wont allow <> [] = % '
 					}
                 }
             },address2: {

@@ -61,7 +61,7 @@ class Lab extends Back_end {
 				if($login_details['role']==2){
 					
 					$post=$this->input->post();
-					$check=$this->Lab_model->check_lab_check_ornot($post['test_type'],$post['test_name']);
+					$check=$this->Lab_model->check_lab_check_ornot($post['test_type'],$post['test_name'],$login_details['a_id']);
 					if(count($check)>0){
 						$this->session->set_flashdata('error',"Test name already exists. Please another Test name.");
 						redirect('lab');
@@ -107,7 +107,7 @@ class Lab extends Back_end {
 					//echo '<pre>';print_r($post);exit;
 					$test_name_details=$this->Lab_model->get_lab_test_name_details($post['l_t_id']);
 					if($test_name_details['test_type']!=$post['test_type'] || $test_name_details['test_name']!=$post['test_name']){
-						$check=$this->Lab_model->check_lab_check_ornot($post['test_type'],$post['test_name']);
+						$check=$this->Lab_model->check_lab_check_ornot($post['test_type'],$post['test_name'],$login_details['a_id']);
 						if(count($check)>0){
 							$this->session->set_flashdata('error',"Lab test already exists. Please another Test name.");
 							redirect('lab/testedit/'.base64_encode($post['l_t_id']));
@@ -570,7 +570,7 @@ class Lab extends Back_end {
 			{
 			$login_details=$this->session->userdata('mlab_details');
 				if($login_details['role']==1){
-					$data['order_list']=$this->Lab_model->get_all_lab_orders_list($login_details['a_id']);
+					$data['order_list']=$this->Lab_model->get_all_admin_lab_orders_list($login_details['a_id']);
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('admin/lab_order_list',$data);
 					$this->load->view('admin/footer');
@@ -796,6 +796,152 @@ class Lab extends Back_end {
 		}
 		
 	}
+	
+	public  function importtest(){
+		
+		if($this->session->userdata('mlab_details'))
+		{
+			$login_details=$this->session->userdata('mlab_details');
+			$limitSize	= 1000000000; //(15 kb) - Maximum size of uploaded file, change it to any size you want
+			$fileName	= basename($_FILES['test_file']['name']);
+			$fileSize	= $_FILES["test_file"]["size"];
+			$fileExt	= substr($fileName, strrpos($fileName, '.') + 1);
+		if(substr($_FILES['test_file']['name'], 0, 5)=='tests'){
+											
+										if (($fileExt == "xlsx") && ($fileSize < $limitSize)) {
+												include_once('simplexlsx.class.php');
+												$getWorksheetName = array();
+												$xlsx = new SimpleXLSX( $_FILES['test_file']['tmp_name'] );
+												$getWorksheetName = $xlsx->getWorksheetName();
+												//echo $xlsx->sheetsCount();exit;
+														for($j=1;$j <= $xlsx->sheetsCount();$j++){
+														$cnt=$xlsx->sheetsCount()-1;
+														$arry=$xlsx->rows($j);
+														unset($arry[0]);
+
+																//echo "<pre>";print_r($arry);exit;
+																foreach($arry as $key=>$fields)
+																{
+																		if(isset($fields[1]) && $fields[1]!='' && $fields[2]!='' && $fields[3]!=''){
+																		$totalfields[] = $fields;
+																		
+																		if(empty($fields[0])) {
+																			$data['errors'][]="Test type is required. Row Id is :  ".$key.'<br>';
+																			$error=1;
+																		}else if($fields[0]!=''){
+																			$regex ="/^[ A-Za-z0-9_@.}{@#&`~\\/,|=^?$%*)(_+-]*$/"; 
+																			if(!preg_match($regex, $fields[0]))	  	
+																			{
+																			$data['errors'][]='Test type wont allow "  <> []. Row Id is :  '.$key.'<br>';
+																			$error=1;
+																			}
+																		}
+																		if(empty($fields[1])) {
+																			$data['errors'][]="Test name is required. Row Id is :  ".$key.'<br>';
+																			$error=1;
+																		}else if($fields[1]!=''){
+																			$regex ="/^[ A-Za-z0-9_@.}{@#&`~\\/,|=^?$%*)(_+-]*$/"; 
+																			if(!preg_match($regex, $fields[1]))	  	
+																			{
+																			$data['errors'][]='Test name wont allow "  <> []. Row Id is :  '.$key.'<br>';
+																			$error=1;
+																			}
+																		}
+																		if(empty($fields[2])) {
+																			$data['errors'][]="Reports in is required. Row Id is :  ".$key.'<br>';
+																			$error=1;
+																		}else if($fields[2]!=''){
+																			$regex ="/^[ A-Za-z0-9_@.}{@#&`~\\/,|=^?$%*)(_+-]*$/"; 
+																			if(!preg_match($regex, $fields[2]))	  	
+																			{
+																			$data['errors'][]='Reports in wont allow "  <> []. Row Id is :  '.$key.'<br>';
+																			$error=1;
+																			}
+																		}
+																		if(empty($fields[3])) {
+																			$data['errors'][]="Amount is required. Row Id is :  ".$key.'<br>';
+																			$error=1;
+																		}else if($fields[3]!=''){
+																			$regex ="/^[0-9.]+$/"; 
+																			if(!preg_match( $regex, $fields[3]))	  	
+																			{
+																			$data['errors'][]='Amount can only consist of digits. Row Id is :  '.$key.'<br>';
+																			$error=1;
+																			}
+																		}
+																		if(empty($fields[4])) {
+																			$data['errors'][]="Sample pickup Charges is required. Row Id is :  ".$key.'<br>';
+																			$error=1;
+																		}else if($fields[4]!=''){
+																			$regex ="/^[0-9.]+$/"; 
+																			if(!preg_match( $regex, $fields[4]))	  	
+																			{
+																			$data['errors'][]='Sample pickup Charges can only consist of digits. Row Id is :  '.$key.'<br>';
+																			$error=1;
+																			}
+																		}
+																		$check=$this->Lab_model->check_lab_check_ornot($fields[0],$fields[1],$login_details['a_id']);
+																		if(count($check)>0){
+																			$data['errors'][]='Lab test already exists. Please another Test name . Row Id is :  '.$key.'<br>';
+																			$error=1;	
+																		}
+																		
+																		
+																		
+																 }else{
+																	 $this->session->set_flashdata('error','fields are missing check once again');
+																	 redirect('lab');
+																 }
+																}
+																//echo '<pre>';print_r($data);exit;
+														if(count($data['errors'])>0){
+														$this->session->set_flashdata('addsuccess',$data['errors']);
+														redirect('lab');
+														}
+
+													}
+													if(count($data['errors'])<=0){
+														
+															foreach($totalfields as $data){
+																//echo "<pre>";print_r($data);exit;
+																$add=array(
+																'lab_id'=>$login_details['a_id'],
+																'test_type'=>isset($data[0])?$data[0]:'',
+																'test_name'=>isset($data[1])?$data[1]:'',
+																'test_duartion'=>isset($data[2])?$data[2]:'',
+																'test_amount'=>isset($data[3])?$data[3]:'',
+																'delivery_charge'=>isset($data[4])?$data[4]:'',
+																'created_at'=>date('Y-m-d H:i:s'),
+																'updated_at'=>date('Y-m-d H:i:s'),
+																'created_by'=>$login_details['a_id'],
+																);
+																$results=$this->Lab_model->save_labtest($add);
+																			
+
+														   }
+															
+													}
+													if(count($results)>0){
+													$this->session->set_flashdata('addcus','Tests are successfully added');
+													redirect('lab/index/'.base64_encode(1));	
+													}
+													
+												
+										}else{
+											$this->session->set_flashdata('error','Your are uploaded  wrong File');
+											redirect('lab');	
+										}
+										
+									}else{
+										$this->session->set_flashdata('error','Your are uploaded  wrong File. Please upload correctfile!');
+										redirect('lab');
+									}
+			}else{
+			 $this->session->set_flashdata('error','Please login to continue');
+			 redirect('admin');
+		}
+	}
+	
 	
 	
 	

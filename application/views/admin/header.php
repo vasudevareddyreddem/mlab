@@ -46,7 +46,7 @@
             <div class="page-header-inner ">
                 <!-- logo start -->
                 <div class="page-logo">
-                    <a href="dashboard.php">
+                    <a href="<?php echo base_url(); ?>">
 
                         <span class="logo-default">Seller Admin</span> </a>
                 </div>

@@ -27,7 +27,7 @@
 											<td><?php echo isset($lis['test_name'])?$lis['test_name']:''; ?></td>
 											<td>
 											<?php if($lis['report_file']!=''){ ?>
-											<a target="_blank" href="<?php echo base_url('assets/reportfiles/'.$lis['report_file']); ?>">Downalod</a>
+											<a target="_blank" href="<?php echo base_url('assets/reportfiles/'.$lis['report_file']); ?>">Download</a>
 											<?php }  ?>
 											</td>
 											<td class="valigntop">

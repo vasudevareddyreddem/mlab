@@ -26,13 +26,13 @@
                                         <td><?php echo isset($mlab_details['email'])?$mlab_details['email']:''; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Address1</td>
+                                        <td>Address</td>
                                         <td><?php echo isset($mlab_details['address1'])?$mlab_details['address1']:''; ?></td>
                                     </tr>
-                                    <tr>
+                                    <!--<tr>
                                         <td>Address2</td>
                                         <td><?php echo isset($mlab_details['address2'])?$mlab_details['address2']:''; ?></td>
-                                    </tr>
+                                    </tr>-->
                                     <tr>
                                         <td>City</td>
                                         <td><?php echo isset($mlab_details['city'])?$mlab_details['city']:''; ?></td>

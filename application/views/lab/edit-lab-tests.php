@@ -23,7 +23,7 @@
                                             <input type="text" class="form-control" name="test_name" id="test_name" placeholder="Enter Test Name" value="<?php echo isset($test_name_details['test_name'])?$test_name_details['test_name']:''; ?>">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label>Estimated Duration</label>
+                                            <label>Reports In</label>
                                             <input type="text" class="form-control" name="test_duartion" id="test_duartion" placeholder="Enter Duration" value="<?php echo isset($test_name_details['test_duartion'])?$test_name_details['test_duartion']:''; ?>">
                                         </div>
                                         <div class="form-group col-md-6">
@@ -106,10 +106,10 @@ function adminstatus2(id){
             test_duartion: {
                 validators: {
                     notEmpty: {
-                        message: 'Estimated Duration is required'
+                        message: 'Reports In is required'
                     },regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
-					message:'Estimated Duration wont allow <> [] = % '
+					message:'Reports In wont allow <> [] = % '
 					}
                 }
             },

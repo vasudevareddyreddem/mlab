@@ -74,7 +74,8 @@
                                     <tr>
                                         <th>Test Package Name</th>
                                         <th>Test Name</th>
-                                        <th>Discount</th>
+                                        <th>MRP</th>
+										<th>Discount</th>
                                         <th>Amount</th>
                                         <th>Percentage</th>
                                         <th>Date & Time</th>
@@ -98,8 +99,9 @@
 										<?php } ?>
 										
 										</td>
-                                        <td><?php echo isset($list['discount'])?$list['discount']:''; ?></td>
                                         <td><?php echo isset($list['amount'])?$list['amount']:''; ?></td>
+                                        <td><?php echo isset($list['discount'])?$list['discount']:''; ?></td>
+                                        <td><?php echo isset($list['amount'])?$list['amount']-$list['discount']:''; ?></td>
                                         <td><?php echo isset($list['percentage'])?$list['percentage']:''; ?></td>
                                         <td><?php echo isset($list['created_at'])?$list['created_at']:''; ?></td>
                                         <td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive";} ?></td>
