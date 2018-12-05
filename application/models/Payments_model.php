@@ -83,6 +83,19 @@ class Payments_model extends CI_Model
 		$this->db->where('admin.a_id',$a_id);
 		return $this->db->get()->row_array();
 	}
+	/* save commission amount*/
+	public  function save_commision_payement($data){
+		$this->db->insert('admin_commision_list',$data);
+		return $this->db->insert_id();
+	}
+	
+	public  function get_week_commisiion_payment_status($from_date,$to_date,$seller_id){
+		$this->db->select('*')->from('admin_commision_list');
+		$this->db->where('admin_commision_list.seller_id',$seller_id);
+		$this->db->where('admin_commision_list.week_start_date',$from_date);
+		$this->db->where('admin_commision_list.week_end_date',$to_date);
+		return $this->db->get()->row_array();
+	}
 	
 	
 	

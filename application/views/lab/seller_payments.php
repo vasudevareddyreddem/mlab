@@ -30,8 +30,10 @@
                                         <td><?php echo isset($list['cnt'])?$list['cnt']:''; ?></td>
                                         <td>
 										<?php echo isset($list['cash'])?$list['cash']:''; ?>
-										<?php if($list['commision_amt']>0){ ?>
+										<?php if($list['commision_amt']>0 && $list['commision_payment_status']==''){ ?>
 										<a href="<?php echo base_url('payments/pay/'.base64_encode($list['week_from']).'/'.base64_encode($list['week_to'])); ?>">Pay</a>
+										<?php }else if($list['commision_amt']>0 && $list['commision_payment_status']!=''){ ?>
+										<b>Commision amount ( <?php echo $list['commision_amt']; ?> ) Paid </b>
 										<?php } ?>
 										
 										</td>

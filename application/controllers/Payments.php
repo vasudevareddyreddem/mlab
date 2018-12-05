@@ -58,6 +58,7 @@ class Payments extends Back_end {
 							foreach($weeks_list as $lis){
 								$count=1;$get_order_list='';foreach($lis as $li){
 										//echo '<pre>';print_r($li);
+										$paymetn_status=$this->Payments_model->get_week_commisiion_payment_status($li['From'],$li['to'],$login_details['a_id']);
 										$get_order_list=$this->Payments_model->get_inbween_week_orders_list($li['From'],$li['to'],$login_details['a_id']);
 										$cash_delivery=$this->Payments_model->get_inbween_week_cash_ondelivery_orders_orders_list($li['From'],$li['to'],$login_details['a_id']);
 										$org_cash_delivery=$this->Payments_model->get_inbween_week_cash_commision_org_amt_ondelivery_orders_orders_list($li['From'],$li['to'],$login_details['a_id']);
@@ -73,6 +74,12 @@ class Payments extends Back_end {
 											$datas[$count]['with_out_delivery_cash_amt']=isset($org_cash_delivery['cash_amount'])?$org_cash_delivery['cash_amount']:'';
 											$datas[$count]['commision_amt']=($org_cash_delivery['cash_amount']*$lab_details['commission_amt'])/100;
 											$datas[$count]['cnt']=+count($get_order_list);
+											if(count($paymetn_status)>0){
+												$datas[$count]['commision_payment_status']='Paid';
+											}else{
+												$datas[$count]['commision_payment_status']='';
+											}
+											
 										}
 										
 									
@@ -121,7 +128,7 @@ class Payments extends Back_end {
 			{
 				$from_date=base64_decode($this->uri->segment(3));	
 				$to_date=base64_decode($this->uri->segment(4));
-				//if($from_date!='' && $to_date!=''){
+				if($from_date!='' && $to_date!=''){
 						$login_details=$this->session->userdata('mlab_details');
 						$lab_details=$this->Payments_model->get_lab_details($login_details['a_id']);
 						$get_order_list=$this->Payments_model->get_inbween_week_orders_list($from_date,$to_date,$login_details['a_id']);
@@ -184,14 +191,47 @@ class Payments extends Back_end {
 					$this->load->view('admin/footer');
 					//echo '<pre>';print_r($datas);exit;
 					
-				// }else{
-					// $this->session->set_flashdata('error','Please login to continue');
-					// redirect('Payments/index');
-				// }
+				 }else{
+					 $this->session->set_flashdata('error','Please login to continue');
+					 redirect('Payments/index');
+				 }
 				
 
 			
 				
+			}else{
+			   $this->session->set_flashdata('error','Please login to continue');
+			  redirect('admin');
+		}
+	}
+	public  function success(){
+		if($this->session->userdata('mlab_details'))
+			{
+				 $login_details=$this->session->userdata('mlab_details');
+				$post=$this->input->post();
+				$add=array(
+				'seller_id'=>$login_details['a_id'],
+				'week_start_date'=>isset($post['week_from'])?base64_decode($post['week_from']):'',
+				'week_end_date'=>isset($post['week_to'])?base64_decode($post['week_to']):'',
+				'commision_rate'=>isset($post['commision_rate'])?base64_decode($post['commision_rate']):'',
+				'payamount'=>isset($post['payamount'])?base64_decode($post['payamount']):'',
+				'order_count'=>isset($post['cnt'])?base64_decode($post['cnt']):'',
+				'cash_amount'=>isset($post['cash'])?base64_decode($post['cash']):'',
+				'razorpay_payment_id'=>isset($post['razorpay_payment_id'])?base64_decode($post['razorpay_payment_id']):'',
+				'with_out_delivery_cash_amt'=>isset($post['with_out_delivery_cash_amt'])?base64_decode($post['with_out_delivery_cash_amt']):'',
+				'created_by'=>$login_details['a_id'],
+				);
+				$save=$this->Payments_model->save_commision_payement($add);
+				if(count($save)>0){
+					$this->session->set_flashdata('success','Payment successfully completed');
+					redirect('payments/index');
+				}else{
+					$this->session->set_flashdata('error','Technical problem will occurred. Please try again');
+					redirect('payments/pay/'.base64_encode($post['week_from']).'/'.base64_decode($post['week_to']));
+				}
+				
+			//echo '<pre>';print_r($add);exit;
+
 			}else{
 			   $this->session->set_flashdata('error','Please login to continue');
 			  redirect('admin');
