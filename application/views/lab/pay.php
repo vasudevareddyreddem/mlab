@@ -11,7 +11,7 @@
 	 
  }
  </style>
- <?php //echo "<pre>";print_r($bill_details);exit; ?>
+ <?php //echo "<pre>";print_r($details);exit; ?>
 <div class="container " style="margin-top:100px;">
 <div class="row justify-content-md-center">
 <div class=" col-md-6 card py-2">
@@ -23,38 +23,35 @@
 <table class="table table-bordered">
 	<tr>
         <th>Name</th>
-		<td><?php echo isset($bill_details['name'])?$bill_details['name']:''; ?></td>
+		<td><?php echo isset($details['name'])?$details['name']:''; ?></td>
      </tr>
 	 <tr>
         <th>Email Address</th>
-		<td><?php echo isset($bill_details['email_id'])?$bill_details['email_id']:''; ?></td>
+		<td><?php echo isset($details['email_id'])?$details['email_id']:''; ?></td>
      </tr>
 	 <tr>
         <th>Mobile</th>
-		<td><?php echo isset($bill_details['mobile_no'])?$bill_details['mobile_no']:''; ?></td>
+		<td><?php echo isset($details['mobile_no'])?$details['mobile_no']:''; ?></td>
      </tr>
 	<tr>
         <th>Project</th>
-		<td><?php echo isset($bill_details['project'])?$bill_details['project']:''; ?></td>
+		<td><?php echo isset($details['project'])?$details['project']:''; ?></td>
      </tr>	
 	 <tr>
         <th>Amount</th>
-		<td><?php echo isset($bill_details['amount'])?$bill_details['amount']:''; ?></td>
+		<td><?php echo isset($details['amount'])?$details['amount']:''; ?></td>
      </tr>
 	 <tr>
         <th>Pay</th>
-		<td><?php echo isset($bill_details['pay'])?$bill_details['pay']:''; ?></td>
+		<td><?php echo isset($details['pay'])?$details['pay']:''; ?></td>
      </tr><tr>
         <th>Due</th>
-		<td><?php echo isset($bill_details['due'])?$bill_details['due']:''; ?></td>
+		<td><?php echo isset($details['due'])?$details['due']:''; ?></td>
      </tr>
-	 <tr>
-        <th>Payment Mode</th>
-		<td><?php if($bill_details['payment_type']==1){ echo "Online bank"; }else if($bill_details['payment_type']==2){ echo "Cash";}else if($bill_details['payment_type']==3){ echo "Other"; } ?></td>
-     </tr> 
+	
 	 <tr>
         
-		<td colspan="2"><strong>Address:</strong> <?php echo isset($bill_details['adress'])?$bill_details['adress']:''; ?></td>
+		<td colspan="2"><strong>Address:</strong> <?php echo isset($details['adress'])?$details['adress']:''; ?></td>
      </tr>
  
   </table>
@@ -63,7 +60,6 @@
 <div class="container">
 <div class="row justify-content-md-center">
 <div class="col-md-3">
-	<a href="<?php echo base_url('payment/billing/'.base64_encode($bill_details['b_id'])); ?>" class="btn btn-warning">Edit</a>
 </div>
 <div class="col-md-3">
 <form  id="paymentform" name="paymentform" action="<?php echo base_url('payment/success'); ?>" method="POST">
@@ -78,14 +74,14 @@
     data-prefill.name="<?php echo $details['prefill']['name']?>"
     data-prefill.email="<?php echo $details['prefill']['email']?>"
     data-prefill.contact="<?php echo $details['prefill']['contact']?>"
-    data-notes.shopping_order_id="<?php echo $bill_details['b_id']?>"
+    data-notes.shopping_order_id="<?php echo $details['b_id']?>"
     data-order_id="<?php echo $details['order_id']?>"
     <?php if ($details['display_currency'] !== 'INR') { ?> data-display_amount="<?php echo $details['amount']?>" <?php } ?>
     <?php if ($details['display_currency'] !== 'INR') { ?> data-display_currency="<?php echo $details['display_currency']?>" <?php } ?>
   >
   </script>
   <!-- Any extra fields to be submitted with the form but not sent to Razorpay -->
-  <input type="hidden" name="b_id" value="<?php echo isset($bill_details['b_id'])?$bill_details['b_id']:''; ?>">
+  <input type="hidden" name="b_id" value="<?php echo isset($details['b_id'])?$details['b_id']:''; ?>">
 </form>
 </div>
 </div>
