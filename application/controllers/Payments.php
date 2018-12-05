@@ -157,6 +157,7 @@ class Payments extends Back_end {
 						$razorpayOrderId = $razorpayOrder['id'];
 						$displayAmount = $amount = $orderData['amount'];
 						$displayCurrency=$orderData['currency'];
+						$datas['lab_details']=$lab_details;
 						$datas['details'] = [
 											"key"               => $api_id,
 											"amount"            => $amount,

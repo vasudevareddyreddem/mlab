@@ -27,53 +27,42 @@
                             <div class="col-md-8 mx-auto">
                                 <table class="table table-bordered">
                                     <tr>
-                                        <th>Name</th>
+                                        <th>Total Amount</th>
                                         <td>
-                                            <?php echo isset($details['name'])?$details['name']:''; ?>
+                                            <?php echo isset($cash)?$cash:''; ?>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Email Address</th>
+                                        <th>Without Pick Up amount</th>
                                         <td>
-                                            <?php echo isset($details['email_id'])?$details['email_id']:''; ?>
+                                             <?php echo isset($with_out_delivery_online_amt)?$with_out_delivery_online_amt:''; ?>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Mobile</th>
+                                        <th>Commission amount</th>
                                         <td>
-                                            <?php echo isset($details['mobile_no'])?$details['mobile_no']:''; ?>
+                                            <?php echo isset($commision_amt)?$commision_amt:''; ?>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Project</th>
+                                        <th>Orders</th>
                                         <td>
-                                            <?php echo isset($details['project'])?$details['project']:''; ?>
+                                            <?php echo isset($cnt)?$cnt:''; ?>
+                                        </td>
+                                    </tr>
+									<tr>
+                                        <th>Commission rate</th>
+                                        <td>
+                                            <?php echo isset($lab_details['commission_amt'])?$lab_details['commission_amt']:''; ?>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Amount</th>
+                                        <th>Pay Amount</th>
                                         <td>
-                                            <?php echo isset($details['amount'])?$details['amount']:''; ?>
+                                            <?php echo isset($commision_amt)?$commision_amt:''; ?>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th>Pay</th>
-                                        <td>
-                                            <?php echo isset($details['pay'])?$details['pay']:''; ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Due</th>
-                                        <td>
-                                            <?php echo isset($details['due'])?$details['due']:''; ?>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td colspan="2"><strong>Address:</strong>
-                                            <?php echo isset($details['adress'])?$details['adress']:''; ?>
-                                        </td>
-                                    </tr>
+                                   
 
                                 </table>
                             </div>
