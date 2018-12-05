@@ -75,7 +75,11 @@
 											<div class="form-group col-md-6">
                                                 <label> Accrediations </label>
                                                 <input type="text" class="form-control"  name="accrediations" id="accrediations" placeholder="Enter Accrediations" value="<?php echo isset($lab_details['accrediations'])?$lab_details['accrediations']:''; ?>">
-                                            </div> 
+                                            </div>
+											<div class="form-group col-md-6">
+                                                <label> Commission amount</label>
+                                                <input type="text" class="form-control"  name="commission_amt" id="commission_amt" placeholder="Enter Commission amount" value="<?php echo isset($lab_details['commission_amt'])?$lab_details['commission_amt']:''; ?>">
+                                            </div> 											
                                             <div class="clearfix">&nbsp;</div>
                                             <div class="col-md-12 text-center">
                                                     <button type="submit" class="btn btn-primary">Update Lab</button>
@@ -174,6 +178,19 @@
 					message:'Accrediations wont allow <> [] = % '
 					}
                 }
+            },
+			commission_amt: {
+                validators: {
+					notEmpty: {
+						message: 'Commission is required'
+					},
+					 between: {
+                        min: 0,
+                        max: 100,
+                        message: 'The Commission must be between 0 and 100'
+                    }
+				
+				}
             },
 			pincode: {
               validators: {

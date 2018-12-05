@@ -75,7 +75,7 @@ class Pharmacy extends Back_end {
 					'zipcode'=>isset($post['pincode'])?$post['pincode']:'',
 					'country'=>isset($post['country'])?$post['country']:'',
 					'accrediations'=>isset($post['accrediations'])?$post['accrediations']:'',
-
+					'commission_amt'=>isset($post['commission_amt'])?$post['commission_amt']:'',
 					'password'=>isset($post['confirmPassword'])?md5($post['confirmPassword']):'',
 					'org_password'=>isset($post['confirmPassword'])?$post['confirmPassword']:'',
 					'created_at'=>date('Y-m-d H:i:s'),
@@ -128,7 +128,8 @@ class Pharmacy extends Back_end {
 					'state'=>isset($post['state'])?$post['state']:'',
 					'zipcode'=>isset($post['pincode'])?$post['pincode']:'',
 					'country'=>isset($post['country'])?$post['country']:'',
-					'accrediations'=>isset($post['accrediations'])?$post['accrediations']:'',
+					'accrediations'=>isset($post['accrediations'])?$post['accrediations']:'',					
+					'commission_amt'=>isset($post['commission_amt'])?$post['commission_amt']:'',
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
 					);

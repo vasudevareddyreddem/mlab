@@ -75,7 +75,11 @@
 											<div class="form-group col-md-6">
                                                 <label> Accrediations </label>
                                                 <input type="text" class="form-control"  name="accrediations" id="accrediations" placeholder="Enter Accrediations"  value="<?php echo isset($pharmacy_details['accrediations'])?$pharmacy_details['accrediations']:''; ?>">
-                                            </div> 											
+                                            </div>
+											<div class="form-group col-md-6">
+                                                <label> Commission amount</label>
+                                                <input type="text" class="form-control"  name="commission_amt" id="commission_amt" placeholder="Enter Commission amount" value="<?php echo isset($pharmacy_details['commission_amt'])?$pharmacy_details['commission_amt']:''; ?>">
+                                            </div>  											
                                             <div class="clearfix">&nbsp;</div>
                                             <div class="col-md-12 text-center">
                                                     <button type="submit" class="btn btn-primary">Update Pharmacy</button>
@@ -183,6 +187,18 @@
 					regexp: /^[0-9]{5,7}$/,
 					message: 'Pin code  must be  5 to 7 characters'
 					}
+				}
+            },commission_amt: {
+                validators: {
+					notEmpty: {
+						message: 'Commission is required'
+					},
+					 between: {
+                        min: 0,
+                        max: 100,
+                        message: 'The Commission must be between 0 and 100'
+                    }
+				
 				}
             },city: {
                validators: {
