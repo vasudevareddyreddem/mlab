@@ -34,7 +34,7 @@
                             </li>
 							<?php if($mlab_details['role']==1){ ?>
                             <li class="nav-item <?php if($this->uri->segment(1)=='lab' || $this->uri->segment(1)=='seller'){ echo "active";} ?>">
-	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                            <a  class="nav-link nav-toggle"> <i class="fa fa-flask"></i>
 	                                <span class="title">Seller Lab</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
@@ -54,7 +54,7 @@
 	                            </ul>
 	                        </li>
                             <li class="nav-item <?php if($this->uri->segment(1)=='pharmacy'){ echo "active";} ?>">
-	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                            <a  class="nav-link nav-toggle"> <i class="fa fa-hospital-o"></i>
 	                                <span class="title">Seller Pharmacy</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
@@ -70,44 +70,51 @@
 	                            </ul>
 	                        </li>
 							<li class="nav-item ">
-	                            <a href="#" class="nav-link "> <i class="material-icons">person</i>
+	                            <a href="#" class="nav-link "> <i class="fa fa-money"></i>
 	                                <span class="title">Payments</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 							<?php }else if($mlab_details['role']==2){ ?>
 							<li class="nav-item  ">
-	                            <a  href="<?php echo base_url('lab/allorders'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('lab/allorders'); ?>" class="nav-link "> 
+                                    <i class="fa fa-ambulance"></i>
 	                                <span class="title">Order Pickup</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 							<li class="nav-item  ">
-	                            <a  href="<?php echo base_url('lab/reports'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('lab/reports'); ?>" class="nav-link "> 
+                                    <i class="fa fa-copy" style="font-weight: bold;"></i>
 	                                <span class="title">Upload Reports</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 							<li class="nav-item  ">
-	                            <a  href="<?php echo base_url('lab'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('lab'); ?>" class="nav-link "> 
+                                    <i class="fa fa-file-text"></i>
 	                                <span class="title">Upload Lab Tests</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 							<li class="nav-item  ">
-	                            <a  href="<?php echo base_url('lab/packages'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('lab/packages'); ?>" class="nav-link "> 
+                                    <i class="fa fa-upload"></i>
 	                                <span class="title">Upload Lab Packages</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 							<li class="nav-item  ">
-	                            <a href="<?php echo base_url('history/laborders'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a href="<?php echo base_url('history/laborders'); ?>" class="nav-link "> 
+                                    <i class="fa fa-history"></i>
 	                                <span class="title">History</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
                             <li class="nav-item  ">
-	                            <a href="<?php echo base_url('payments'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a href="<?php echo base_url('payments'); ?>" class="nav-link "> 
+                                    <i class="fa fa-money"></i>
 	                                <span class="title">Payments</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 							<?php } ?>
                             <li class="nav-item ">
-	                            <a href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> 
+                                    <i class="fa fa-sign-out"></i>
 	                                <span class="title">Logout</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
