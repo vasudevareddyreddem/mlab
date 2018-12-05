@@ -121,7 +121,7 @@ class Payments extends Back_end {
 			{
 				$from_date=base64_decode($this->uri->segment(3));	
 				$to_date=base64_decode($this->uri->segment(4));
-				if($from_date!='' && $to_date!=''){
+				//if($from_date!='' && $to_date!=''){
 						$login_details=$this->session->userdata('mlab_details');
 						$lab_details=$this->Payments_model->get_lab_details($login_details['a_id']);
 						$get_order_list=$this->Payments_model->get_inbween_week_orders_list($from_date,$to_date,$login_details['a_id']);
@@ -183,10 +183,10 @@ class Payments extends Back_end {
 					$this->load->view('admin/footer');
 					//echo '<pre>';print_r($datas);exit;
 					
-				}else{
-					$this->session->set_flashdata('error','Please login to continue');
-					redirect('Payments/index');
-				}
+				// }else{
+					// $this->session->set_flashdata('error','Please login to continue');
+					// redirect('Payments/index');
+				// }
 				
 
 			
