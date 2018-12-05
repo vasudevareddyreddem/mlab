@@ -79,7 +79,7 @@ class Payments_model extends CI_Model
 	}
 	/* lab details */
 	public  function get_lab_details($a_id){
-		$this->db->select('a_id,role,name,commission_amt')->from('admin');
+		$this->db->select('a_id,role,name,commission_amt,name,email,mobile,altmobile,address1,city,state')->from('admin');
 		$this->db->where('admin.a_id',$a_id);
 		return $this->db->get()->row_array();
 	}

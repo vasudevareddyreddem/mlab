@@ -31,7 +31,7 @@
                                         <td>
 										<?php echo isset($list['cash'])?$list['cash']:''; ?>
 										<?php if($list['commision_amt']>0){ ?>
-										<a href="<?php echo base_url('payment/pay'); ?>">Pay</a>
+										<a href="<?php echo base_url('payments/pay/'.base64_encode($list['week_from']).'/'.base64_encode($list['week_to'])); ?>">Pay</a>
 										<?php } ?>
 										
 										</td>

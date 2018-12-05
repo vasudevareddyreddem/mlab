@@ -26,7 +26,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config['base_url'] = 'http://localhost/mlab/';
 $config['smsusername']	= "pracha";
 $config['smspassword']	= "123456";
-$config['sender']	= "PRACHA";
+$config['sender']	= "MEDSIT";
+$config['keyId'] ='rzp_test_FMROR38S2ObKGw';
+$config['API_keySecret'] = '4ZAmE5b07syPo0P1WbFUNr7X';
 
 /*
 |--------------------------------------------------------------------------

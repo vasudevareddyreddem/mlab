@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 @include_once( APPPATH . 'controllers/Back_end.php');
-
+require_once ('razorpay-php/Razorpay.php');
+use Razorpay\Api\Api as RazorpayApi;
 class Payments extends Back_end {
 	
 		public function __construct() 
@@ -113,6 +114,86 @@ class Payments extends Back_end {
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
+		}
+	}
+	public  function pay(){
+		if($this->session->userdata('mlab_details'))
+			{
+				$from_date=base64_decode($this->uri->segment(3));	
+				$to_date=base64_decode($this->uri->segment(4));
+				if($from_date!='' && $to_date!=''){
+						$login_details=$this->session->userdata('mlab_details');
+						$lab_details=$this->Payments_model->get_lab_details($login_details['a_id']);
+						$get_order_list=$this->Payments_model->get_inbween_week_orders_list($from_date,$to_date,$login_details['a_id']);
+						$cash_delivery=$this->Payments_model->get_inbween_week_cash_ondelivery_orders_orders_list($from_date,$to_date,$login_details['a_id']);
+						$org_cash_delivery=$this->Payments_model->get_inbween_week_cash_commision_org_amt_ondelivery_orders_orders_list($from_date,$to_date,$login_details['a_id']);
+						$online_delivery=$this->Payments_model->get_inbween_week_online_orders_orders_list($from_date,$to_date,$login_details['a_id']);
+						$org_online_delivery=$this->Payments_model->get_inbween_week_online_orders_commision_org_amt_orders_list($from_date,$to_date,$login_details['a_id']);
+							if(count($get_order_list)>0){
+							//$datas[$count]=$get_order_list;
+							$datas['week_from']=$from_date;
+							$datas['week_to']=$to_date;
+							$datas['cash']=isset($cash_delivery['cash_amount'])?$cash_delivery['cash_amount']:'';
+							$datas['online']=isset($online_delivery['online_amount'])?$online_delivery['online_amount']:'';
+							$datas['with_out_delivery_online_amt']=isset($org_online_delivery['online_amount'])?$org_online_delivery['online_amount']:'';
+							$datas['with_out_delivery_cash_amt']=isset($org_cash_delivery['cash_amount'])?$org_cash_delivery['cash_amount']:'';
+							$datas['commision_amt']=($org_cash_delivery['cash_amount']*$lab_details['commission_amt'])/100;
+							$datas['cnt']=+count($get_order_list);
+						}
+						$amount_pay=number_format($datas['commision_amt'], 2, '.', ' ');
+						/* payment purpose*/
+						$api_id= $this->config->item('keyId');
+						$api_Secret= $this->config->item('API_keySecret');
+						$api = new RazorpayApi($api_id,$api_Secret);
+							//$api = new RazorpayApi($this->config->load('keyId'), $this->config->load('API_keySecret'));
+							$orderData = [
+									'receipt'         => $login_details['a_id'],
+									'amount'          => $amount_pay * 100, // 2000 rupees in paise
+									'currency'        => 'INR',
+									'payment_capture' => 1 // auto capture
+							];
+
+						$razorpayOrder = $api->order->create($orderData);
+						$razorpayOrderId = $razorpayOrder['id'];
+						$displayAmount = $amount = $orderData['amount'];
+						$displayCurrency=$orderData['currency'];
+						$datas['details'] = [
+											"key"               => $api_id,
+											"amount"            => $amount,
+											"name"              => $lab_details['name'],
+											"description"       => "cash on delivery orders commision amount",
+											"image"             => "",
+											"prefill"           => [
+											"name"              => $lab_details['name'],
+											"email"             => $lab_details['email'],
+											"contact"           => $lab_details['mobile'],
+											],
+											"notes"             => [
+											"address"           => $lab_details['address1'].$lab_details['city'],
+											"merchant_order_id" => $razorpayOrder['id'],
+											],
+											"theme"             => [
+											"color"             => "#F37254"
+											],
+											"order_id"          => $razorpayOrderId,
+											"display_currency"          => $orderData['currency'],
+							];
+							
+					$this->load->view('lab/pay',$datas);
+					$this->load->view('admin/footer');
+					//echo '<pre>';print_r($datas);exit;
+					
+				}else{
+					$this->session->set_flashdata('error','Please login to continue');
+					redirect('Payments/index');
+				}
+				
+
+			
+				
+			}else{
+			   $this->session->set_flashdata('error','Please login to continue');
+			  redirect('admin');
 		}
 	}
 	
