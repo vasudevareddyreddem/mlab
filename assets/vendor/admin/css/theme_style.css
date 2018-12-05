@@ -1090,7 +1090,7 @@ form.search-form-opened .btn.submit {
 .page-header.navbar .menu-toggler.responsive-toggler {
     display: none;
     float: right;
-    margin: 23px 13px 0
+    margin: 17px 13px 0;
 }
 .page-header.navbar .top-menu {
     margin: 0;
@@ -4627,8 +4627,9 @@ ul.activity-list .activity-desk h5 a {
 .card .table th,
 .card .dataTable td,
 .card .dataTable th {
-    padding: 15px 8px;
+    padding: 3px 8px;
     vertical-align: middle;
+    font-size: 10px;
 }
 .table td.valigntop {
     vertical-align: top;

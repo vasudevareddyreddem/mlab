@@ -19,21 +19,21 @@
     <link href="<?php echo base_url(); ?>assets/vendor/admin/css/bootstrapValidator.min.css" rel="stylesheet" type="text/css" />
     <!-- Material Design Lite CSS -->
     <link href="<?php echo base_url(); ?>assets/vendor/admin/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/material.min.css" rel="stylesheet" >
-	<link href="<?php echo base_url(); ?>assets/vendor/admin/css/material_style.css" rel="stylesheet" >
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/material.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/material_style.css" rel="stylesheet">
     <!-- Theme Styles -->
     <link href="<?php echo base_url(); ?>assets/vendor/admin/css/theme_style.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/vendor/admin/css/style.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/vendor/admin/css/custom.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/vendor/admin/css/responsive.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/vendor/admin/css/theme-color.css" rel="stylesheet" type="text/css" />
-	  <link href="<?php echo base_url(); ?>assets/vendor/admin/css/select2.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/select2.css" rel="stylesheet" type="text/css" />
 
     <link href="<?php echo base_url(); ?>assets/vendor/admin/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
-	    <script src="<?php echo base_url(); ?>assets/vendor/admin/js/jquery.min.js" ></script>
+    <script src="<?php echo base_url(); ?>assets/vendor/admin/js/jquery.min.js"></script>
     <!-- bootstrap -->
-    <script src="<?php echo base_url(); ?>assets/vendor/admin/js/bootstrap.min.js" ></script>
-    <script src="<?php echo base_url(); ?>assets/vendor/admin/js/bootstrapValidator.min.js" ></script>
+    <script src="<?php echo base_url(); ?>assets/vendor/admin/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendor/admin/js/bootstrapValidator.min.js"></script>
     <!-- counterup -->
 
 </head>
@@ -47,8 +47,8 @@
                 <!-- logo start -->
                 <div class="page-logo">
                     <a href="<?php echo base_url(); ?>">
-
-                        <span class="logo-default">Seller Admin</span> </a>
+                        <span class="logo-default">Seller Admin</span> 
+                    </a>
                 </div>
                 <!-- logo end -->
                 <ul class="nav navbar-nav navbar-left in">
@@ -56,7 +56,7 @@
                 </ul>
                 <!-- start mobile menu -->
                 <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span></span>
+                    <i class="fa fa-bars"></i>
                 </a>
                 <!-- end mobile menu -->
                 <!-- start header menu -->
@@ -65,20 +65,19 @@
                         <!-- start manage user dropdown -->
                         <li class="dropdown dropdown-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-							<?php if($mlab_details['profile_pic']==''){ ?>
-								<img alt="" class="img-circle " src="<?php echo base_url(); ?>assets/vendor/admin/img/dp.jpg" />
-							<?php }else{ ?>
-								<img alt="" class="img-circle " src="<?php echo base_url('assets/profile_pic/'.$mlab_details['profile_pic']); ?>" />
-							<?php } ?>
-						
-                               
-                                <span class="username username-hide-on-mobile"> <?php echo isset($mlab_details['name'])?$mlab_details['name']:''; ?> </span>
+                                <?php if($mlab_details['profile_pic']==''){ ?>
+                                <img alt="admin" class="img-circle " src="<?php echo base_url(); ?>assets/vendor/admin/img/dp.jpg" />
+                                <?php }else{ ?>
+                                <img alt="" class="img-circle " src="<?php echo base_url('assets/profile_pic/'.$mlab_details['profile_pic']); ?>" />
+                                <?php } ?>
+                                <span class="username username-hide-on-mobile">
+                                    <?php echo isset($mlab_details['name'])?$mlab_details['name']:''; ?> </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
                                 <li>
                                     <a href="<?php echo base_url('profile'); ?>">
-                                        <i class="fa fa-user"></i> Profile 
+                                        <i class="fa fa-user"></i> Profile
                                     </a>
                                 </li>
                                 <li>
@@ -88,7 +87,7 @@
                                 </li>
                                 <li>
                                     <a href="<?php echo base_url('dashboard/logout'); ?>">
-                                        <i class="fa fa-sign-out"></i> Log Out 
+                                        <i class="fa fa-sign-out"></i> Log Out
                                     </a>
                                 </li>
                             </ul>
@@ -99,43 +98,43 @@
         </div>
 
     </div>
-	<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-			
-			<div style="padding:10px">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h4 style="pull-left" class="modal-title">Confirmation</h4>
-			</div>
-			<div class="modal-body">
-			<div class="alert alert-danger alert-dismissible" id="errormsg" style="display:none;"></div>
-			  <div class="row">
-				<div id="content1" class="col-xs-12 col-xl-12 form-group">
-				Are you sure ? 
-				</div>
-				</div>
-				<div class="row">
-				<div class="col-md-6 col-sm-6  col-sm-6 ">
-				  <button type="button" aria-label="Close" data-dismiss="modal" class="btn  blueBtn pull-left">Cancel</button>
-				</div>
-				<div class="col-md-6 col-sm-6  col-sm-6 ">
-                <a href="?id=value" class="btn  blueBtn popid pull-right" style="text-decoration:none;"> <span aria-hidden="true">Ok</span></a>
-				</div>
-			 </div>
-		  </div>
-      </div>
-      
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div style="padding:10px">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 style="pull-left" class="modal-title">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger alert-dismissible" id="errormsg" style="display:none;"></div>
+                    <div class="row">
+                        <div id="content1" class="col-xs-12 col-xl-12 form-group">
+                            Are you sure ?
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6  col-sm-6 ">
+                            <button type="button" aria-label="Close" data-dismiss="modal" class="btn  blueBtn pull-left">Cancel</button>
+                        </div>
+                        <div class="col-md-6 col-sm-6  col-sm-6 ">
+                            <a href="?id=value" class="btn  blueBtn popid pull-right" style="text-decoration:none;"> <span aria-hidden="true">Ok</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-  </div>
-	<?php if($this->session->flashdata('success')): ?>
-<div class="alert_msg1 animated slideInUp bg-succ">
-   <?php echo $this->session->flashdata('success');?> &nbsp; <i class="fa fa-check text-success ico_bac" aria-hidden="true"></i>
-</div>
-<?php endif; ?>
-<?php if($this->session->flashdata('error')): ?>
-<div class="alert_msg1 animated slideInUp bg-warn">
-   <?php echo $this->session->flashdata('error');?> &nbsp; <i class="fa fa-exclamation-triangle text-success ico_bac" aria-hidden="true"></i>
-</div>
-<?php endif; ?>
+    <?php if($this->session->flashdata('success')): ?>
+    <div class="alert_msg1 animated slideInUp bg-succ">
+        <?php echo $this->session->flashdata('success');?> &nbsp; <i class="fa fa-check text-success ico_bac" aria-hidden="true"></i>
+    </div>
+    <?php endif; ?>
+    <?php if($this->session->flashdata('error')): ?>
+    <div class="alert_msg1 animated slideInUp bg-warn">
+        <?php echo $this->session->flashdata('error');?> &nbsp; <i class="fa fa-exclamation-triangle text-success ico_bac" aria-hidden="true"></i>
+    </div>
+    <?php endif; ?>
