@@ -9,7 +9,7 @@
                     </div>
                     <div class="card-body ">
                         <div class="table-responsive">
-                            <table id="saveStage" class="display table" style="width:100%;">
+                            <table id="saveStage" class="display table table-striped" style="width:100%;">
                                 <thead>
                                     <tr>
                                         <th>Patient Name</th>

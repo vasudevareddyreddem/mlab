@@ -9,19 +9,17 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="saveStage" class="display table" style="width:100%;">
+                            <table id="saveStage" class="display table table-striped" style="width:100%;">
                                 <thead>
                                     <tr>
-                                         <th>Patient Name</th>
+                                        <th>Patient Name</th>
                                         <th>Mobile Number</th>
                                         <th>Test Name / Package Name</th>
 										<th>Sample Pickup Date & Time</th>
                                         <th>Amount</th>
                                         <th>Delivery charges</th>
 										<th>Address</th>
-                                        
                                         <th>Payment Type</th>
-                                        
                                         <th>Created Date & Time</th>
                                         <th>Status</th>
                                     </tr>

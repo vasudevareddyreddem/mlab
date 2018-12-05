@@ -123,97 +123,95 @@ $total_lab_list = array(
     );
 ?>
 <script>
-    window.onload = function () {
-     
-    var chart = new CanvasJS.Chart("chartContainer", {
-    	title: {
-    		text: "Month wise List"
-    	},
-    	axisY: {
-    		title: " count range"
-    	},
-		legend:{
-		cursor:"pointer",
-		dockInsidePlotArea: true,
-		itemclick: toogleDataSeries
-		},
-    	data: [{
-    		type: "spline",
-			showInLegend: true,
-			name: "Total Lab List",
-			lineDashType: "solid", 
-			color: "#E91E63",
-    		dataPoints: <?php echo json_encode($total_lab_list, JSON_NUMERIC_CHECK); ?>
-    	},
-		{
-    		type: "spline",
-			showInLegend: true,
-			name: "Total Pharmacy List",
-			lineDashType: "solid",
-			color: "#FF9800",			
-    		dataPoints: <?php echo json_encode($total_pharmacy_list, JSON_NUMERIC_CHECK); ?>
-    	}
-		]
-    });
-    chart.render();
-     function toogleDataSeries(e){
-	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-		e.dataSeries.visible = false;
-	} else{
-		e.dataSeries.visible = true;
-	}
-	chart.render();
-}
+    window.onload = function() {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            title: {
+                text: "Month wise List"
+            },
+            axisY: {
+                title: " count range"
+            },
+            legend: {
+                cursor: "pointer",
+                dockInsidePlotArea: true,
+                itemclick: toogleDataSeries
+            },
+            data: [{
+                    type: "spline",
+                    showInLegend: true,
+                    name: "Total Lab List",
+                    lineDashType: "solid",
+                    color: "#E91E63",
+                    dataPoints: <?php echo json_encode($total_lab_list, JSON_NUMERIC_CHECK); ?>
+                },
+                {
+                    type: "spline",
+                    showInLegend: true,
+                    name: "Total Pharmacy List",
+                    lineDashType: "solid",
+                    color: "#FF9800",
+                    dataPoints: <?php echo json_encode($total_pharmacy_list, JSON_NUMERIC_CHECK); ?>
+                }
+            ]
+        });
+        chart.render();
+
+        function toogleDataSeries(e) {
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else {
+                e.dataSeries.visible = true;
+            }
+            chart.render();
+        }
     }
-    </script>
+</script>
 <div class="page-content-wrapper">
-                <div class="page-content">
-                    <div class="page-bar">
-                        <div class="page-title-breadcrumb">
-                            <div class=" pull-left">
-                                <div class="page-title">Dashboard</div>
-                            </div>
-                            <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
-                                </li>
-                                <li class="active">Dashboard</li>
-                            </ol>
+    <div class="page-content">
+        <div class="page-bar">
+            <div class="page-title-breadcrumb">
+                <div class=" pull-left">
+                    <div class="page-title">Dashboard</div>
+                </div>
+                <ol class="breadcrumb page-breadcrumb pull-right">
+                    <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                    </li>
+                    <li class="active">Dashboard</li>
+                </ol>
+            </div>
+        </div>
+        <!-- start widget -->
+        <div class="row">
+            <div class="col-lg-5 col-md-5">
+                <div class="card mt-0 btn-info">
+                    <div class="panel-body">
+                        <h3 class="mt-2 mb-2 text-white">No.of Lab's </h3>
+                        <div class="progressbar-xs progress-rounded progress-striped progress ng-isolate-scope active">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<?php echo $lab_list['cnt']; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $lab_list['cnt']; ?>%;"></div>
                         </div>
+                        <span class="text-small margin-top-10 full-width text-white">
+                            <?php echo $lab_list['cnt']; ?>
+                        </span>
                     </div>
-                   <!-- start widget -->
-	                  <div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<div class="row clearfix">            
-			                    <div class="col-md-6 col-sm-6 col-xs-12">
-			                        <div class="card">
-			                            <div class="panel-body">
-			                                <h3>No.of Lab's </h3>
-			                                <div class="progressbar-xs progress-rounded progress-striped progress ng-isolate-scope active">
-			                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $lab_list['cnt']; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $lab_list['cnt']; ?>%;"></div>
-			                                </div>
-			                                <span class="text-small margin-top-10 full-width"><?php echo $lab_list['cnt']; ?></span> </div>
-			                        </div>
-			                    </div>
-			                    <div class="col-md-6 col-sm-6 col-xs-12">
-			                        <div class="card">
-			                            <div class="panel-body">
-			                                <h3>No.of Pharmacy's</h3>
-			                                <div class="progressbar-xs progress-rounded progress-striped progress ng-isolate-scope active">
-			                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<?php echo $pharmacy_list['cnt']; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $pharmacy_list['cnt']; ?>%;"></div>
-			                                </div>
-			                                <span class="text-small margin-top-10 full-width"><?php echo $pharmacy_list['cnt']; ?></span> </div>
-			                        </div>
-			                    </div>
-			                </div>
-						</div>
-						
-						
-			        	</div>
-						<div class="row">
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
-</div>
-					
-                    
+                </div>
+                <div class="card btn-success">
+                    <div class="panel-body">
+                        <h3 class="mt-2 mb-2 text-white">No.of Pharmacy's</h3>
+                        <div class="progressbar-xs progress-rounded progress-striped progress ng-isolate-scope active">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<?php echo $pharmacy_list['cnt']; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $pharmacy_list['cnt']; ?>%;"></div>
+                        </div>
+                        <span class="text-small margin-top-10 full-width text-white">
+                            <?php echo $pharmacy_list['cnt']; ?>
+                        </span>
+                    </div>
                 </div>
             </div>
-    	  <script src="<?php echo base_url(); ?>assets/vendor/canvasjs.min.js" ></script>
+            <div class="col-lg-7 col-md-7">
+                <div id="chartContainer" style="height: 280px; width: 100%;"></div>
+            </div>
+        </div>
+            
+    </div>
+</div>
+<script src="<?php echo base_url(); ?>assets/vendor/canvasjs.min.js"></script>

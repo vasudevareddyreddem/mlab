@@ -17,26 +17,32 @@
             <div class="col-lg-12">
                 <div class="row clearfix">
                     <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="card">
+                        <div class="card btn-info">
                             <div class="panel-body">
-                                <h3>No.of Total Orders </h3>
-                                <span class="text-small margin-top-10 full-width"><?php echo isset($total_orders['cnt'])?$total_orders['cnt']:''; ?></span>
+                                <h3 class="mt-0 mb-3">No.of Total Orders </h3>
+                                <span class="text-small margin-top-10 full-width">
+                                    <?php echo isset($total_orders['cnt'])?$total_orders['cnt']:''; ?>
+                                </span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="card">
+                        <div class="card btn-success">
                             <div class="panel-body">
-                                <h3>No.of Received Orders </h3>
-                               <span class="text-small margin-top-10 full-width"><?php echo isset($total_received_orders['cnt'])?$total_received_orders['cnt']:''; ?></span>
+                                <h3 class="mt-0 mb-3">No.of Received Orders </h3>
+                                <span class="text-small margin-top-10 full-width">
+                                    <?php echo isset($total_received_orders['cnt'])?$total_received_orders['cnt']:''; ?>
+                                </span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="card">
+                        <div class="card btn-danger">
                             <div class="panel-body">
-                                <h3>No.of Rejected Orders</h3>
-                                <span class="text-small margin-top-10 full-width"><?php echo isset($total_reject_orders['cnt'])?$total_reject_orders['cnt']:''; ?></span>
+                                <h3 class="mt-0 mb-3">No.of Rejected Orders</h3>
+                                <span class="text-small margin-top-10 full-width">
+                                    <?php echo isset($total_reject_orders['cnt'])?$total_reject_orders['cnt']:''; ?>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -64,9 +70,7 @@
                     </div>-->
                 </div>
             </div>
-          
+
         </div>
-
-
     </div>
 </div>

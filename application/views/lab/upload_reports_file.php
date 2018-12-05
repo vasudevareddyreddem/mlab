@@ -10,7 +10,7 @@
                     </div>
                     <div class="card-body ">
                         <div class="table-responsive">
-                            <table id="" class="display table" style="width:100%;">
+                            <table id="" class="display table table-striped" style="width:100%;">
                                 <thead>
                                     <tr>
                                         <th>S.No</th>
