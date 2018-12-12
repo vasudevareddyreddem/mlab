@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 @include_once( APPPATH . 'controllers/Back_end.php');
-
+require_once ('razorpay-php/Razorpay.php');
+use Razorpay\Api\Api as RazorpayApi;
 class Lab extends Back_end {
 	
 		public function __construct() 
@@ -236,6 +237,7 @@ class Lab extends Back_end {
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$data['packages_test_lists']=$this->Lab_model->get_packages_test_lists($login_details['a_id']);
 					$data['test_lists']=$this->Lab_model->get_test_list($login_details['a_id']);
+					$data['test_type_lists']=$this->Lab_model->get_lab_test_type_list($login_details['a_id']);
 
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('lab/upload-lab-packages',$data);
@@ -249,6 +251,27 @@ class Lab extends Back_end {
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
+	}
+	
+	public  function get_test_names_list(){
+		if($this->session->userdata('mlab_details'))
+			{$login_details=$this->session->userdata('mlab_details');
+				$post=$this->input->post();
+				$details=$this->Lab_model->test_name_list($post['t_name'],$login_details['a_id']);
+				if(count($details)>0){
+					$data['msg']=1;
+					$data['list']=$details;
+					echo json_encode($data);exit;
+				}else{
+					$data['msg']=0;
+					$data['list']='';
+					echo json_encode($data);exit;
+				}
+			}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+			}
+		
 	}
 	public function testpackagepost(){
 		if($this->session->userdata('mlab_details'))
@@ -272,6 +295,7 @@ class Lab extends Back_end {
 					$add_package=array(
 					'lab_id'=>$login_details['a_id'],
 					'test_package_name'=>isset($post['test_package_name'])?$post['test_package_name']:'',
+					'test_type'=>isset($post['test_type'])?$post['test_type']:'',
 					'discount'=>isset($post['discount'])?$post['discount']:'',
 					'amount'=>isset($post['amount'])?$post['amount']:'',
 					'instruction'=>isset($post['instruction'])?$post['instruction']:'',
@@ -434,6 +458,8 @@ class Lab extends Back_end {
 					$pack_id=base64_decode($this->uri->segment(3));
 					$data['packages_name_details']=$this->Lab_model->get_packages_test_details($pack_id);
 					$data['test_lists']=$this->Lab_model->get_test_list($login_details['a_id']);
+					$data['test_type_lists']=$this->Lab_model->get_lab_test_type_list($login_details['a_id']);
+					$data['test_type_test_lists']=$this->Lab_model->test_name_list($data['packages_name_details']['test_type'],$login_details['a_id']);
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('lab/edit-lab-packages',$data);
 					$this->load->view('admin/footer');
@@ -472,6 +498,7 @@ class Lab extends Back_end {
 					}
 					$add_package=array(
 					'test_package_name'=>isset($post['test_package_name'])?$post['test_package_name']:'',
+					'test_type'=>isset($post['test_type'])?$post['test_type']:'',
 					'discount'=>isset($post['discount'])?$post['discount']:'',
 					'amount'=>isset($post['amount'])?$post['amount']:'',
 					'instruction'=>isset($post['instruction'])?$post['instruction']:'',
@@ -681,7 +708,7 @@ class Lab extends Back_end {
 			$admindetails=$this->session->userdata('mlab_details');
 			
 			$post=$this->input->post();
-			//echo '<pre>';print_r($post);exit;
+			//echo '<pre>';print_r($post);
 			if($admindetails['role']==2){
 					$order_item_id_id=base64_decode($post['order_item_id_id']);
 					if($order_item_id_id!=''){
@@ -694,6 +721,23 @@ class Lab extends Back_end {
 							if(count($statusdata)>0){
 								
 								$details=$this->Lab_model->order_item_details($order_item_id_id);
+								//echo '<pre>';print_r($details);exit;
+								$api_id= $this->config->item('keyId');
+								$api_Secret= $this->config->item('API_keySecret');
+								$api = new RazorpayApi($api_id,$api_Secret);
+								if($details['refund_razorpay_payment_id']=='' && $details['payment_type']==1){
+										$refund = $api->refund->create(array('payment_id' => $details['razorpay_payment_id']));
+											$refund_details=array(
+												'refund_razorpay_payment_id'=>isset($refund['id'])?$refund['id']:'',
+												'refund_amount'=>isset($refund['amount'])?$refund['amount']:'',
+												'refund_created_at'=>date('Y-m-d H:i:s'),
+												);
+									
+										$this->Lab_model->update_order_item_status($order_item_id_id,$refund_details);	
+								}
+								
+								//echo '<pre>';print_r($details);
+								//echo '<pre>';print_r($refund);exit;
 								$username=$this->config->item('smsusername');
 								$pass=$this->config->item('smspassword');
 								$sender=$this->config->item('sender');

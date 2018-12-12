@@ -27,12 +27,27 @@
 										
 										
 										 } ?>
+									<div class="form-group col-md-6">
+                                            <label>Test Type</label>
+                                            <select class="form-control" name="test_type" id="test_type" onchange="get_lab_names_list(this.value);" >
+                                                <option value="">Select Tests</option>
+                                                <?php if(isset($test_type_lists) && count($test_type_lists)>0){ ?>
+                                                <?php foreach($test_type_lists as $lis){ ?>
+													<?php if($lis['test_type']==$packages_name_details['test_type']){ ?>
+														<option selected value="<?php echo $lis['test_type']; ?>"> <?php echo $lis['test_type']; ?></option>
+													<?php }else{ ?>
+														<option value="<?php echo $lis['test_type']; ?>"> <?php echo $lis['test_type']; ?></option>
+													<?php } ?>
+                                                <?php } ?>
+                                                <?php } ?>
+                                            </select>
+                                        </div> 
                                     <div class="form-group col-md-6">
                                         <label>Test Names</label>
                                         <select class="form-control select2" name="test_name[]" id="test_name" multiple="multiple">
                                             <option value="">Select Tests</option>
-                                            <?php if(isset($test_lists) && count($test_lists)>0){ ?>
-                                            <?php foreach($test_lists as $lis){ ?>
+                                            <?php if(isset($test_type_test_lists) && count($test_type_test_lists)>0){ ?>
+                                            <?php foreach($test_type_test_lists as $lis){ ?>
                                             <?php if (in_array($lis['l_id'], $l_ids)){ ?>
                                             <option selected value="<?php echo $lis['l_id']; ?>">
                                                 <?php echo $lis['test_name']; ?>
@@ -86,6 +101,28 @@
 
 
 <script>
+function get_lab_names_list(name){
+	if(name!=''){
+		jQuery.ajax({
+					url: "<?php echo site_url('lab/get_test_names_list');?>",
+					data: {
+						t_name: name,
+					},
+					dataType: 'json',
+					type: 'POST',
+					success: function (data) {
+					$('#test_name').empty();
+						temp1='<option value="" disabled>select</option>';
+						$('#test_name').append(temp1); 
+					  $.each(data.list, function(i, product) {
+								$('#test_name').append('<option value="'+product.l_id+'">'+product.test_name+'</option>').trigger("chosen:updated"); 
+							
+								});
+						}
+				});
+	}
+	
+}
     $(document).ready(function() {
         $('#add_package_name').bootstrapValidator({
 
@@ -106,6 +143,13 @@
                     validators: {
                         notEmpty: {
                             message: 'Test Name is required'
+                        }
+                    }
+                },
+				test_type: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Test Type is required'
                         }
                     }
                 },

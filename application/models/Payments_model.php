@@ -97,6 +97,38 @@ class Payments_model extends CI_Model
 		return $this->db->get()->row_array();
 	}
 	
+	/* admin order  lists*/
+	public  function get_total_order_list_seller_wise(){
+		$this->db->select('lab_order_items.l_id,admin.name,admin.mobile,admin.email')->from('lab_order_items');
+		$this->db->join('admin', 'admin.a_id = lab_order_items.l_id', 'left');
+		$this->db->group_by('lab_order_items.l_id');
+		$return=$this->db->get()->result_array();
+		foreach($return as $list){
+			$order_count=$this->get_lab_orders_count($list['l_id']);
+			$order_total_amount=$this->get_lab_order_total_amount($list['l_id']);
+			//echo '<pre>';print_r($order_total_amount);
+			$data[$list['l_id']]=$list;
+			$data[$list['l_id']]['total_orders']=isset($order_count['total_orders'])?$order_count['total_orders']:'';
+			$data[$list['l_id']]['total_amount']=isset($order_total_amount['total_amt'])?$order_total_amount['total_amt']:'';
+			
+		}
+		if(!empty($data)){
+			return $data;
+		}
+		
+	}
+	
+	public  function get_lab_orders_count($l_id){
+		$this->db->select('COUNT(order_item_id) as total_orders')->from('lab_order_items');
+		$this->db->where('lab_order_items.l_id',$l_id);
+		return $this->db->get()->row_array();
+	}
+	public  function get_lab_order_total_amount($l_id){
+		$this->db->select('SUM(total_amt) as total_amt')->from('lab_order_items');
+		$this->db->where('lab_order_items.l_id',$l_id);
+		return $this->db->get()->row_array();
+	}
+	
 	
 	
 	

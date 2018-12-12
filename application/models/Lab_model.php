@@ -202,7 +202,7 @@ class Lab_model extends CI_Model
 		return $this->db->update('lab_order_items',$data);
 	}
 	public  function order_item_details($order_item_id){
-		$this->db->select('lab_patient_details.date,lab_patient_details.time,lab_patient_details.name,lab_patient_details.mobile')->from('lab_order_items');
+		$this->db->select('lab_orders.razorpay_payment_id,lab_orders.payment_type,lab_patient_details.date,lab_patient_details.time,lab_patient_details.name,lab_patient_details.mobile,lab_order_items.refund_razorpay_payment_id')->from('lab_order_items');
 		$this->db->join('lab_orders', 'lab_orders.r_id = lab_order_items.order_id', 'left');
 		$this->db->join('lab_patient_details', 'lab_patient_details.l_t_a_id = lab_orders.patient_details_id', 'left');
 
@@ -246,6 +246,23 @@ class Lab_model extends CI_Model
 
 		$this->db->where('order_package_test_list.o_p_t_id',$o_p_t_id);
 		return $this->db->get()->row_array();
+	}
+	
+	public  function get_lab_test_type_list($a_id){
+		$this->db->select('test_type,l_id,lab_id')->from('lab_tests');
+		$this->db->where('status',1);
+		$this->db->where('created_by',$a_id);
+		$this->db->group_by('test_type');
+		return $this->db->get()->result_array();
+	}
+	
+	public  function test_name_list($name,$a_id){
+		$this->db->select('test_name,l_id,lab_id')->from('lab_tests');
+		$this->db->where('test_type',$name);
+		$this->db->where('status',1);
+		$this->db->where('created_by',$a_id);
+		return $this->db->get()->result_array();
+	
 	}
 	
 	

@@ -70,7 +70,7 @@
 	                            </ul>
 	                        </li>
 							<li class="nav-item ">
-	                            <a href="#" class="nav-link "> <i class="fa fa-money"></i>
+	                            <a href="<?php echo base_url('payments/lists'); ?>" class="nav-link "> <i class="fa fa-money"></i>
 	                                <span class="title">Payments</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
