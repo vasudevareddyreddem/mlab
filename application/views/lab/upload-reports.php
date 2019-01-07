@@ -19,6 +19,7 @@
                                         <th>Delivery charges</th>
                                         <th>Sample Pickup Date & Time</th>
                                         <th>Payment Type</th>
+                                        <th>PickUp Boy Status</th>
                                         <th>Created Date & Time</th>
                                         <th>Action</th>
                                     </tr>
@@ -40,6 +41,7 @@
                                 <td>
 								<?php if($lis['payment_type']==1){ echo "Online"; } else if($lis['payment_type']==3){ echo "Swipe on Delivery";}else if($lis['payment_type']==2){  echo "Cash On Delivery"; } ?>
 								</td>
+                                <td>Completed</td>
 								<td><?php echo isset($lis['created_at'])?$lis['created_at']:''; ?></td>
 								 <td class="valigntop">
                                             <div class="btn-group"><a href="<?php echo base_url('lab/uploadreports/'.base64_encode($lis['order_item_id'])); ?>">

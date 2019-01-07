@@ -22,6 +22,7 @@
                                         <th>Address</th>
                                         <th>Payment Type</th>
                                         <th>Created Date & Time</th>
+                                        <th>PickUp Boy Status</th>
                                         <th>Status</th>
                                         <th>Lab Status</th>
                                     </tr>
@@ -64,6 +65,8 @@
                                         <td>
                                             <?php echo isset($lis['created_at'])?$lis['created_at']:''; ?>
                                         </td>
+                                        
+                                        <td>Completed</td>
                                         <td>
                                             <?php if($lis['status']==0){ echo "Pending";}else if($lis['status']==1){ echo "Success"; }else if($lis['status']==2){ echo "Canceled"; } ?>
                                         </td>

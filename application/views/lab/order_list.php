@@ -21,7 +21,7 @@
 										<th>Address</th>
                                         <th>Payment Type</th>
                                         <th>Created Date & Time</th>
-                                        <th>Status</th>
+                                        <th>PickUp Boy Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -33,11 +33,10 @@
                                 <td>
 								<?php echo isset($lis['test_name'])?$lis['test_name']:''; ?>
 								<?php echo isset($lis['test_package_name'])?$lis['test_package_name']:''; ?>
+                                </td>
 								<td>
 								<?php echo isset($lis['date'])?$lis['date']:''; ?>
 								<?php echo isset($lis['time'])?$lis['time']:''; ?>
-								</td>
-								
 								</td>
                                 <td><?php echo isset($lis['amount'])?$lis['amount']:''; ?></td>
                                 
