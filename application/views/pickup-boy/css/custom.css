@@ -1,0 +1,84 @@
+.page-container-bg-solid .page-bar, .page-content-white .page-bar {
+    background-color: #eaeef3;
+    position: relative;
+    padding: 0 20px;
+    margin: 0px -20px 0px;
+}
+.bg-indigo{
+	background:#6673FC;
+	color:#fff;
+}
+/* chating sart */
+.input-chat-des {
+	padding:0 10px;
+}
+.pos-btn-ab{
+	    /* position: absolute; */
+    top: -5px;
+    right: -9px;
+}
+.input-chat-des input{
+	height:45px;
+}
+.input-chat-des button{
+	height:45px;
+}
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+}
+
+
+.chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+.chat-help.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.chat-help .panel-body
+{
+    overflow-y: scroll;
+    height: 350px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
