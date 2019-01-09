@@ -111,6 +111,12 @@
 	                                <span class="title">Payments</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
+                            <li class="nav-item  ">
+	                            <a href="<?php echo base_url('pickupboy'); ?>" class="nav-link"> 
+                                    <i class="fa fa-money"></i>
+	                                <span class="title">Add PickUp Boy</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
 							<?php } ?>
                             <li class="nav-item ">
 	                            <a href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> 
