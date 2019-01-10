@@ -26,7 +26,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pickup_orders.php" class="nav-link"> <i class="fa fa-hourglass-half"></i>
+                        <a href="<?php echo base_url('pickupboy/pickup_orders') ?>" class="nav-link"> <i class="fa fa-hourglass-half"></i>
                             <span class="title">Pick Up Orders</span> <span class="arrow"></span>
                         </a>
                     </li>

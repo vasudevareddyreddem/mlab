@@ -6,32 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
 
-    <title>PickUp Boy</title>
+    <title>Seller Lab</title>
     <!-- google font -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css" />
     <!-- icons -->
-    <link href="assets/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/assets/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!--bootstrap -->
-    <link href="css/tether.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/bootstrapValidator.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/tether.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/bootstrapValidator.min.css" rel="stylesheet" type="text/css" />
     <!-- Material Design Lite CSS -->
-    <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/material.min.css" rel="stylesheet" >
-	<link href="css/material_style.css" rel="stylesheet" >
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/material.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/material_style.css" rel="stylesheet">
     <!-- Theme Styles -->
-    <link href="css/theme_style.css" rel="stylesheet" type="text/css" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <link href="css/custom.css" rel="stylesheet" type="text/css" />
-    <link href="css/responsive.css" rel="stylesheet" type="text/css" />
-    <link href="css/theme-color.css" rel="stylesheet" type="text/css" />
-    
-    <script src="js/jquery.min.js"></script>
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/theme_style.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/custom.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/theme-color.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/select2.css" rel="stylesheet" type="text/css" />
+
+    <link href="<?php echo base_url(); ?>assets/vendor/admin/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="<?php echo base_url(); ?>assets/vendor/admin/js/jquery.min.js"></script>
     <!-- bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrapValidator.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendor/admin/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendor/admin/js/bootstrapValidator.min.js"></script>
 
 </head>
 <!-- END HEAD -->

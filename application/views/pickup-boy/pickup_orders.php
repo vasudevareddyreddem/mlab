@@ -1,5 +1,4 @@
-<?php include('header.php'); ?>
-<?php include('sidebar.php'); ?>
+
 
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -26,13 +25,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php $count=1;
+                                foreach ($order_list as $list ){?>
                                     <tr>
-                                        <td>1</td>
-                                        <td>xxxxx</td>
-                                        <td>xxxxxx</td>
-                                        <td>xxxxx</td>
-                                        <td>xxxx</td>
-                                        <td>xxxx</td>
+                                        <td><?php echo $count;?></td>
+                                        <td><?php echo $list->p_name;?></td>
+                                        <td><?php echo $list->mobile;?></td>
+                                        <td><?php echo $list->test_name;?></td>
+                                        <td><?php echo $list->address;?></td>
+                                        <td><?php echo $list->address;?></td>
+                                        <td>$list->mobile</td>
                                         <td>COD</td>
                                         <td class="valigntop">
                                             <div class="btn-group">
@@ -54,6 +56,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                <?php }?>
                                     <tr>
                                         <td>2</td>
                                         <td>xxxxx</td>
@@ -176,4 +179,3 @@
         </div>
     </div>
 </div>
-<?php include('footer.php'); ?>
