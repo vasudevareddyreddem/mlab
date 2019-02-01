@@ -3,9 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Back_end extends CI_Controller {
 
-	public function __construct() 
+	public function __construct()
 	{
-		parent::__construct();	
+		parent::__construct();
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		$this->load->library('session');
@@ -14,7 +14,7 @@ class Back_end extends CI_Controller {
 		$this->load->helper('directory');
 		$this->load->helper('security');
 		$this->load->model('Admin_model');
-	
+
 			if($this->session->userdata('mlab_details'))
 			{
 				$mlab_details=$this->session->userdata('mlab_details');
@@ -24,5 +24,5 @@ class Back_end extends CI_Controller {
 				//$this->load->view('admin/footer');
 			}
 		}
-	
+
 }

@@ -4,10 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard extends Back_end {
 
-	public function __construct() 
+	public function __construct()
 	{
-		parent::__construct();	
-		
+		parent::__construct();
+
 	}
 	public function index()
 	{
@@ -15,10 +15,10 @@ class Dashboard extends Back_end {
 		{
 			$login_detail=$this->session->userdata('mlab_details');
 			if($login_detail['role']==1){
-				$data['lab_list']=$this->Admin_model->get_lab_total_list($login_detail['a_id']);	
-				$data['pharmacy_list']=$this->Admin_model->get_pharmacy_total_list($login_detail['a_id']);	
-				$data['total_lab_list']=$this->Admin_model->get_all_lab_total_list($login_detail['a_id']);	
-				$data['total_pharmacy_list']=$this->Admin_model->get_all_pharmacy_total_list($login_detail['a_id']);	
+				$data['lab_list']=$this->Admin_model->get_lab_total_list($login_detail['a_id']);
+				$data['pharmacy_list']=$this->Admin_model->get_pharmacy_total_list($login_detail['a_id']);
+				$data['total_lab_list']=$this->Admin_model->get_all_lab_total_list($login_detail['a_id']);
+				$data['total_pharmacy_list']=$this->Admin_model->get_all_pharmacy_total_list($login_detail['a_id']);
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/dashboard',$data);
 			}else if($login_detail['role']==2){
@@ -27,6 +27,8 @@ class Dashboard extends Back_end {
 				$data['total_reject_orders']=$this->Admin_model->get_total_reject_lab_orders($login_detail['a_id']);
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('lab/dashboard',$data);
+			} elseif ($login_detail['role'] == 4) {
+				$this->load->view('pickupboy/dashboard');
 			}
 			$this->load->view('admin/footer');
 
@@ -56,14 +58,14 @@ class Dashboard extends Back_end {
 			$admindetails=$this->session->userdata('mlab_details');
 				$this->load->view('html/changepassword');
 				$this->load->view('html/footer');
-			
+
 		}else{
 			$this->session->set_flashdata('loginerror','Please login to continue');
 			redirect('admin');
 		}
 	}
 	public function changepasswordpost(){
-	 
+
 		if($this->session->userdata('mlab_details'))
 		{
 			$admindetails=$this->session->userdata('mlab_details');
@@ -85,23 +87,23 @@ class Dashboard extends Back_end {
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 							redirect('dashboard/changepassword');
 						}
-					
+
 				}else{
 					$this->session->set_flashdata('error',"Password and Confirm password are not matched");
 					redirect('dashboard/changepassword');
 				}
-				
+
 			}else{
 				$this->session->set_flashdata('error',"Old password are not matched");
 				redirect('dashboard/changepassword');
 			}
-				
-			
+
+
 		}else{
 			 $this->session->set_flashdata('error','Please login to continue');
 			 redirect('');
-		} 
-	 
+		}
+
 	}
 	public function logout(){
 		$admindetails=$this->session->userdata('mlab_details');
@@ -111,9 +113,9 @@ class Dashboard extends Back_end {
 		$this->session->unset_userdata('mlab_details');
         redirect('admin');
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }

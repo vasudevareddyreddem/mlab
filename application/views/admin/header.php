@@ -47,7 +47,13 @@
                 <!-- logo start -->
                 <div class="page-logo">
                     <a href="<?php echo base_url(); ?>">
-                        <span class="logo-default">Seller Admin</span> 
+                        <span class="logo-default">
+                          <?php if($mlab_details['role']==4){ ?>
+                            Pick Up Boy
+                          <?php } else { ?>
+                            Seller Admin
+                          <?php } ?>
+                        </span>
                     </a>
                 </div>
                 <!-- logo end -->
