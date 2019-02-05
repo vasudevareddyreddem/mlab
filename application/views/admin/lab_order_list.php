@@ -65,8 +65,17 @@
                                         <td>
                                             <?php echo isset($lis['created_at'])?$lis['created_at']:''; ?>
                                         </td>
-                                        
-                                        <td>Completed</td>
+
+                                        <td>
+                                          <?php
+                                            if($lis['lab_status']== 1){ echo "Accepted"; }
+                                            else if($lis['lab_status']== 2){ echo "Rejected";}
+                                            else if($lis['lab_status']== 0){  echo "Pending"; }
+                                            else if($lis['lab_status']== 3){ echo 'Picked up'; }
+                                            else if($lis['lab_status']== 4){ echo 'On going'; }
+                                            else if($lis['lab_status']== 5){ echo 'Completed'; }
+                                          ?>
+                                        </td>
                                         <td>
                                             <?php if($lis['status']==0){ echo "Pending";}else if($lis['status']==1){ echo "Success"; }else if($lis['status']==2){ echo "Canceled"; } ?>
                                         </td>

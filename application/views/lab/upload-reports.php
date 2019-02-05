@@ -33,7 +33,7 @@
                                 <td>
 								<?php echo isset($lis['test_name'])?$lis['test_name']:''; ?>
 								<?php echo isset($lis['test_package_name'])?$lis['test_package_name']:''; ?>
-								
+
 								</td>
                                 <td><?php echo isset($lis['amount'])?$lis['amount']:''; ?></td>
                                 <td><?php echo isset($lis['delivery_charge'])?$lis['delivery_charge']:''; ?></td>
@@ -41,7 +41,16 @@
                                 <td>
 								<?php if($lis['payment_type']==1){ echo "Online"; } else if($lis['payment_type']==3){ echo "Swipe on Delivery";}else if($lis['payment_type']==2){  echo "Cash On Delivery"; } ?>
 								</td>
-                                <td>Completed</td>
+                <td>
+                  <?php
+                    if($lis['lab_status']== 1){ echo "Accepted"; }
+                    else if($lis['lab_status']== 2){ echo "Rejected";}
+                    else if($lis['lab_status']== 0){  echo "Pending"; }
+                    else if($lis['lab_status']== 3){ echo 'Picked up'; }
+                    else if($lis['lab_status']== 4){ echo 'On going'; }
+                    else if($lis['lab_status']== 5){ echo 'Completed'; }
+                  ?>
+                </td>
 								<td><?php echo isset($lis['created_at'])?$lis['created_at']:''; ?></td>
 								 <td class="valigntop">
                                             <div class="btn-group"><a href="<?php echo base_url('lab/uploadreports/'.base64_encode($lis['order_item_id'])); ?>">
@@ -50,9 +59,9 @@
                                                 </button></a>
                                             </div>
                                         </td>
-                            
+
                             </tr>
-							
+
 						<?php } ?>
 						<?php } ?>
                                 </tbody>
