@@ -17,9 +17,9 @@ class Pickupboy_model extends CI_Model
 		return $this->db->insert($this->table,$post_data);
 	}
   //active and inactive records
-  public function get_pickupboy()
+  public function get_pickupboy($a_id='')
   {
-    return $this->db->get_where($this->table,array('role' => 4 ,'status' => 1))->result();
+    return $this->db->get_where($this->table,array('role' => 4 ,'status !=' => 2,'created_by' => $a_id))->result();
   }
   //accepted orders for Pickup
   public function accepted_orders_for_pickup()
@@ -61,6 +61,22 @@ class Pickupboy_model extends CI_Model
     $this->db->where('lab_order_items.lab_status =',5);
     return $this->db->get()->result_array();
   }
-
+  //pickupboy details by id
+  public  function get_pickupboy_details($a_id){
+		$this->db->select('*')->from('admin');
+		$this->db->where('a_id',$a_id);
+		return $this->db->get()->row_array();
+	}
+  //update pickupboy
+  public function update($post_data='',$post_id=''){
+    $this->db->where('a_id',$post_id);
+    $this->db->set($post_data);
+    return $this->db->update($this->table);
+  }
+  //
+  public  function update_pickupboy_details($a_id,$data){
+		$this->db->where('a_id',$a_id);
+		return $this->db->update('admin',$data);
+	}
 }
 ?>

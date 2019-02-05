@@ -19,7 +19,7 @@ class Pickupboy extends Back_end
     if ($this->session->userdata('mlab_details')) {
       $login_details = $this->session->userdata('mlab_details');
       if ($login_details['role'] == 2) {
-        $data['pickupboy_list'] = $this->Pickupboy_model->get_pickupboy();
+        $data['pickupboy_list'] = $this->Pickupboy_model->get_pickupboy($login_details['a_id']);
         $this->load->view('pickupboy/pickupboy_list',$data);
         $this->load->view('admin/footer');
       } else {
@@ -68,7 +68,7 @@ class Pickupboy extends Back_end
             'org_password' => $post_data['confirmPassword'],
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
-            'created_by' => $login_details['role'],
+            'created_by' => $login_details['a_id'],
             'status' => 1
           );
           $post_data = array_merge($post_data,$addl_data);
@@ -156,6 +156,7 @@ class Pickupboy extends Back_end
         $order_item_id_id=base64_decode($this->uri->segment(3));
         if($order_item_id_id!=''){
           $stusdetails = array(
+            'pickupboy_id'=>$admindetails['a_id'],
             'lab_status'=>3,
             'updated_at'=>date('Y-m-d H:i:s')
           );
@@ -206,6 +207,7 @@ class Pickupboy extends Back_end
 					$order_item_id_id = base64_decode($this->uri->segment(3));
 					if($order_item_id_id != ''){
 						$stusdetails = array(
+              'pickupboy_id'=>$admindetails['a_id'],
 							'lab_status' => 4,
 							'updated_at' => date('Y-m-d H:i:s')
 							);
@@ -255,6 +257,7 @@ class Pickupboy extends Back_end
 					$order_item_id_id=base64_decode($this->uri->segment(3));
 					if($order_item_id_id != '') {
 						$stusdetails=array(
+              'pickupboy_id'=>$admindetails['a_id'],
 							'lab_status'=> 5,
 							'updated_at'=>date('Y-m-d H:i:s')
 							);
@@ -292,6 +295,146 @@ class Pickupboy extends Back_end
 					redirect('dashboard');
 			}
 		} else {
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+  }
+  //edit pickupboy (view)
+  public function edit(){
+		if($this->session->userdata('mlab_details')){
+			$login_details=$this->session->userdata('mlab_details');
+			if($login_details['role'] == 2){
+				$p_id = base64_decode($this->uri->segment(3));
+				$data['pickupboy_details']=$this->Pickupboy_model->get_pickupboy_details($p_id);
+				$this->load->view('pickupboy/edit_pickupboy',$data);
+				$this->load->view('admin/footer');
+			}else{
+				$this->session->set_flashdata('error','You have no permissions');
+				redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+  //update pickupboy
+  public function update()
+  {
+    if ($this->session->userdata('mlab_details')) {
+      $login_details = $this->session->userdata('mlab_details');
+      if ($login_details['role'] == 2) {
+        $post = $this->input->post();
+        $details=$this->Pickupboy_model->get_pickupboy_details($post['a_id']);
+        if($details['email']!=$post['email']){
+          $check_email=$this->Admin_model->check_email_exits($post['email']);
+          if(count($check_email)>0){
+            $this->session->set_flashdata('error',"Email address already exists. Please another email address.");
+            redirect('pickupboy/edit/'.base64_encode($post['a_id']));
+          }
+        }
+        $post_data = $this->input->post();
+        if ($post_data) {
+          $addl_data = array(
+            'role' => 4,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+            'status' => 1
+          );
+          $post_data = array_merge($post_data,$addl_data);
+          if ($this->Pickupboy_model->update($post_data,$post['a_id'])) {
+            $this->session->set_flashdata('success','Pickupboy updated successfully');
+            redirect('pickupboy');
+          } else {
+            $this->session->set_flashdata('error','Please try again');
+            redirect($this->session->referrer());
+          }
+        } else {
+          $thid->session->set_flashdata('error','Please try again');
+          redirect($this->agent->referrer());
+        }
+      } else {
+        $this->session->set_flashdata('error','You have no permissions');
+        redirect('dashboard');
+      }
+    } else {
+      $this->session->set_flashdata('error','Please login to continue');
+      redirect('admin');
+    }
+  }
+  //Pickupboy Status
+  public function status($value='')
+  {
+    if($this->session->userdata('mlab_details'))
+    {
+      $admindetails=$this->session->userdata('mlab_details');
+      if($admindetails['role'] == 2){
+        $a_id = $this->uri->segment(3);
+        $status = base64_decode($this->uri->segment(4));
+        if($status == 1) {
+          $statu = 0;
+        } else {
+          $statu = 1;
+        }
+        if($a_id!=''){
+          $stusdetails=array(
+            'status'=>$statu,
+            'updated_at'=>date('Y-m-d H:i:s')
+          );
+          $statusdata= $this->Pickupboy_model->update_pickupboy_details(base64_decode($a_id),$stusdetails);
+          if(count($statusdata) > 0) {
+            if($status == 1) {
+              $this->session->set_flashdata('success',"Pickupboy successfully deactivated.");
+            } else {
+              $this->session->set_flashdata('success',"Pickupboy successfully activated.");
+            }
+            redirect('pickupboy');
+          } else {
+            $this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+            redirect('pickupboy');
+          }
+        }else{
+          $this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+          redirect('pickupboy');
+        }
+      }else{
+        $this->session->set_flashdata('error',"You have no permission to access");
+        redirect('dashboard');
+      }
+    }else{
+      $this->session->set_flashdata('error','Please login to continue');
+      redirect('admin');
+    }
+  }
+  //delete pickupboy
+  public function delete()
+  {
+    if($this->session->userdata('mlab_details'))
+		{
+			$admindetails=$this->session->userdata('mlab_details');
+			if($admindetails['role'] == 2){
+				$a_id = $this->uri->segment(3);
+				if($a_id != ''){
+				  $stusdetails = array(
+						'status'=>2,
+						'updated_at'=>date('Y-m-d H:i:s')
+					);
+					$statusdata= $this->Pickupboy_model->update_pickupboy_details(base64_decode($a_id),$stusdetails);
+					if(count($statusdata) > 0) {
+						$this->session->set_flashdata('success',"Pickupboy successfully Deleted.");
+						redirect('pickupboy');
+					} else {
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('pickupboy');
+					}
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('pickupboy');
+				}
+			}else{
+				$this->session->set_flashdata('error',"You have no permission to access");
+				redirect('dashboard');
+			}
+		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}

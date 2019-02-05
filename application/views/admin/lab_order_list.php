@@ -75,6 +75,13 @@
                                             else if($lis['lab_status']== 4){ echo 'On going'; }
                                             else if($lis['lab_status']== 5){ echo 'Completed'; }
                                           ?>
+                                          <?php
+                                          if (isset($lis['pickupboy_id']) && !empty($lis['pickupboy_id'])) {
+                                            echo '('.$lis['pickupboy_id'].')';
+                                          } else {
+                                            echo '';
+                                          }
+                                          ?>
                                         </td>
                                         <td>
                                             <?php if($lis['status']==0){ echo "Pending";}else if($lis['status']==1){ echo "Success"; }else if($lis['status']==2){ echo "Canceled"; } ?>

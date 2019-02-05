@@ -50,6 +50,13 @@
                     else if($lis['lab_status']== 4){ echo 'On going'; }
                     else if($lis['lab_status']== 5){ echo 'Completed'; }
                   ?>
+                  <?php
+                    if(isset($lis['pickupboy_id']) && !empty($lis['pickupboy_id'])){
+                      echo '('. $lis['pickupboy_id'].')';
+                    } else {
+                      echo '';
+                    }
+                  ?>
                 </td>
 								<td><?php echo isset($lis['created_at'])?$lis['created_at']:''; ?></td>
 								 <td class="valigntop">
