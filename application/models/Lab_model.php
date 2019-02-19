@@ -251,7 +251,8 @@ class Lab_model extends CI_Model
 
 	public  function get_lab_test_type_list($a_id){
 		$this->db->select('test_type,l_id,lab_id')->from('lab_tests');
-		$this->db->where('status',1);
+		$this->db->where('status !=',2);
+
 		$this->db->where('created_by',$a_id);
 		$this->db->group_by('test_type');
 		return $this->db->get()->result_array();
@@ -260,7 +261,7 @@ class Lab_model extends CI_Model
 	public  function test_name_list($name,$a_id){
 		$this->db->select('test_name,l_id,lab_id')->from('lab_tests');
 		$this->db->where('test_type',$name);
-		$this->db->where('status',1);
+		$this->db->where('status !=',2);
 		$this->db->where('created_by',$a_id);
 		return $this->db->get()->result_array();
 

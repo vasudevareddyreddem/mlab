@@ -16,6 +16,8 @@
                                     <th>Email</th>
                                     <th>Mobile No </th>
                                     <th>Reg Date & Time</th>
+                                    <th>Discount Percentage</th>
+                                    <th>Qr Image</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -36,6 +38,14 @@
                                     <td>
                                         <?php echo $list['created_at']; ?>
                                     </td>
+                                    <td>
+                                        <?php echo $list['discount_per']; ?>
+                                    </td>
+                                    <td>
+                                      <img src="<?php echo base_url().$list['qr_path']?>" alt="" >
+
+                                    </td>
+
                                     <td>
                                         <?php if($list['status']==1){ echo "Active"; }else{  echo "Deactive"; } ?>
                                     </td>

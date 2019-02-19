@@ -3,21 +3,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 @include_once( APPPATH . 'controllers/Back_end.php');
 
 class Seller extends Back_end {
-	
-		public function __construct() 
+
+		public function __construct()
 		{
-		parent::__construct();	
+		parent::__construct();
 		$this->load->model('Seller_model');
-	
+
 		}
-	
-	
+
+
+
 	public function index(){
 		if($this->session->userdata('mlab_details'))
 			{
 			$login_details=$this->session->userdata('mlab_details');
 				if($login_details['role']==1){
-					
+
 					$this->load->view('admin/add_seller_lab');
 					$this->load->view('admin/footer');
 				}else{
@@ -35,7 +36,7 @@ class Seller extends Back_end {
 			{
 			$login_details=$this->session->userdata('mlab_details');
 				if($login_details['role']==1){
-					
+
 					$l_id=base64_decode($this->uri->segment(3));
 					$data['lab_details']=$this->Seller_model->get_lab_details($l_id);
 					$this->load->view('admin/edit_seller_lab',$data);
@@ -61,6 +62,31 @@ class Seller extends Back_end {
 						$this->session->set_flashdata('error',"Email address already exists. Please another email address.");
 						redirect('seller');
 					}
+					//qr code generation
+					$this->load->library('ciqrcode');
+if($this->input->post('discount')==null or $this->input->post('discount')==''){
+	$qrvalue=0;
+
+}
+else{
+	$qrvalue=$this->input->post('discount');
+}
+
+$params['data'] =$qrvalue ;
+
+$params['level'] = 'H';
+
+$params['size'] = 10;
+
+$params['cachedir'] = FCPATH.'assets/qrcode/';
+$path='assets/qrcode/'.time().'.png';
+
+$params['savename'] =FCPATH.$path;
+
+
+$this->ciqrcode->generate($params);
+//end of qr code generation
+
 					$add=array(
 					'role'=>2,
 					'name'=>isset($post['name'])?$post['name']:'',
@@ -81,12 +107,15 @@ class Seller extends Back_end {
 					'created_at'=>date('Y-m-d H:i:s'),
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
+					'discount_per'=>$this->input->post('discount'),
+					'qr_path'=>$path
+
 					);
 					$save=$this->Seller_model->save_seller($add);
 					if(count($save)>0){
 						$this->session->set_flashdata('success','Lab details  successsfully added');
 						redirect('seller/lists');
-						
+
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('seller');
@@ -138,7 +167,7 @@ class Seller extends Back_end {
 					if(count($update)>0){
 						$this->session->set_flashdata('success','Lab details successsfully updated');
 						redirect('seller/lists');
-						
+
 					}else{
 						$this->session->set_flashdata('error',"Technical problem will occurred. Please try again.");
 						redirect('seller/edit/'.base64_encode($post['a_id']));
@@ -159,7 +188,7 @@ class Seller extends Back_end {
 			{
 			$login_details=$this->session->userdata('mlab_details');
 				if($login_details['role']==1){
-					
+
 					$data['lab_lists']=$this->Seller_model->get_sellers_list($login_details['a_id']);
 					$this->load->view('admin/lab_list',$data);
 					$this->load->view('admin/footer');
@@ -208,7 +237,7 @@ class Seller extends Back_end {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('seller/lists');
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -243,7 +272,7 @@ class Seller extends Back_end {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('seller/lists');
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');

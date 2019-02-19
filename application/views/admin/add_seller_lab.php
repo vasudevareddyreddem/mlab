@@ -1,6 +1,6 @@
 <div class="page-content-wrapper">
                 <div class="page-content">
-                    
+
 					<div class="row">
                        <div class="col-md-12">
                             <div class="card card-topline-aqua">
@@ -40,7 +40,7 @@
                                             <div class="form-group col-md-6">
                                                 <label> Landline / Alternate Mobile No </label>
                                                 <input type="text" class="form-control"  name="altmobile" id="altmobile" placeholder="Landline / Alternate Mobile No" >
-                                            </div> 
+                                            </div>
                                             <div class="form-group col-md-6">
                                                 <label> GSTIN </label>
                                                 <input type="text" class="form-control"  name="gstin" id="gstin" placeholder="GSTIN" >
@@ -53,7 +53,7 @@
 												<label>City</label>
 												<input type="text" class="form-control" name="city" id="city" placeholder="Enter City" value="">
 											</div>
-											     
+
 											<?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
                                             <div class="form-group col-md-6">
                                                 <label >State</label>
@@ -62,7 +62,7 @@
                                                    <?php foreach($states as $key=>$state):
 														if($hospital_details['hos_bas_state'] == $state):
 														$selected ='selected=selected';
-														else : 
+														else :
 														$selected = '';
 														endif;
 													 ?>
@@ -85,7 +85,11 @@
 											<div class="form-group col-md-6">
                                                 <label> Commission amount</label>
                                                 <input type="text" class="form-control"  name="commission_amt" id="commission_amt" placeholder="Enter Commission amount" >
-                                            </div> 
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                                      <label> Add Discount </label>
+                                                                      <input type="text" class="form-control"  name="discount" id="discount" placeholder="Enter Discount" >
+                                                                  </div>
                                             <div class="clearfix">&nbsp;</div>
                                             <div class="col-md-12 text-center">
                                                     <button type="submit" class="btn btn-primary">Add Lab</button>
@@ -100,14 +104,14 @@
                             </div>
                         </div>
                     </div>
-				
-                
+
+
                 </div>
             </div>
 <script>
 	$(document).ready(function() {
     $('#add_seller').bootstrapValidator({
-        
+
         fields: {
             name: {
                   validators: {
@@ -129,7 +133,7 @@
 					regexp:  /^[0-9]{10,14}$/,
 					message:'Mobile Number must be 10 to 14 digits'
 					}
-				
+
 				}
             },
 			altmobile: {
@@ -141,7 +145,7 @@
 					regexp:  /^[0-9]{10,14}$/,
 					message:'Landline / Alternate Mobile No  must be 10 to 14 digits'
 					}
-				
+
 				}
             },
             email: {
@@ -228,14 +232,14 @@
 					regexp: /^[a-zA-Z ]+$/,
 					message: 'City can only consist of alphabets and Space'
 					}
-				
+
 				}
             },state: {
                 validators: {
 					notEmpty: {
 						message: 'State is required'
 					}
-				
+
 				}
             },country: {
                 validators: {
@@ -246,7 +250,7 @@
 					regexp: /^[a-zA-Z ]+$/,
 					message: 'Country can only consist of alphabets and Space'
 					}
-				
+
 				}
             },commission_amt: {
                 validators: {
@@ -258,7 +262,7 @@
                         max: 100,
                         message: 'The Commission must be between 0 and 100'
                     }
-				
+
 				}
             },image: {
                 validators: {
@@ -267,9 +271,17 @@
 					message: 'Uploaded file is not a valid. Only png,jpg,jpeg,gif,Png files are allowed'
 					}
 				}
-            }
+      },
+      discount: {
+          validators: {
+            regexp: {
+                                      regexp: /^[0-9]+$/,
+                                      message: 'Enter only numbers'
+                                  }
+  }
+},
             }
         })
-     
+
 });
 </script>

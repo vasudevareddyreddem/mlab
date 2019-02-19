@@ -3,21 +3,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 @include_once( APPPATH . 'controllers/Back_end.php');
 
 class Pharmacy extends Back_end {
-	
-		public function __construct() 
+
+		public function __construct()
 		{
-		parent::__construct();	
+		parent::__construct();
 		$this->load->model('Pharmacy_model');
-	
+
 		}
-	
-	
+
+
 	public function index(){
 		if($this->session->userdata('mlab_details'))
 			{
 			$login_details=$this->session->userdata('mlab_details');
 				if($login_details['role']==1){
-					
+
 					$this->load->view('admin/pharmacy_add');
 					$this->load->view('admin/footer');
 				}else{
@@ -35,7 +35,7 @@ class Pharmacy extends Back_end {
 			{
 			$login_details=$this->session->userdata('mlab_details');
 				if($login_details['role']==1){
-					
+
 					$l_id=base64_decode($this->uri->segment(3));
 					$data['pharmacy_details']=$this->Pharmacy_model->get_Pharmacy_details($l_id);
 					$this->load->view('admin/edit_pharmacy',$data);
@@ -81,12 +81,14 @@ class Pharmacy extends Back_end {
 					'created_at'=>date('Y-m-d H:i:s'),
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
+
+					
 					);
 					$save=$this->Pharmacy_model->save_pharmacy($add);
 					if(count($save)>0){
 						$this->session->set_flashdata('success','Pharmacy Details successfully Updated');
 						redirect('pharmacy/lists');
-						
+
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('pharmacy');
@@ -128,7 +130,7 @@ class Pharmacy extends Back_end {
 					'state'=>isset($post['state'])?$post['state']:'',
 					'zipcode'=>isset($post['pincode'])?$post['pincode']:'',
 					'country'=>isset($post['country'])?$post['country']:'',
-					'accrediations'=>isset($post['accrediations'])?$post['accrediations']:'',					
+					'accrediations'=>isset($post['accrediations'])?$post['accrediations']:'',
 					'commission_amt'=>isset($post['commission_amt'])?$post['commission_amt']:'',
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
@@ -138,7 +140,7 @@ class Pharmacy extends Back_end {
 					if(count($update)>0){
 						$this->session->set_flashdata('success','Pharmacy Details successfully Updated');
 						redirect('pharmacy/lists');
-						
+
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('pharmacy/edit/'.base64_encode($post['a_id']));
@@ -159,7 +161,7 @@ class Pharmacy extends Back_end {
 			{
 			$login_details=$this->session->userdata('mlab_details');
 				if($login_details['role']==1){
-					
+
 					$data['pharmacy_details']=$this->Pharmacy_model->get_all_pharmacy_details($login_details['a_id']);
 					$this->load->view('admin/pharmacy_list',$data);
 					$this->load->view('admin/footer');
@@ -208,7 +210,7 @@ class Pharmacy extends Back_end {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('pharmacy/lists');
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -243,7 +245,7 @@ class Pharmacy extends Back_end {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('pharmacy/lists');
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
