@@ -82,7 +82,7 @@ class Pharmacy extends Back_end {
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
 
-					
+
 					);
 					$save=$this->Pharmacy_model->save_pharmacy($add);
 					if(count($save)>0){

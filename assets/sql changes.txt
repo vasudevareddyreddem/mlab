@@ -3,3 +3,13 @@ ALTER TABLE `mlab`.`admin`
 
   ALTER TABLE `mlab`.`admin`
   ADD COLUMN `qr_path` VARCHAR(250) NULL AFTER `created_by`;
+
+  CREATE TABLE `mlab`.`user_pharmacy_tab`(
+  `id` INT(11) AUTO_INCREMENT,
+  `phar_id` INT(11),
+  `pat_id` INT(11),
+  `amount` FLOAT(11),
+  `paid_date` DATE,
+  `status` INT(11),
+   KEY(`id`)
+);

@@ -72,7 +72,7 @@ else{
 	$qrvalue=$this->input->post('discount');
 }
 
-$params['data'] =$qrvalue ;
+$params['data'] ='Discount Percentage:'.$qrvalue ;
 
 $params['level'] = 'H';
 
@@ -146,6 +146,30 @@ $this->ciqrcode->generate($params);
 							redirect('seller/edit/'.base64_encode($post['a_id']));
 						}
 					}
+					//qr code generation
+					$this->load->library('ciqrcode');
+if($this->input->post('discount')==null or $this->input->post('discount')==''){
+	$qrvalue=0;
+
+}
+else{
+	$qrvalue=$this->input->post('discount');
+}
+
+$params['data'] ='Discount Percentage:'.$qrvalue ;
+
+$params['level'] = 'H';
+
+$params['size'] = 10;
+
+$params['cachedir'] = FCPATH.'assets/qrcode/';
+$path='assets/qrcode/'.time().'.png';
+
+$params['savename'] =FCPATH.$path;
+
+
+$this->ciqrcode->generate($params);
+//end of qr code generation
 					$add=array(
 					'name'=>isset($post['name'])?$post['name']:'',
 					'email'=>isset($post['email'])?$post['email']:'',
@@ -161,7 +185,10 @@ $this->ciqrcode->generate($params);
 					'commission_amt'=>isset($post['commission_amt'])?$post['commission_amt']:'',
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
+					'discount_per'=>$this->input->post('discount'),
+					'qr_path'=>$path
 					);
+
 						//echo '<pre>';print_r($add);exit;
 					$update=$this->Seller_model->update_seller_lab_details($post['a_id'],$add);
 					if(count($update)>0){
