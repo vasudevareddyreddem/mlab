@@ -79,7 +79,13 @@
 											<div class="form-group col-md-6">
                                                 <label> Commission amount</label>
                                                 <input type="text" class="form-control"  name="commission_amt" id="commission_amt" placeholder="Enter Commission amount" value="<?php echo isset($pharmacy_details['commission_amt'])?$pharmacy_details['commission_amt']:''; ?>">
-                                            </div>  											
+                                            </div> 
+
+																						<div class="form-group col-md-6">
+																																			<label> Add Discount </label>
+																																			<input type="text" class="form-control"  name="discount" id="discount" placeholder="Enter Discount"
+																																			value="<?php echo isset($pharmacy_details['discount_per'])?$pharmacy_details['discount_per']:''; ?>" >
+																																	</div> 											
                                             <div class="clearfix">&nbsp;</div>
                                             <div class="col-md-12 text-center">
                                                     <button type="submit" class="btn btn-primary">Update Pharmacy</button>
@@ -229,7 +235,15 @@
 					}
 				
 				}
-            },image: {
+            },
+			discount: {
+							validators: {
+								regexp: {
+																					regexp: /^[0-9]+$/,
+																					message: 'Enter only numbers'
+																			}
+			}
+		},image: {
                 validators: {
 					regexp: {
 					regexp: "(.*?)\.(png|jpg|jpeg|gif|Png)$",

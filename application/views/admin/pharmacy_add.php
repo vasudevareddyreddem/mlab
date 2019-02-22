@@ -86,7 +86,11 @@
 											<div class="form-group col-md-6">
                                                 <label> Commission amount</label>
                                                 <input type="text" class="form-control"  name="commission_amt" id="commission_amt" placeholder="Enter Commission amount" >
-                                            </div> 											
+                                            </div> 
+												<div class="form-group col-md-6">
+												<label> Add Discount </label>
+												<input type="text" class="form-control"  name="discount" id="discount" placeholder="Enter Discount" >
+												</div>											
                                             <div class="clearfix">&nbsp;</div>
                                             <div class="col-md-12 text-center">
                                                     <button type="submit" class="btn btn-primary">Add Pharmacy</button>
@@ -261,7 +265,16 @@
 					}
 				
 				}
-            },image: {
+            }, discount: {
+          validators: {
+            regexp: {
+                                      regexp: /^[0-9]+$/,
+                                      message: 'Enter only numbers'
+                                  }
+  }
+},
+			
+			image: {
                 validators: {
 					regexp: {
 					regexp: "(.*?)\.(png|jpg|jpeg|gif|Png)$",

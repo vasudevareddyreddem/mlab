@@ -156,7 +156,7 @@ else{
 	$qrvalue=$this->input->post('discount');
 }
 
-$params['data'] ='Discount Percentage:'.$qrvalue ;
+$params['data'] =$qrvalue ;
 
 $params['level'] = 'H';
 

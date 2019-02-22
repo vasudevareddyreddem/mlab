@@ -7,7 +7,7 @@
                     <div class="card-head">
                         <header>Pharmacy List</header>
                     </div>
-                    <div class="card-body ">
+                    <div class="card-body table-responsive">
                         <?php if(isset($pharmacy_details) && count($pharmacy_details)>0){ ?>
                         <table id="lablist" class="display table table-striped" style="width:100%;">
                             <thead>
@@ -16,7 +16,9 @@
                                     <th>Email</th>
                                     <th>Mobile No </th>
                                     <th>Reg Date & Time</th>
-
+									 <th>Discount Percentage</th>
+                                    <th>Qr Image</th>
+                                    <th> Print qr code</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -37,7 +39,19 @@
                                     <td>
                                         <?php echo $list['created_at']; ?>
                                     </td>
-                                  
+                                   <td>
+                                        <?php echo $list['discount_per']; ?>
+                                    </td>
+                                    <td id=<?php echo $list['a_id']; ?>>
+                                      <img src="<?php echo base_url().$list['qr_path']?>" alt="" >
+                                         <br>
+                                             <?php echo $list['name']; ?>
+
+                                    </td>
+                                    <td>
+                                      <button class='btn btn-xs btn-primary print
+                                      ' value='<?php echo $list['a_id']; ?>'>print</button>
+                                    </td>
 
                                     <td>
                                         <?php if($list['status']==1){ echo "Active"; }else{  echo "Deactive"; } ?>
@@ -98,4 +112,27 @@
         $('#content1').html('Are you sure you want to delete?');
 
     }
+</script>
+<script text='javascript'>
+$('.print').on('click',function(){
+value=this.value;
+
+
+
+   var divToPrint=document.getElementById(value);
+
+   newWin= window.open("");
+
+   newWin.document.write(divToPrint.outerHTML);
+
+   newWin.print();
+
+   newWin.close();
+
+
+
+
+
+
+});
 </script>

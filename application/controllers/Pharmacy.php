@@ -61,6 +61,21 @@ class Pharmacy extends Back_end {
 						$this->session->set_flashdata('error',"Email address already exists. Please another email address.");
 						redirect('pharmacy');
 					}
+					/* qr code*/
+					$this->load->library('ciqrcode');
+						if($this->input->post('discount')==null or $this->input->post('discount')==''){
+							$qrvalue=0;
+						}else{
+							$qrvalue=$this->input->post('discount');
+						}
+						$params['data'] =$qrvalue ;
+						$params['level'] = 'H';
+						$params['size'] = 10;
+						$params['cachedir'] = FCPATH.'assets/qrcode/';
+						$path='assets/qrcode/'.time().'.png';
+						$params['savename'] =FCPATH.$path;
+						$this->ciqrcode->generate($params);
+					/* qr code*/
 					$add=array(
 					'role'=>3,
 					'name'=>isset($post['name'])?$post['name']:'',
@@ -81,8 +96,8 @@ class Pharmacy extends Back_end {
 					'created_at'=>date('Y-m-d H:i:s'),
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
-
-
+					'discount_per'=>$this->input->post('discount'),
+					'qr_path'=>$path
 					);
 					$save=$this->Pharmacy_model->save_pharmacy($add);
 					if(count($save)>0){
@@ -119,6 +134,28 @@ class Pharmacy extends Back_end {
 							redirect('pharmacy/edit/'.base64_encode($post['a_id']));
 						}
 					}
+					$this->load->library('ciqrcode');
+if($this->input->post('discount')==null or $this->input->post('discount')==''){
+	$qrvalue=0;
+
+}
+else{
+	$qrvalue=$this->input->post('discount');
+}
+
+$params['data'] =$qrvalue ;
+
+$params['level'] = 'H';
+
+$params['size'] = 10;
+
+$params['cachedir'] = FCPATH.'assets/qrcode/';
+$path='assets/qrcode/'.time().'.png';
+
+$params['savename'] =FCPATH.$path;
+
+
+$this->ciqrcode->generate($params);
 					$add=array(
 					'name'=>isset($post['name'])?$post['name']:'',
 					'email'=>isset($post['email'])?$post['email']:'',
@@ -134,6 +171,8 @@ class Pharmacy extends Back_end {
 					'commission_amt'=>isset($post['commission_amt'])?$post['commission_amt']:'',
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$login_details['a_id'],
+					'discount_per'=>$this->input->post('discount'),
+					'qr_path'=>$path
 					);
 						//echo '<pre>';print_r($add);exit;
 					$update=$this->Pharmacy_model->update_seller_pharmacy_details($post['a_id'],$add);
