@@ -30,6 +30,11 @@ class Dashboard extends Back_end {
 			} elseif ($login_detail['role'] == 4) {
 				$this->load->view('pickupboy/dashboard');
 			}
+			elseif ($login_detail['role'] == 3) {
+ 	redirect('pharmacyadmin');
+
+
+ 		}
 			$this->load->view('admin/footer');
 
 		}else{

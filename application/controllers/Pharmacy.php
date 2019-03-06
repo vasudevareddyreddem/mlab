@@ -63,10 +63,12 @@ class Pharmacy extends Back_end {
 					}
 					/* qr code*/
 					$this->load->library('ciqrcode');
+
 						if($this->input->post('discount')==null or $this->input->post('discount')==''){
-							$qrvalue=0;
+
+							$qrvalue="0,".$post['email'];
 						}else{
-							$qrvalue=$this->input->post('discount');
+							$qrvalue=$this->input->post('discount').','.$post['email'];
 						}
 						$params['data'] =$qrvalue ;
 						$params['level'] = 'H';
@@ -135,13 +137,13 @@ class Pharmacy extends Back_end {
 						}
 					}
 					$this->load->library('ciqrcode');
-if($this->input->post('discount')==null or $this->input->post('discount')==''){
-	$qrvalue=0;
 
-}
-else{
-	$qrvalue=$this->input->post('discount');
-}
+					if($this->input->post('discount')==null or $this->input->post('discount')==''){
+
+						$qrvalue="0,".$post['email'];
+					}else{
+						$qrvalue=$this->input->post('discount').','.$post['email'];
+					}
 
 $params['data'] =$qrvalue ;
 
@@ -294,4 +296,5 @@ $this->ciqrcode->generate($params);
 			redirect('admin');
 		}
 	}
+
 }

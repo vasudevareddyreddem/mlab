@@ -143,7 +143,33 @@
                         <span class="title">Completed Orders</span> <span class="arrow"></span>
                     </a>
                 </li>
-              <?php } ?>
+              <?php } elseif ($mlab_details['role']==3) { ?>
+                <li class="nav-item  ">
+	                            <a  href="<?php echo base_url('pharmacyadmin/orders');?>" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">Orders</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item  ">
+	                            <a  href="<?php echo base_url('pharmacyadmin/upload_medicine');?>" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">Upload Medicine</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+                          <li class="nav-item  ">
+                                          <a  href="<?php echo base_url('pharmacyadmin/medicine_list');?>" class="nav-link "> <i class="material-icons">person</i>
+                                              <span class="title">Medicine List</span> <span class="arrow"></span>
+                                          </a>
+                                      </li>
+							<li class="nav-item  open">
+	                            <a  href="<?php echo base_url('pharmacyadmin/dispatch_medicine');?>" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">Dispatch Medicine</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+                            <li class="nav-item  ">
+	                            <a href="<?php echo base_url('pharmacyadmin/history');?>" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">History</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+              <?php }?>
                             <li class="nav-item ">
 	                            <a href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link ">
                                     <i class="fa fa-sign-out"></i>

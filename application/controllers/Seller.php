@@ -64,13 +64,13 @@ class Seller extends Back_end {
 					}
 					//qr code generation
 					$this->load->library('ciqrcode');
-if($this->input->post('discount')==null or $this->input->post('discount')==''){
-	$qrvalue=0;
 
-}
-else{
-	$qrvalue=$this->input->post('discount');
-}
+					if($this->input->post('discount')==null or $this->input->post('discount')==''){
+
+						$qrvalue="0,".$post['email'];
+					}else{
+						$qrvalue=$this->input->post('discount').','.$post['email'];
+					}
 
 $params['data'] =$qrvalue ;
 
@@ -148,13 +148,13 @@ $this->ciqrcode->generate($params);
 					}
 					//qr code generation
 					$this->load->library('ciqrcode');
-if($this->input->post('discount')==null or $this->input->post('discount')==''){
-	$qrvalue=0;
 
-}
-else{
-	$qrvalue=$this->input->post('discount');
-}
+					if($this->input->post('discount')==null or $this->input->post('discount')==''){
+
+						$qrvalue="0,".$post['email'];
+					}else{
+						$qrvalue=$this->input->post('discount').','.$post['email'];
+					}
 
 $params['data'] =$qrvalue ;
 
