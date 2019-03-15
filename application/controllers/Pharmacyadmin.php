@@ -63,24 +63,22 @@ class Pharmacyadmin extends  CI_Controller {
     }
 		public function orders(){
 			if($this->session->userdata('mlab_details'))
-	{
-			$admin=$this->session->userdata('mlab_details');
-		$res=$this->Pharmacy_model1->get_user_orders($admin['a_id']);
-//	print_r($res);exit;
-		if(count($res)>0){
-			$data['list']=$res;
-			$data['status']=1;
+			{
+				$admin=$this->session->userdata('mlab_details');
+				$res=$this->Pharmacy_model1->get_user_orders($admin['a_id']);
+				//echo '<pre>';print_r($res);exit;
+				if(count($res)>0){
+					$data['list']=$res;
+					$data['status']=1;
 
-		}
-		else{
-			$data['status']=0;
-		}
-			$this->load->view('pharmacy/view-orders',$data);
-			$this->load->view('pharmacy/footer');
-		}
-		else{
+				}else{
+				$data['status']=0;
+				}
+				$this->load->view('pharmacy/view-orders',$data);
+				$this->load->view('pharmacy/footer');
+			}else{
 			redirect('login');
-		}
+			}
 
 		}
 		public function upload_medicine(){

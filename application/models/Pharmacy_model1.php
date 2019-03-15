@@ -31,34 +31,21 @@ class Pharmacy_model1 extends CI_Model
 
   }
 	public function get_user_orders($id){
-
-
-		$this->db2->select('a.a_u_id,a.name,a.mobile')->from('appointment_users a')->where('status',1)
-		;
-
-$res1 =  $this->db2->get()->result_array();
-
-	$this->db->select('c.*')->from('cust_orders_tab c')->where('status',1)
-	->where('phar_id',$id);
-
-$res2=$this->db->get()->result_array();
-//print_r($res2);exit;
-
-foreach($res2 as $key2=>$val2){
-	foreach($res1 as $key1=>$val1){
-		if($val1['a_u_id']==$val2['cust_id']){
-            $res2[$key2]['name']=$val1['name'];
-            $res2[$key2]['mobile']=$val1['mobile'];
-						  $res2[$key2]['a_u_id']=$val1['a_u_id'];
+		$this->db2->select('a.a_u_id,a.name,a.mobile')->from('appointment_users a')->where('status',1);
+		$res1 =  $this->db2->get()->result_array();
+		$this->db->select('c.*')->from('cust_orders_tab c')->where('status',1)->where('phar_id',$id);
+		$res2=$this->db->get()->result_array();
+			foreach($res2 as $key2=>$val2){
+				foreach($res1 as $key1=>$val1){
+					if($val1['a_u_id']==$val2['cust_id']){
+						$res2[$key2]['name']=$val1['name'];
+						$res2[$key2]['mobile']=$val1['mobile'];
+						$res2[$key2]['a_u_id']=$val1['a_u_id'];
 						break;
-		}
-
-	}
-}
-
-return $res2;
-
-
+					}
+				}
+			}
+		return $res2;
 	}
 	public function medicine_list($pid){
 		$this->db->select('id,medicine_name,(mrp/quantity) smrp')->from('medicine_tab')->where('status',1);

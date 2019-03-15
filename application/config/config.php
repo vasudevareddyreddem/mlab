@@ -29,6 +29,7 @@ $config['smspassword']	= "123456";
 $config['sender']	= "MEDSIT";
 $config['keyId'] ='rzp_test_FMROR38S2ObKGw';
 $config['API_keySecret'] = '4ZAmE5b07syPo0P1WbFUNr7X';
+$config['upload_medicine_url']="http://appointment.ehealthinfra.com/";
 
 /*
 |--------------------------------------------------------------------------
