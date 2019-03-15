@@ -62,9 +62,7 @@
                                         <button type="submit" class="btn btn-info">Submit</button>
                                         <button  id='remove' type="button" class="btn btn-danger">Remove</button>
                                     </div>
-                                    <div class="col-md-12">
-                                        <a href="#" class="btn btn-default">Upload Excel Sheet</a>
-                                    </div>
+                                    
                                 </div>
 															</form>
                             </div>
