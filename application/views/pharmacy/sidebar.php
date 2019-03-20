@@ -58,6 +58,16 @@
 	                                <span class="title">History</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
+							<li class="nav-item  ">
+	                            <a href="<?php echo base_url('pharmacypickupboy/add');?>" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">Add PickUp Boy</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item  ">
+	                            <a href="<?php echo base_url('pharmacypickupboy/index');?>" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">PickUp List</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
 	                    </ul>
 	                </div>
                 </div>

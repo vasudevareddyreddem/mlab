@@ -41,7 +41,7 @@
             <div class="page-header-inner ">
                 <!-- logo start -->
                 <div class="page-logo">
-                    <a href="dashboard.php">
+                    <a href="<?php echo base_url('dashboard'); ?>">
 
                         <span class="logo-default">Seller Pharmacy</span> </a>
                 </div>
@@ -49,16 +49,6 @@
                 <ul class="nav navbar-nav navbar-left in">
                     <li><a href="#" class="menu-toggler sidebar-toggler"><i class="fa fa-bars"></i></a></li>
                 </ul>
-                <form class="search-form-opened" action="#" method="GET">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search..." name="query">
-                        <span class="input-group-btn">
-                            <a href="javascript:;" class="btn submit">
-                                <i class="icon-magnifier"></i>
-                            </a>
-                        </span>
-                    </div>
-                </form>
                 <!-- start mobile menu -->
                 <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
                     <span></span>

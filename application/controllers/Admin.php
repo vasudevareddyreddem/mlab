@@ -57,6 +57,9 @@ class Admin extends CI_Controller {
 			if(count($check_login)>0){
 				$login_details=$this->Admin_model->get_admin_details($check_login['a_id']);
 				$this->session->set_userdata('mlab_details',$login_details);
+				if($login_details['role']==5){
+					redirect('pharmacypickupboy/pickup');
+				}
 				redirect('dashboard');
 			}else{
 				$this->session->set_flashdata('error',"Invalid Email Address or Password!");

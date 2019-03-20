@@ -169,7 +169,28 @@
 	                                <span class="title">History</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
-              <?php }?>
+							<li class="nav-item  ">
+	                            <a href="<?php echo base_url('pharmacypickupboy/add');?>" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">Add PickUp Boy</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item  ">
+	                            <a href="<?php echo base_url('pharmacypickupboy/index');?>" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">PickUp List</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+						  <?php }elseif ($mlab_details['role']==5) {?>
+							<li class="nav-item">
+								<a href="<?php echo base_url('pharmacypickupboy/pickup'); ?>" class="nav-link"> <i class="fa fa-hourglass-half"></i>
+									<span class="title">Pick Up Orders</span> <span class="arrow"></span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="<?php echo base_url('pharmacypickupboy/completed'); ?>" class="nav-link"> <i class="fa fa-hourglass-half"></i>
+									<span class="title">Completed Orders</span> <span class="arrow"></span>
+								</a>
+							</li>
+						  <?php } ?>
                             <li class="nav-item ">
 	                            <a href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link ">
                                     <i class="fa fa-sign-out"></i>

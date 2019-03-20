@@ -29,12 +29,11 @@ class Dashboard extends Back_end {
 				$this->load->view('lab/dashboard',$data);
 			} elseif ($login_detail['role'] == 4) {
 				$this->load->view('pickupboy/dashboard');
+			}elseif ($login_detail['role'] == 3) {
+				redirect('pharmacyadmin');
+			}elseif ($login_detail['role'] == 5) {
+				redirect('pharmacypickupboy/pickup');
 			}
-			elseif ($login_detail['role'] == 3) {
- 	redirect('pharmacyadmin');
-
-
- 		}
 			$this->load->view('admin/footer');
 
 		}else{
