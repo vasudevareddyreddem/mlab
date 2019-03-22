@@ -100,12 +100,17 @@ class Pharmacypickupboy extends Back_end
       $admindetails = $this->session->userdata('mlab_details');
       if($admindetails['role'] == 5) {
         $pickup_orders=$this->Pharmacypickupboy_model->accepted_orders_for_pickup($admindetails['created_by']);
-		foreach($pickup_orders as $list){
+		
+		if(isset($pickup_orders) && count($pickup_orders)>0){
+			foreach($pickup_orders as $list){
 			$cust=$this->Pharmacypickupboy_model->get_customer_details($list['cust_id']);
 			$data['pickup_orders'][$list['cust_order_id']]=$list;
 			$data['pickup_orders'][$list['cust_order_id']]['cust_name']=isset($cust['name'])?$cust['name']:'';
 			$data['pickup_orders'][$list['cust_order_id']]['email']=isset($cust['email'])?$cust['email']:'';
 			$data['pickup_orders'][$list['cust_order_id']]['mobile']=isset($cust['mobile'])?$cust['mobile']:'';
+			}
+		}else{
+			$data=array();
 		}
 		$this->load->view('pharmacy_pickupboy/pickup_orders',$data);
         $this->load->view('admin/footer');

@@ -13,6 +13,7 @@
                                         <thead>
                                             <tr>
                                                 <th>S.No</th>
+												<th>Order Id</th>
 												<th>Name</th>
                                                 <th>Mobile No </th>
                                                 <th>Medicine List</th>
@@ -29,6 +30,7 @@
 																						foreach($list as $row){?>
 																							<tr>
 																								<td><?php echo $cnt;?></td>
+																								<td><?php echo $row['cust_order_id'];?></td>
 																								<td><?php echo $row['name'];?></td>
 																									<td><?php echo $row['mobile'];?></td>
 

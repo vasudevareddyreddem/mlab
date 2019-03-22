@@ -27,13 +27,36 @@ class Pharmacy_model1 extends CI_Model
   public function save_edit_medicine($id,$data){
     $this->db->where('id',$id);
     $this->db->update('medicine_tab',$data);
-    return $this->db->affected_rows()?1:0;
+   return $this->db->affected_rows()?1:0;
+
+  } 
+  public function save_edit_medicines($id,$data){
+    $this->db->where('id',$id);
+    return $this->db->update('medicine_tab',$data);
+	
 
   }
 	public function get_user_orders($id){
 		$this->db2->select('a.a_u_id,a.name,a.mobile')->from('appointment_users a')->where('status',1);
 		$res1 =  $this->db2->get()->result_array();
 		$this->db->select('c.*')->from('cust_orders_tab c')->where('status',1)->where('phar_id',$id);
+		$res2=$this->db->get()->result_array();
+			foreach($res2 as $key2=>$val2){
+				foreach($res1 as $key1=>$val1){
+					if($val1['a_u_id']==$val2['cust_id']){
+						$res2[$key2]['name']=$val1['name'];
+						$res2[$key2]['mobile']=$val1['mobile'];
+						$res2[$key2]['a_u_id']=$val1['a_u_id'];
+						break;
+					}
+				}
+			}
+		return $res2;
+	}
+	public function get_user_rejected_orders($id){
+		$this->db2->select('a.a_u_id,a.name,a.mobile')->from('appointment_users a')->where('status',1);
+		$res1 =  $this->db2->get()->result_array();
+		$this->db->select('c.*')->from('cust_orders_tab c')->where('status',3)->where('phar_id',$id);
 		$res2=$this->db->get()->result_array();
 			foreach($res2 as $key2=>$val2){
 				foreach($res1 as $key1=>$val1){
@@ -136,14 +159,13 @@ return		$this->db->get()->result_array();
         return $this->db->get()->row_array();
 	}
 	public function history($phid){
-		$this->db2->select('a.a_u_id,a.name,a.mobile')->from('appointment_users a')->where('status',1);
-$res1 =  $this->db2->get()->result_array();
+	$this->db2->select('a.a_u_id,a.name,a.mobile')->from('appointment_users a')->where('status',1);
+	$res1 =  $this->db2->get()->result_array();
 
-	$this->db->select('p.cust_order_id,c.cust_id,sum(p.total) final,avg(p.discount) discount,sum(p.quantity*unit_price) aprice,group_concat(m.medicine_name) mlist,p.status')->from('cust_orders_tab c')->join('pharmacy_orders p','p.cust_order_id=c.id')->join('medicine_tab m','m.id=p.med_id')->
-where('c.phar_id',$phid)->group_by('p.cust_order_id,c.cust_id')->
+	$this->db->select('p.created_date,p.cust_order_id,c.cust_id,sum(p.total) final,avg(p.discount) discount,sum(p.quantity*unit_price) aprice,group_concat(m.medicine_name) mlist,p.status')->from('cust_orders_tab c')->join('pharmacy_orders p','p.cust_order_id=c.id')->join('medicine_tab m','m.id=p.med_id')->
+	where('c.phar_id',$phid)->group_by('p.cust_order_id,c.cust_id')->
 	having('final >',0);
-
-$res2=$this->db->get()->result_array();
+	$res2=$this->db->get()->result_array();
 
 
 //echo $this->db->last_query();exit;

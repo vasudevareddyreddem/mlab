@@ -33,7 +33,7 @@
 							<td><?php echo $pickup_order['mobile']; ?></td>
 							<td><?php echo $pickup_order['address']; ?></td>
 							<td><?php echo $pickup_order['updated_date']; ?></td>
-							<td><?php if($pickup_order['status']==1){ echo "Packed";}else if($pickup_order['status']==2){ echo "Dispatched"; }else if($pickup_order['status']==3){ echo "Deliveried"; }else if($pickup_order['status']==0){ echo "Accepted"; } ?></td>
+							<td><?php if($pickup_order['status']==1){ echo "Packed";}else if($pickup_order['status']==2){ echo "Dispatched"; }else if($pickup_order['status']==3){ echo "Delivered"; }else if($pickup_order['status']==0){ echo "Accepted"; } ?></td>
 							
 						</tr>
                         <?php $sno++; ?>

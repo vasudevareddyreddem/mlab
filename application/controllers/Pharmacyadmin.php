@@ -81,6 +81,26 @@ class Pharmacyadmin extends  CI_Controller {
 			}
 
 		}
+		public function rejectedorders(){
+			if($this->session->userdata('mlab_details'))
+			{
+				$admin=$this->session->userdata('mlab_details');
+				$res=$this->Pharmacy_model1->get_user_rejected_orders($admin['a_id']);
+				//echo '<pre>';print_r($res);exit;
+				if(count($res)>0){
+					$data['list']=$res;
+					$data['status']=1;
+
+				}else{
+				$data['status']=0;
+				}
+				$this->load->view('pharmacy/reject-orders',$data);
+				$this->load->view('pharmacy/footer');
+			}else{
+			redirect('login');
+			}
+
+		}
 		public function upload_medicine(){
 			if($this->session->userdata('mlab_details'))
 	{
@@ -97,7 +117,7 @@ class Pharmacyadmin extends  CI_Controller {
 	{
             $admin=$this->session->userdata('mlab_details');
 			$res=$this->Pharmacy_model1->ready_to_dispatch($admin['a_id']);
-
+			//echo '<pre>';print_r($res);exit;
 			if(count($res)>0){
 				$data['status']=1;
 				$data['list']=$res;
@@ -118,7 +138,7 @@ class Pharmacyadmin extends  CI_Controller {
 	{
 		$admin=$this->session->userdata('mlab_details');
 		$res=$this->Pharmacy_model1->history($admin['a_id']);
-
+		//echo '<pre>';print_r($res);exit;
 		if(count($res)>0){
 		$data['status']=1;
 		$data['list']=$res;
@@ -218,7 +238,7 @@ class Pharmacyadmin extends  CI_Controller {
 			}
 			else{
 					$this->session->set_flashdata('success',"Medicines list uploaded successfully");
-				redirect('medicine_list');
+				redirect('pharmacyadmin/medicine_list');
 			}
 
 			}
@@ -317,16 +337,15 @@ $data=array('medicine_name'=>$mname,
 'updated_date'=>date('Y-m-d H:i:s'),
 'updated_by'=>1,
 );
-$res=$this->Pharmacy_model1->save_edit_medicine($id,$data);
-//echo $this->db->last_query();exit;
+$res=$this->Pharmacy_model1->save_edit_medicines($id,$data);
 if($res==1){
 	$this->session->set_flashdata('success',"Medicine Details Updated successfully");
-	redirect('pharmacy/medicine_list');
+	redirect('pharmacyadmin/medicine_list');
 
 }
 else{
 	$this->session->set_flashdata('error',"Medicine Details Not Updated");
-	redirect($_SERVER['HTTP_REFERER']);
+	redirect('pharmacyadmin/edit_medicine/'.base64_encode($id));
 
 }
 }

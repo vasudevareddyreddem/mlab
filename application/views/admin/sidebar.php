@@ -144,11 +144,16 @@
                     </a>
                 </li>
               <?php } elseif ($mlab_details['role']==3) { ?>
-                <li class="nav-item  ">
-	                            <a  href="<?php echo base_url('pharmacyadmin/orders');?>" class="nav-link "> <i class="material-icons">person</i>
-	                                <span class="title">Orders</span> <span class="arrow"></span>
-	                            </a>
-	                        </li>
+							<li class="nav-item  ">
+									<a  href="<?php echo base_url('pharmacyadmin/orders');?>" class="nav-link "> <i class="material-icons">person</i>
+									<span class="title">Orders</span> <span class="arrow"></span>
+									</a>
+							</li>
+							<li class="nav-item  ">
+									<a  href="<?php echo base_url('pharmacyadmin/rejectedorders');?>" class="nav-link "> <i class="material-icons">person</i>
+									<span class="title">Rejected Orders</span> <span class="arrow"></span>
+									</a>
+							</li>
 							<li class="nav-item  ">
 	                            <a  href="<?php echo base_url('pharmacyadmin/upload_medicine');?>" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Upload Medicine</span> <span class="arrow"></span>
