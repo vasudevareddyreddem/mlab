@@ -8,9 +8,8 @@
 	<!-- data tables -->
     <script src="<?php echo base_url('assets/js/jquery.dataTables.min.js');?>" ></script>
  	<script src="<?php echo base_url('assets/js/dataTables.bootstrap4.min.js');?>" ></script>
-    <script src="<?php echo base_url('assets/js/table_data.js');?>" >
-    <!-- Common js-->
-    <!-- Common js-->
+    <script src="<?php echo base_url('assets/js/table_data.js');?>" ></script>
+   
 	<script src="<?php echo base_url('assets/js/app.js');?>" ></script>
     <script src="<?php echo base_url('assets/js/layout.js');?>" ></script>
     <!-- material -->

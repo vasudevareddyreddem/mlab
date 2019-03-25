@@ -19,7 +19,7 @@
 																<?php	}}}?>
 
 																 </div>
-                                <div class="card-body ">
+                                <div class="card-body table-responsive">
 
                                     <table id="saveStage" class="display table" style="width:100%;">
                                         <thead>

@@ -19,7 +19,8 @@
                                     <?php } ?>
 	                                </div>
 	                                <div class="pull-left info">
-	                                    <p> <?php echo isset($mlab_details['email'])?$mlab_details['email']:''; ?></p>
+	                                    <p> <?php echo isset($mlab_details['name'])?$mlab_details['name']:'';
+                                         ?></p>
 	                                    <a href="#"><i class="fa fa-circle user-online"></i><span class="txtOnline"> Online</span></a>
 	                                </div>
 	                            </div>
@@ -34,42 +35,42 @@
 
 	                        </li>
 	                        <li class="nav-item  ">
-	                            <a  href="<?php echo base_url('pharmacyadmin/orders');?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('pharmacyadmin/orders');?>" class="nav-link "> <i class="material-icons">reorder</i>
 	                                <span class="title">Orders</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 							<li class="nav-item  ">
-									<a  href="<?php echo base_url('pharmacyadmin/rejectedorders');?>" class="nav-link "> <i class="material-icons">person</i>
+									<a  href="<?php echo base_url('pharmacyadmin/rejectedorders');?>" class="nav-link "> <i class="material-icons">highlight_off</i>
 									<span class="title">Rejected Orders</span> <span class="arrow"></span>
 									</a>
 							</li>
 							<li class="nav-item  ">
-	                            <a  href="<?php echo base_url('pharmacyadmin/upload_medicine');?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('pharmacyadmin/upload_medicine');?>" class="nav-link "> <i class="material-icons">cloud_upload</i>
 	                                <span class="title">Upload Medicine</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
                           <li class="nav-item  ">
-                                          <a  href="<?php echo base_url('pharmacyadmin/medicine_list');?>" class="nav-link "> <i class="material-icons">person</i>
+                                          <a  href="<?php echo base_url('pharmacyadmin/medicine_list');?>" class="nav-link "> <i class="material-icons">list</i>
                                               <span class="title">Medicine List</span> <span class="arrow"></span>
                                           </a>
                                       </li>
 							<li class="nav-item  open">
-	                            <a  href="<?php echo base_url('pharmacyadmin/dispatch_medicine');?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('pharmacyadmin/dispatch_medicine');?>" class="nav-link "> <i class="material-icons">waves</i>
 	                                <span class="title">Dispatch Medicine</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
                             <li class="nav-item  ">
-	                            <a href="<?php echo base_url('pharmacyadmin/history');?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a href="<?php echo base_url('pharmacyadmin/history');?>" class="nav-link "> <i class="material-icons">history</i>
 	                                <span class="title">History</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 							<li class="nav-item  ">
-	                            <a href="<?php echo base_url('pharmacypickupboy/add');?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a href="<?php echo base_url('pharmacypickupboy/add');?>" class="nav-link "> <i class="material-icons">person_add</i>
 	                                <span class="title">Add PickUp Boy</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 							<li class="nav-item  ">
-	                            <a href="<?php echo base_url('pharmacypickupboy/index');?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a href="<?php echo base_url('pharmacypickupboy/index');?>" class="nav-link "> <i class="material-icons">list</i>
 	                                <span class="title">PickUp List</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
