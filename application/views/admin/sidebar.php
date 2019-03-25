@@ -144,42 +144,42 @@
                     </a>
                 </li>
               <?php } elseif ($mlab_details['role']==3) { ?>
-							<li class="nav-item  ">
+							<li class="nav-item  <?php if($this->uri->segment(2)=='orders'){ echo "active";} ?>">
 									<a  href="<?php echo base_url('pharmacyadmin/orders');?>" class="nav-link "> <i class="material-icons">person</i>
 									<span class="title">Orders</span> <span class="arrow"></span>
 									</a>
 							</li>
-							<li class="nav-item  ">
+							<li class="nav-item  <?php if($this->uri->segment(2)=='rejectedorders'){ echo "active";} ?>">
 									<a  href="<?php echo base_url('pharmacyadmin/rejectedorders');?>" class="nav-link "> <i class="material-icons">person</i>
 									<span class="title">Rejected Orders</span> <span class="arrow"></span>
 									</a>
 							</li>
-							<li class="nav-item  ">
+							<li class="nav-item  <?php if($this->uri->segment(2)=='upload_medicine'){ echo "active";} ?>">
 	                            <a  href="<?php echo base_url('pharmacyadmin/upload_medicine');?>" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Upload Medicine</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
-                          <li class="nav-item  ">
+                          <li class="nav-item  <?php if($this->uri->segment(2)=='medicine_list'){ echo "active";} ?>">
                                           <a  href="<?php echo base_url('pharmacyadmin/medicine_list');?>" class="nav-link "> <i class="material-icons">person</i>
                                               <span class="title">Medicine List</span> <span class="arrow"></span>
                                           </a>
                                       </li>
-							<li class="nav-item  open">
+							<li class="nav-item  <?php if($this->uri->segment(2)=='dispatch_medicine'){ echo "active";} ?>">
 	                            <a  href="<?php echo base_url('pharmacyadmin/dispatch_medicine');?>" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Dispatch Medicine</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
-                            <li class="nav-item  ">
+                            <li class="nav-item <?php if($this->uri->segment(2)=='history'){ echo "active";} ?> ">
 	                            <a href="<?php echo base_url('pharmacyadmin/history');?>" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">History</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
-							<li class="nav-item  ">
+							<li class="nav-item <?php if($this->uri->segment(2)=='add'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('pharmacypickupboy/add');?>" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Add PickUp Boy</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
-							<li class="nav-item  ">
+							<li class="nav-item <?php if($this->uri->segment(2)=='index'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('pharmacypickupboy/index');?>" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">PickUp List</span> <span class="arrow"></span>
 	                            </a>
