@@ -76,7 +76,7 @@ $params['data'] =$qrvalue ;
 
 $params['level'] = 'H';
 
-$params['size'] = 10;
+$params['size'] = 5;
 
 $params['cachedir'] = FCPATH.'assets/qrcode/';
 $path='assets/qrcode/'.time().'.png';
@@ -160,7 +160,7 @@ $params['data'] =$qrvalue ;
 
 $params['level'] = 'H';
 
-$params['size'] = 10;
+$params['size'] = 5;
 
 $params['cachedir'] = FCPATH.'assets/qrcode/';
 $path='assets/qrcode/'.time().'.png';

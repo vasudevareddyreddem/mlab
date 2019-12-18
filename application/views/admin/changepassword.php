@@ -9,7 +9,7 @@
                     </div>
                     <div class="card-body">
                         <!-- Tab panes -->
-                        <form class="" action="<?php echo base_url('pharmacyadmin/changepasswordpost/'); ?>" method="post" id="changepassword">
+                        <form class="" action="<?php echo base_url('profile/changepasswordpost/'); ?>" method="post" id="changepassword">
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label>Old Password</label>
@@ -28,7 +28,7 @@
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </div>
-                        </form>
+                        </form>  
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
 <script>
 	$(document).ready(function() {
     $('#changepassword').bootstrapValidator({
-
+        
         fields: {
             oldpassword: {
                 validators: {
@@ -72,7 +72,7 @@
 					}
 				}
             },
-
+           
             confirmpassword: {
 					 validators: {
 						 notEmpty: {
@@ -86,6 +86,6 @@
 				}
             }
         })
-
+     
 });
 </script>

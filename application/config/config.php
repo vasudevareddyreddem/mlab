@@ -24,12 +24,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/mlab/';
-$config['smsusername']	= "pracha";
-$config['smspassword']	= "123456";
-$config['sender']	= "MEDSIT";
-$config['keyId'] ='rzp_test_FMROR38S2ObKGw';
-$config['API_keySecret'] = '4ZAmE5b07syPo0P1WbFUNr7X';
-$config['upload_medicine_url']="http://appointment.ehealthinfra.com/";
+$config['keyId'] ='rzp_test_1CSnweG2HOTawb';
+$config['API_keySecret'] = '5idRiZ46N5rQFBWwVwBgtABF';
+$config['mob_num']	= "8500050944";
+$config['sender']	= "MEDARG";
+$config['apikey']	= "edb6822473ce4ec09425548de7bd45a3";
+$config['index_page'] = '';
+
 
 /*
 |--------------------------------------------------------------------------

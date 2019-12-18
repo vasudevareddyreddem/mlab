@@ -9,7 +9,7 @@
                                 <div class="card-head">
                                      <header>Medicine List</header>
                                 </div>
-                                <div class="card-body table-responsive">
+                                <div class="card-body ">
 
                                     <table id="saveStage" class="display table" style="width:100%;">
                                         <thead>

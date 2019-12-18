@@ -72,7 +72,7 @@ class Pharmacy extends Back_end {
 						}
 						$params['data'] =$qrvalue ;
 						$params['level'] = 'H';
-						$params['size'] = 5;
+						$params['size'] = 10;
 						$params['cachedir'] = FCPATH.'assets/qrcode/';
 						$path='assets/qrcode/'.time().'.png';
 						$params['savename'] =FCPATH.$path;
